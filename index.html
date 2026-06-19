@@ -193,18 +193,20 @@ MACRO BACKGROUND EFFECTS & PRODUCTION UI
 }
 
 /* =========================
-CUSTOM ENGINE CURSOR (PEN TOOL & VECTOR MODES)
+CUSTOM ENGINE CURSOR (PRO EXPLICIT IMPLEMENTATION)
 ========================= */
 
 .software-cursor {
   position: fixed;
   top: 0;
   left: 0;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   pointer-events: none;
   z-index: 10000;
-  transform: translate(0px, 0px); /* Custom offsets managed dynamically via JS */
+  /* Adjust transform origin to tip of the nib */
+  transform-origin: 0% 0%;
+  transform: translate3d(0px, 0px, 0); 
   transition: opacity 0.2s ease;
 }
 
@@ -221,7 +223,7 @@ CUSTOM ENGINE CURSOR (PEN TOOL & VECTOR MODES)
   pointer-events: none;
   z-index: 10001;
   transform: translate(-50%, -50%);
-  opacity: 0; /* Only turns visible during interactive states */
+  opacity: 0; 
   transition: opacity 0.2s ease;
 }
 
@@ -610,9 +612,10 @@ MOBILE RESPONSIVENESS
 }
 
 @media (max-width: 768px) {
-  
+  /* BUG FIX Restoration flags from image_eaab2c.png */
   body { cursor: auto !important; } 
-  .software-cursor, .cursor-anchor-dot { display: none; }
+  a, button, .btn, .interactable, .project-card, .tool-pill { cursor: auto !important; }
+  .software-cursor, .cursor-anchor-dot { display: none !important; }
   
   .section { padding: 80px 0; }
   .section::before { display: none; }
@@ -704,10 +707,14 @@ MOBILE RESPONSIVENESS
   REC <span id="tc-display" style="margin-left: 5px;">00:00:00:00</span>
 </div>
 
-<!-- HIGH TECH INTERACTIVE PEN CUSTOM CURSOR -->
-<svg class="software-cursor" id="custom-pen-cursor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Pen Tool Path Mode Vector Graphic -->
-  <path id="cursor-graphic" d="M2 22L9.58 14.42M11 13L18.34 5.66C19.28 4.72 19.28 3.28 18.34 2.34C17.4 1.4 15.96 1.4 15.02 2.34L7.68 9.68M13.25 4.25L16.4 7.4M5.5 16.5L4 20L7.5 18.5" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- HIGH-FIDELITY ADOBE AFTER EFFECTS / PHOTOSHOPE Nib STYLE CURSOR -->
+<svg class="software-cursor" id="custom-pen-cursor" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g id="cursor-graphic-group" transform="rotate(-45 16 16)">
+    <!-- High-res production vector nib design layout replacing the hairpin wire shape -->
+    <path id="cursor-graphic" d="M16 2L6 14C6 14 7.5 20 12 22L16 30L20 22C24.5 20 26 14 26 14L16 2Z" fill="#111" stroke="#d4af37" stroke-width="2" stroke-linejoin="round"/>
+    <circle cx="16" cy="14" r="2" fill="#d4af37" />
+    <line x1="16" y1="14" x2="16" y2="24" stroke="#d4af37" stroke-width="1.5"/>
+  </g>
 </svg>
 <div class="cursor-anchor-dot"></div>
 
@@ -1064,12 +1071,16 @@ JAVASCRIPT ENGINE (ENGINE SYSTEMS)
     });
   }, observerOptions);
 
-  document.querySelectorAll('.reveal').forEach((element) => {
-    observer.observe(element);
+  // Structural Cascade initialization handler block matching image_eaab2c.png rules
+  window.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.reveal').forEach((element) => {
+      observer.observe(element);
+    });
   });
 
-  // 2. High Fidelity Pen Tool Cursor Engine
+  // 2. Pro Level Vector Pen Tool Cursor Engine
   const penCursor = document.getElementById('custom-pen-cursor');
+  const graphicGroup = document.getElementById('cursor-graphic-group');
   const graphicPath = document.getElementById('cursor-graphic');
   const anchorDot = document.querySelector('.cursor-anchor-dot');
   const compass = document.getElementById('blender-compass');
@@ -1077,12 +1088,11 @@ JAVASCRIPT ENGINE (ENGINE SYSTEMS)
   let mouseX = 0, mouseY = 0;
   let cursorX = 0, cursorY = 0;
 
-  // Track raw positions
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
     
-    // Anchor dot stays locked onto true mouse position
+    // Precise anchor targeting alignment logic
     anchorDot.style.left = mouseX + 'px';
     anchorDot.style.top = mouseY + 'px';
 
@@ -1092,35 +1102,36 @@ JAVASCRIPT ENGINE (ENGINE SYSTEMS)
     compass.style.transform = `rotateX(${rotY}deg) rotateY(${rotX}deg)`;
   });
 
-  // Linear interpolation loop for organic weight response
+  // Balanced linear interpolation rendering block matching absolute positioning parameters
   function renderCursor() {
     let distX = mouseX - cursorX;
     let distY = mouseY - cursorY;
     
-    cursorX += distX * 0.25; 
-    cursorY += distY * 0.25;
+    cursorX += distX * 0.28; 
+    cursorY += distY * 0.28;
     
-    // Position the vector graphic box
-    penCursor.style.left = cursorX + 'px';
-    penCursor.style.top = cursorY + 'px';
+    // Position the vector viewport node exactly matching tip coordinates
+    penCursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
     
     requestAnimationFrame(renderCursor);
   }
   renderCursor();
 
-  // Handle active component switching (Pen tool vs Selection Arrow Pointer)
+  // Handle active operational switching modes (Pen Tool Vector Nib -> Crosshair Target Selection Point)
   const interactables = document.querySelectorAll('.interactable, a, button, .btn, .project-card, .tool-pill');
   interactables.forEach(el => {
     el.addEventListener('mouseenter', () => {
       anchorDot.style.opacity = '1';
-      // Morph the SVG structure into standard selection pointer vectors
-      graphicPath.setAttribute('d', 'M3 3L10.58 18.92L13.25 12.25L19.92 9.58L3 3Z');
+      // Smoothly transform styling variables to create crosshair intersection target
+      graphicGroup.style.transform = 'rotate(0deg) translate(-10px, -10px)';
+      graphicPath.setAttribute('d', 'M16 4V28M4 16H28');
       graphicPath.setAttribute('stroke', '#ffffff');
     });
     el.addEventListener('mouseleave', () => {
       anchorDot.style.opacity = '0';
-      // Revert back to Pen Tool drawing coordinates
-      graphicPath.setAttribute('d', 'M2 22L9.58 14.42M11 13L18.34 5.66C19.28 4.72 19.28 3.28 18.34 2.34C17.4 1.4 15.96 1.4 15.02 2.34L7.68 9.68M13.25 4.25L16.4 7.4M5.5 16.5L4 20L7.5 18.5');
+      // Restore standard operational system values instantly
+      graphicGroup.style.transform = 'rotate(-45deg 16 16)';
+      graphicPath.setAttribute('d', 'M16 2L6 14C6 14 7.5 20 12 22L16 30L20 22C24.5 20 26 14 26 14L16 2Z');
       graphicPath.setAttribute('stroke', '#d4af37');
     });
   });
