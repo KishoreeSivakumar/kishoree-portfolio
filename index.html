@@ -26,21 +26,58 @@ color:white;
 overflow-x:hidden;
 }
 
-body::before{
-content:"";
-position:fixed;
-inset:0;
-background:
-radial-gradient(circle at top right,
-rgba(212,175,55,.08),
-transparent 35%),
+/* =========================
+NEW CINEMATIC BACKGROUND
+========================= */
 
-radial-gradient(circle at bottom left,
-rgba(212,175,55,.06),
-transparent 40%);
-pointer-events:none;
-z-index:-1;
+/* 1. 3D Software Viewport Grid */
+.grid-overlay {
+  position: fixed;
+  inset: 0;
+  background-size: 60px 60px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  z-index: -3;
+  pointer-events: none;
 }
+
+/* 2. Floating Ambient Light Orbs */
+.bg-glow {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(150px);
+  z-index: -2;
+  pointer-events: none;
+  animation: floatLight 25s infinite alternate ease-in-out;
+}
+
+.glow-1 {
+  width: 50vw;
+  height: 50vw;
+  background: rgba(212, 175, 55, 0.12); /* Gold light */
+  top: -10%;
+  left: -10%;
+}
+
+.glow-2 {
+  width: 40vw;
+  height: 40vw;
+  background: rgba(255, 255, 255, 0.08); /* Soft white light */
+  bottom: -10%;
+  right: -10%;
+  animation-duration: 30s;
+  animation-direction: alternate-reverse;
+}
+
+@keyframes floatLight {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(15vw, 10vh) scale(1.1); }
+}
+
+/* =========================
+STANDARD STYLES
+========================= */
 
 .container{
 max-width:1400px;
@@ -146,6 +183,8 @@ background:#0f0f0f;
 border:1px solid rgba(212,175,55,.15);
 border-radius:20px;
 padding:35px;
+/* Added a subtle background blur for the glassmorphism effect over the new background */
+backdrop-filter: blur(10px);
 }
 
 .stat-card h2{
@@ -172,6 +211,7 @@ transition:.4s;
 .project-card:hover{
 transform:translateY(-10px);
 border-color:#d4af37;
+box-shadow: 0 15px 30px rgba(212, 175, 55, 0.1);
 }
 
 .project-card img{
@@ -202,10 +242,9 @@ margin-bottom:60px;
 
 
 /* =========================
-NEW ANIMATION EFFECTS CSS
+SCROLL ANIMATIONS CSS
 ========================= */
 
-/* 1. Scroll Reveal Classes */
 .reveal {
   opacity: 0;
   transform: translateY(40px);
@@ -217,7 +256,6 @@ NEW ANIMATION EFFECTS CSS
   transform: translateY(0);
 }
 
-/* 2. Hero Typography Stagger */
 .hero h1 {
   opacity: 0;
   animation: fadeUp 1.2s cubic-bezier(0.25, 1, 0.5, 1) 0.2s forwards;
@@ -244,7 +282,6 @@ NEW ANIMATION EFFECTS CSS
   }
 }
 
-/* 3. Subtle Breathing Watermark */
 .watermark {
   position:absolute;
   right:0;
@@ -252,17 +289,16 @@ NEW ANIMATION EFFECTS CSS
   transform:translateY(-50%);
   font-size:320px;
   font-weight:800;
-  color:rgba(255,255,255,.03);
+  color:rgba(255,255,255,.02);
   user-select:none;
   animation: breathe 8s ease-in-out infinite;
 }
 
 @keyframes breathe {
-  0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.03; }
-  50% { transform: translateY(-50%) scale(1.05); opacity: 0.06; }
+  0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.02; }
+  50% { transform: translateY(-50%) scale(1.05); opacity: 0.05; }
 }
 
-/* 4. Marquee Effect for Services Strip */
 .services {
   overflow: hidden;
   padding: 25px 0;
@@ -287,11 +323,94 @@ NEW ANIMATION EFFECTS CSS
   100% { transform: translateX(-50%); }
 }
 
+/* =========================
+MOBILE RESPONSIVENESS
+========================= */
+
+@media (max-width: 768px) {
+  
+  .section {
+    padding: 70px 0;
+  }
+
+  .navbar {
+    flex-direction: column;
+    gap: 20px;
+    padding: 25px 0;
+  }
+  
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .nav-links a {
+    font-size: 14px;
+  }
+
+  .hero {
+    text-align: center;
+    justify-content: center;
+    padding-top: 40px;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+  }
+
+  .hero p {
+    font-size: 16px;
+    margin-bottom: 30px;
+  }
+
+  .hero .btn {
+    display: block;
+    margin: 0 auto 15px auto;
+    width: 80%;
+  }
+
+  .watermark {
+    font-size: 150px;
+    left: 50%;
+    top: 30%;
+    right: auto;
+    transform: translate(-50%, -50%);
+  }
+
+  @keyframes breathe {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.02; }
+    50% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.05; }
+  }
+
+  .stats-grid,
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .section-title {
+    font-size: 38px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  div[style*="grid-template-columns:2fr 1fr;"] {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+}
+
 </style>
 
 </head>
 
 <body>
+
+<div class="grid-overlay"></div>
+<div class="bg-glow glow-1"></div>
+<div class="bg-glow glow-2"></div>
 
 <div class="container">
   <header class="navbar">
@@ -982,20 +1101,18 @@ All Rights Reserved.
   const observerOptions = {
     root: null,
     rootMargin: '0px',
-    threshold: 0.15 // Triggers when 15% of the element is visible
+    threshold: 0.15 
   };
 
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('active');
-        // Stop observing once revealed so it doesn't animate out and in repeatedly
         observer.unobserve(entry.target); 
       }
     });
   }, observerOptions);
 
-  // Grab all elements with the 'reveal' class and observe them
   document.querySelectorAll('.reveal').forEach((element) => {
     observer.observe(element);
   });
