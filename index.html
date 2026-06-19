@@ -24,15 +24,13 @@ font-family:'Poppins',sans-serif;
 background:#050505;
 color:white;
 overflow-x:hidden;
-/* Hide default cursor for custom cursor effect */
 cursor: none; 
 }
 
 /* =========================
-NEW MACRO BACKGROUND EFFECTS
+MACRO BACKGROUND EFFECTS
 ========================= */
 
-/* 1. Cinematic Film Grain */
 .noise-overlay {
   position: fixed;
   top: 0;
@@ -45,7 +43,6 @@ NEW MACRO BACKGROUND EFFECTS
   background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
 }
 
-/* 2. Giant Scrolling Background Text */
 .bg-text-container {
   position: fixed;
   top: 55%;
@@ -72,7 +69,6 @@ NEW MACRO BACKGROUND EFFECTS
   100% { transform: translateX(-50%); }
 }
 
-/* 3. 3D Software Viewport Grid */
 .grid-overlay {
   position: fixed;
   inset: 0;
@@ -84,7 +80,6 @@ NEW MACRO BACKGROUND EFFECTS
   pointer-events: none;
 }
 
-/* 4. Floating Ambient Light Orbs */
 .bg-glow {
   position: fixed;
   border-radius: 50%;
@@ -148,7 +143,6 @@ CUSTOM CURSOR
   transition: width 0.3s, height 0.3s, background 0.3s;
 }
 
-/* Cursor hover effect class */
 .cursor-hover {
   width: 80px !important;
   height: 80px !important;
@@ -157,7 +151,7 @@ CUSTOM CURSOR
 }
 
 /* =========================
-STANDARD STYLES
+STANDARD STYLES & GRIDS
 ========================= */
 
 .container{
@@ -187,7 +181,6 @@ padding:140px 0;
 position: relative;
 }
 
-/* Connecting scroll line between sections */
 .section::before {
   content: '';
   position: absolute;
@@ -307,6 +300,13 @@ margin-bottom:40px;
 line-height:1.8;
 }
 
+/* UNIVERSAL GAP OF 30px APPLIED TO ALL GRIDS FOR ALIGNMENT */
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:30px; 
+}
+
 .stat-card{
 background:rgba(15, 15, 15, 0.7);
 border:1px solid rgba(212,175,55,.1);
@@ -345,9 +345,8 @@ margin-bottom:10px;
 
 .projects-grid{
 display:grid;
-grid-template-columns:
-repeat(auto-fit,minmax(380px,1fr));
-gap:35px;
+grid-template-columns: repeat(auto-fit,minmax(380px,1fr));
+gap:30px; 
 }
 
 .project-card{
@@ -393,29 +392,35 @@ margin-bottom:20px;
 
 .section-title{
 font-size:52px;
-margin-bottom:60px;
-text-align: center;
+margin-bottom:50px;
+text-align: left; /* Changed to left alignment for grid consistency */
 }
 
-/* About Section Layout */
 .about-split-row {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 40px;
+  gap: 30px; 
   align-items: stretch;
 }
 
 .about-side-stack {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 30px; 
   justify-content: space-between;
+}
+
+/* NEW PERFECT 4-COLUMN CONTACT GRID */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
 }
 
 .tools-flex {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start; /* Changed to left alignment */
   gap: 15px;
 }
 
@@ -438,7 +443,6 @@ text-align: center;
   box-shadow: 0 15px 30px rgba(212,175,55,0.2);
 }
 
-
 /* =========================
 SCROLL ANIMATIONS CSS
 ========================= */
@@ -454,7 +458,6 @@ SCROLL ANIMATIONS CSS
   transform: translateY(0) scale(1);
 }
 
-/* Staggered Delays for the Side Stack */
 .delay-1 { transition-delay: 0.1s; }
 .delay-2 { transition-delay: 0.2s; }
 .delay-3 { transition-delay: 0.3s; }
@@ -475,14 +478,8 @@ SCROLL ANIMATIONS CSS
 }
 
 @keyframes fadeUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  0% { opacity: 0; transform: translateY(30px); }
+  100% { opacity: 1; transform: translateY(0); }
 }
 
 .services {
@@ -524,9 +521,13 @@ SCROLL ANIMATIONS CSS
 MOBILE RESPONSIVENESS
 ========================= */
 
+@media (max-width: 1024px) {
+  .contact-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
 @media (max-width: 768px) {
   
-  body { cursor: auto; } /* Disable custom cursor on mobile */
+  body { cursor: auto; } 
   .cursor-dot, .cursor-ring { display: none; }
   
   .section { padding: 80px 0; }
@@ -571,20 +572,22 @@ MOBILE RESPONSIVENESS
 
   .bg-text { font-size: 120px; }
 
-  .projects-grid {
+  .stats-grid,
+  .projects-grid,
+  .contact-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
 
   .about-split-row {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
   }
 
   .section-title {
     font-size: 38px;
     margin-bottom: 40px;
-    text-align: center;
+    text-align: left;
   }
 }
 
@@ -861,7 +864,7 @@ My work combines storytelling, pacing, motion design and professional post-produ
 Let's Work Together
 </h2>
 
-<div class="projects-grid">
+<div class="contact-grid">
 
 <div class="stat-card reveal interactable">
 <h3 class="gold">Email</h3>
@@ -891,7 +894,7 @@ Let's Work Together
 
 <br><br>
 
-<div style="text-align: center;">
+<div style="text-align: left;">
 <a href="Kishoree_S_Resume.pdf" target="_blank" class="btn reveal interactable">
 Download Resume
 </a>
@@ -952,22 +955,19 @@ Video Editor • Motion Graphics Artist • 3D Animator
   let mouseX = 0, mouseY = 0;
   let ringX = 0, ringY = 0;
 
-  // Track mouse movement
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
     
-    // Instant dot movement
     cursorDot.style.left = mouseX + 'px';
     cursorDot.style.top = mouseY + 'px';
   });
 
-  // Smooth ring tracking
   function animateCursor() {
     let distX = mouseX - ringX;
     let distY = mouseY - ringY;
     
-    ringX += distX * 0.15; // Speed of the tracking ring
+    ringX += distX * 0.15; 
     ringY += distY * 0.15;
     
     cursorRing.style.left = ringX + 'px';
@@ -977,7 +977,6 @@ Video Editor • Motion Graphics Artist • 3D Animator
   }
   animateCursor();
 
-  // Hover state expansion for interactable elements
   const interactables = document.querySelectorAll('.interactable');
   interactables.forEach(el => {
     el.addEventListener('mouseenter', () => cursorRing.classList.add('cursor-hover'));
