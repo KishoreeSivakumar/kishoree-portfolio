@@ -1,3 +1,8 @@
+<!-- =========================
+SECTION 1
+HEAD + PREMIUM CSS + ANIMATIONS + CINEMATIC FX
+========================= -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,9 +33,10 @@ cursor: none;
 }
 
 /* =========================
-MACRO BACKGROUND EFFECTS
+MACRO BACKGROUND EFFECTS & CINEMATIC UI
 ========================= */
 
+/* 1. Cinematic Film Grain */
 .noise-overlay {
   position: fixed;
   top: 0;
@@ -43,6 +49,46 @@ MACRO BACKGROUND EFFECTS
   background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
 }
 
+/* 2. Director's Viewfinder Corners */
+.viewfinder {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  z-index: 998;
+  pointer-events: none;
+}
+.vf-tl { top: 40px; left: 40px; border-right: none; border-bottom: none; }
+.vf-tr { top: 40px; right: 40px; border-left: none; border-bottom: none; }
+.vf-bl { bottom: 40px; left: 40px; border-right: none; border-top: none; }
+.vf-br { bottom: 40px; right: 40px; border-left: none; border-top: none; }
+
+/* 3. Live Timeline Timecode */
+.timecode {
+  position: fixed;
+  bottom: 45px;
+  right: 100px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 13px;
+  color: #d4af37;
+  letter-spacing: 2px;
+  z-index: 998;
+  pointer-events: none;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.rec-dot {
+  width: 8px;
+  height: 8px;
+  background: red;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* 4. Giant Scrolling Background Text */
 .bg-text-container {
   position: fixed;
   top: 55%;
@@ -69,6 +115,7 @@ MACRO BACKGROUND EFFECTS
   100% { transform: translateX(-50%); }
 }
 
+/* 5. 3D Software Viewport Grid */
 .grid-overlay {
   position: fixed;
   inset: 0;
@@ -80,6 +127,7 @@ MACRO BACKGROUND EFFECTS
   pointer-events: none;
 }
 
+/* 6. Floating Ambient Light Orbs */
 .bg-glow {
   position: fixed;
   border-radius: 50%;
@@ -300,13 +348,6 @@ margin-bottom:40px;
 line-height:1.8;
 }
 
-/* UNIVERSAL GAP OF 30px APPLIED TO ALL GRIDS FOR ALIGNMENT */
-.stats-grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:30px; 
-}
-
 .stat-card{
 background:rgba(15, 15, 15, 0.7);
 border:1px solid rgba(212,175,55,.1);
@@ -343,6 +384,7 @@ color:#d4af37;
 margin-bottom:10px;
 }
 
+/* 30px Grid standardization */
 .projects-grid{
 display:grid;
 grid-template-columns: repeat(auto-fit,minmax(380px,1fr));
@@ -364,16 +406,19 @@ border-color:#d4af37;
 box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 30px rgba(212, 175, 55, 0.15);
 }
 
+/* Cinematic Color Grading on Hover */
 .project-card img{
 width:100%;
 height:260px;
 object-fit:cover;
 display:block;
-transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+filter: brightness(0.9) contrast(1) saturate(1);
+transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), filter 0.8s ease;
 }
 
 .project-card:hover img {
   transform: scale(1.08);
+  filter: brightness(1.05) contrast(1.15) saturate(1.2); /* Cinematic LUT effect */
 }
 
 .project-info{
@@ -390,10 +435,17 @@ color:#aaa;
 margin-bottom:20px;
 }
 
+/* Chromatic Aberration Title Glitch */
 .section-title{
 font-size:52px;
 margin-bottom:50px;
-text-align: left; /* Changed to left alignment for grid consistency */
+text-align: left;
+transition: text-shadow 0.3s ease;
+cursor: default;
+}
+
+.section-title:hover {
+  text-shadow: 2px 0 0 rgba(255, 0, 0, 0.8), -2px 0 0 rgba(0, 255, 255, 0.8);
 }
 
 .about-split-row {
@@ -410,7 +462,6 @@ text-align: left; /* Changed to left alignment for grid consistency */
   justify-content: space-between;
 }
 
-/* NEW PERFECT 4-COLUMN CONTACT GRID */
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -420,7 +471,7 @@ text-align: left; /* Changed to left alignment for grid consistency */
 .tools-flex {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start; /* Changed to left alignment */
+  justify-content: flex-start;
   gap: 15px;
 }
 
@@ -523,6 +574,7 @@ MOBILE RESPONSIVENESS
 
 @media (max-width: 1024px) {
   .contact-grid { grid-template-columns: repeat(2, 1fr); }
+  .viewfinder, .timecode { display: none; } /* Hide cinematic overlays on smaller screens */
 }
 
 @media (max-width: 768px) {
@@ -572,7 +624,6 @@ MOBILE RESPONSIVENESS
 
   .bg-text { font-size: 120px; }
 
-  .stats-grid,
   .projects-grid,
   .contact-grid {
     grid-template-columns: 1fr;
@@ -597,11 +648,25 @@ MOBILE RESPONSIVENESS
 
 <body>
 
+<!-- NOISE OVERLAY FOR TEXTURE -->
 <div class="noise-overlay"></div>
 
+<!-- CINEMATIC UI ELEMENTS -->
+<div class="viewfinder vf-tl"></div>
+<div class="viewfinder vf-tr"></div>
+<div class="viewfinder vf-bl"></div>
+<div class="viewfinder vf-br"></div>
+
+<div class="timecode">
+  <div class="rec-dot"></div>
+  REC <span id="tc-display" style="margin-left: 5px;">00:00:00:00</span>
+</div>
+
+<!-- CUSTOM CURSOR ELEMENTS -->
 <div class="cursor-dot"></div>
 <div class="cursor-ring"></div>
 
+<!-- MACRO BACKGROUNDS -->
 <div class="grid-overlay"></div>
 <div class="bg-glow glow-1"></div>
 <div class="bg-glow glow-2"></div>
@@ -648,6 +713,7 @@ real estate films, YouTube edits,
 branded campaigns and 3D visual experiences.
 </p>
 
+<!-- Ensure resume file is named correctly[cite: 3] -->
 <a href="Kishoree_S_Resume.pdf" target="_blank" class="btn interactable">
 Download Resume
 </a>
@@ -688,7 +754,7 @@ LinkedIn
 
 <section id="work" class="section">
 
-<h2 class="section-title gold reveal">
+<h2 class="section-title gold reveal interactable">
 Featured Projects
 </h2>
 
@@ -727,7 +793,7 @@ Featured Projects
 
 <section id="projects" class="section">
 
-<h2 class="section-title gold reveal">
+<h2 class="section-title gold reveal interactable">
 Portfolio Showcase
 </h2>
 
@@ -766,7 +832,7 @@ Portfolio Showcase
 
 <section id="experience" class="section">
 
-<h2 class="section-title gold reveal">
+<h2 class="section-title gold reveal interactable">
 Experience
 </h2>
 
@@ -803,7 +869,7 @@ Experience
 
 <section id="tools" class="section">
 
-<h2 class="section-title gold reveal">
+<h2 class="section-title gold reveal interactable">
 Tools & Software
 </h2>
 
@@ -821,7 +887,7 @@ Tools & Software
 
 <section id="about" class="section">
 
-<h2 class="section-title gold reveal">
+<h2 class="section-title gold reveal interactable">
 The Person Behind The Frames
 </h2>
 
@@ -860,7 +926,7 @@ My work combines storytelling, pacing, motion design and professional post-produ
 
 <section id="contact" class="section">
 
-<h2 class="section-title gold reveal">
+<h2 class="section-title gold reveal interactable">
 Let's Work Together
 </h2>
 
@@ -895,6 +961,7 @@ Let's Work Together
 <br><br>
 
 <div style="text-align: left;">
+<!-- Ensure resume file is named correctly[cite: 3] -->
 <a href="Kishoree_S_Resume.pdf" target="_blank" class="btn reveal interactable">
 Download Resume
 </a>
@@ -904,7 +971,7 @@ Download Resume
 
 <footer style="padding:100px 0 60px 0; border-top:1px solid rgba(212,175,55,.15); text-align:center; position: relative;">
 
-<h2 style="font-size:40px; margin-bottom:20px;" class="gold reveal">
+<h2 style="font-size:40px; margin-bottom:20px;" class="gold reveal interactable">
 KISHOREE SIVAKUMAR
 </h2>
 
@@ -928,6 +995,9 @@ Video Editor • Motion Graphics Artist • 3D Animator
 
 </div>
 
+<!-- =========================
+JAVASCRIPT (ANIMATIONS & TIMECODE)
+========================= -->
 <script>
   // 1. Scroll Reveal Animations
   const observerOptions = {
@@ -982,6 +1052,20 @@ Video Editor • Motion Graphics Artist • 3D Animator
     el.addEventListener('mouseenter', () => cursorRing.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => cursorRing.classList.remove('cursor-hover'));
   });
+
+  // 3. Live Timeline Timecode Generator (24fps)
+  const tcDisplay = document.getElementById('tc-display');
+  let frames = 0, seconds = 0, minutes = 0, hours = 1;
+  
+  setInterval(() => {
+    frames++;
+    if(frames >= 24) { frames = 0; seconds++; }
+    if(seconds >= 60) { seconds = 0; minutes++; }
+    if(minutes >= 60) { minutes = 0; hours++; }
+    
+    const pad = (num) => num.toString().padStart(2, '0');
+    tcDisplay.innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}:${pad(frames)}`;
+  }, 1000 / 24);
 </script>
 
 </body>
