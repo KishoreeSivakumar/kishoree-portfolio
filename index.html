@@ -30,7 +30,6 @@ overflow-x:hidden;
 NEW CINEMATIC BACKGROUND
 ========================= */
 
-/* 1. 3D Software Viewport Grid */
 .grid-overlay {
   position: fixed;
   inset: 0;
@@ -42,7 +41,6 @@ NEW CINEMATIC BACKGROUND
   pointer-events: none;
 }
 
-/* 2. Floating Ambient Light Orbs */
 .bg-glow {
   position: fixed;
   border-radius: 50%;
@@ -55,7 +53,7 @@ NEW CINEMATIC BACKGROUND
 .glow-1 {
   width: 50vw;
   height: 50vw;
-  background: rgba(212, 175, 55, 0.12); /* Gold light */
+  background: rgba(212, 175, 55, 0.12);
   top: -10%;
   left: -10%;
 }
@@ -63,7 +61,7 @@ NEW CINEMATIC BACKGROUND
 .glow-2 {
   width: 40vw;
   height: 40vw;
-  background: rgba(255, 255, 255, 0.08); /* Soft white light */
+  background: rgba(255, 255, 255, 0.08);
   bottom: -10%;
   right: -10%;
   animation-duration: 30s;
@@ -89,6 +87,19 @@ padding:0 40px;
 color:#d4af37;
 }
 
+/* NEW: Shimmering Gold Text Effect */
+.text-gradient {
+  background: linear-gradient(135deg, #d4af37, #fff8d6, #d4af37);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+
 .section{
 padding:120px 0;
 }
@@ -100,13 +111,32 @@ border:1px solid #d4af37;
 border-radius:12px;
 text-decoration:none;
 color:#d4af37;
-transition:.3s;
+transition:.4s cubic-bezier(0.25, 1, 0.5, 1);
 margin-right:15px;
+position: relative;
+overflow: hidden;
+}
+
+/* NEW: Button Light Sweep Effect */
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0; 
+  left: -100%;
+  width: 100%; 
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.4), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn:hover::before {
+  left: 100%;
 }
 
 .btn:hover{
 background:#d4af37;
 color:black;
+box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
 }
 
 .navbar{
@@ -120,6 +150,11 @@ padding:35px 0;
 font-size:26px;
 font-weight:700;
 color:#d4af37;
+transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
 }
 
 .nav-links{
@@ -156,6 +191,7 @@ z-index:2;
 color:#d4af37;
 letter-spacing:2px;
 margin-bottom:20px;
+font-size: 14px;
 }
 
 .hero h1{
@@ -179,12 +215,17 @@ gap:25px;
 }
 
 .stat-card{
-background:#0f0f0f;
+background:rgba(15, 15, 15, 0.6);
 border:1px solid rgba(212,175,55,.15);
 border-radius:20px;
 padding:35px;
-/* Added a subtle background blur for the glassmorphism effect over the new background */
 backdrop-filter: blur(10px);
+transition: 0.4s ease;
+}
+
+.stat-card:hover {
+  border-color: rgba(212,175,55,.4);
+  transform: translateY(-5px);
 }
 
 .stat-card h2{
@@ -201,17 +242,17 @@ gap:35px;
 }
 
 .project-card{
-background:#111;
+background:rgba(17, 17, 17, 0.8);
 border-radius:22px;
 overflow:hidden;
 border:1px solid rgba(212,175,55,.15);
-transition:.4s;
+transition:all .4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
 .project-card:hover{
 transform:translateY(-10px);
 border-color:#d4af37;
-box-shadow: 0 15px 30px rgba(212, 175, 55, 0.1);
+box-shadow: 0 20px 40px rgba(212, 175, 55, 0.15);
 }
 
 .project-card img{
@@ -219,6 +260,12 @@ width:100%;
 height:260px;
 object-fit:cover;
 display:block;
+transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* NEW: Image Zoom on hover */
+.project-card:hover img {
+  transform: scale(1.08);
 }
 
 .project-info{
@@ -240,6 +287,31 @@ font-size:52px;
 margin-bottom:60px;
 }
 
+/* NEW: Tool Pills layout */
+.tools-flex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.tool-pill {
+  background: rgba(212, 175, 55, 0.05);
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-size: 16px;
+  color: white;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+}
+
+.tool-pill:hover {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: #d4af37;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(212,175,55,0.15);
+}
+
 
 /* =========================
 SCROLL ANIMATIONS CSS
@@ -247,13 +319,13 @@ SCROLL ANIMATIONS CSS
 
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
+  transform: translateY(40px) scale(0.98);
   transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1); 
 }
 
 .reveal.active {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
 .hero h1 {
@@ -305,6 +377,9 @@ SCROLL ANIMATIONS CSS
   border-top: 1px solid #222;
   border-bottom: 1px solid #222;
   white-space: nowrap;
+  /* NEW: Faded edges for marquee */
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .services-track {
@@ -395,11 +470,6 @@ MOBILE RESPONSIVENESS
     margin-bottom: 40px;
     text-align: center;
   }
-
-  div[style*="grid-template-columns:2fr 1fr;"] {
-    grid-template-columns: 1fr !important;
-    text-align: center;
-  }
 }
 
 </style>
@@ -442,9 +512,8 @@ OPEN TO FREELANCE & FULL-TIME — COIMBATORE, INDIA
 
 <h1>
 
-Crafting stories
-through motion,
-light & depth.
+Crafting stories<br>
+through <span class="text-gradient">motion, light & depth.</span>
 
 </h1>
 
@@ -824,133 +893,36 @@ Worked with brands, businesses and creators.
 Tools & Software
 </h2>
 
-<div class="projects-grid">
-
-<div class="stat-card reveal">
-Adobe Premiere Pro
-</div>
-
-<div class="stat-card reveal">
-Adobe After Effects
-</div>
-
-<div class="stat-card reveal">
-Blender
-</div>
-
-<div class="stat-card reveal">
-Adobe Photoshop
-</div>
-
-<div class="stat-card reveal">
-Adobe Illustrator
-</div>
-
-<div class="stat-card reveal">
-Adobe Lightroom
-</div>
-
-<div class="stat-card reveal">
-CapCut PC
-</div>
-
+<div class="tools-flex reveal">
+  <div class="tool-pill">Adobe Premiere Pro</div>
+  <div class="tool-pill">Adobe After Effects</div>
+  <div class="tool-pill">Blender</div>
+  <div class="tool-pill">Adobe Photoshop</div>
+  <div class="tool-pill">Adobe Illustrator</div>
+  <div class="tool-pill">Adobe Lightroom</div>
+  <div class="tool-pill">CapCut PC</div>
 </div>
 
 </section>
+
 <section id="about" class="section">
 
-<h2 class="section-title gold reveal">
+<h2 class="section-title gold reveal" style="text-align: center;">
 The Person Behind The Frames
 </h2>
 
-<div
-style="
-display:grid;
-grid-template-columns:2fr 1fr;
-gap:40px;
-align-items:start;
-">
+<div class="stat-card reveal" style="max-width: 900px; margin: auto; text-align: center;">
 
-<div class="stat-card reveal">
-
-<p
-style="
-font-size:20px;
-line-height:2;
-color:#cfcfcf;
-">
-
-I'm Kishoree Sivakumar,
-a Video Editor,
-Motion Graphics Artist
-and 3D Animator
-based in Coimbatore, India.
-
-I create cinematic edits,
-real estate films,
-motion graphics,
-social media content
-and 3D visual experiences
-for brands and businesses.
-
-My work combines storytelling,
-pacing,
-motion design
-and professional post-production
-to create engaging content
-that delivers results.
-
+<p style="font-size:20px; line-height:2; color:#cfcfcf;">
+I'm Kishoree Sivakumar, a Video Editor, Motion Graphics Artist and 3D Animator based in Coimbatore, India.<br><br>
+I create cinematic edits, real estate films, motion graphics, social media content and 3D visual experiences for brands and businesses.<br><br>
+My work combines storytelling, pacing, motion design and professional post-production to create engaging content that delivers results.
 </p>
-
-</div>
-
-<div>
-
-<div class="stat-card reveal">
-
-<h2 class="gold">
-3+
-</h2>
-
-<p>
-Years Experience
-</p>
-
-</div>
-
-<br>
-
-<div class="stat-card reveal">
-
-<h2 class="gold">
-50+
-</h2>
-
-<p>
-Projects Completed
-</p>
-
-</div>
-
-<br>
-
-<div class="stat-card reveal">
-
-<h2 class="gold">
-India
-</h2>
-
-<p>
-Based
-</p>
-
-</div>
-
-</div>
 
 </div>
 
 </section>
+
 <section id="contact" class="section">
 
 <h2 class="section-title gold reveal">
