@@ -1,8 +1,3 @@
-<!-- =========================
-SECTION 1
-HEAD + PREMIUM CSS + ANIMATIONS + ULTRA-CINEMATIC RES FX
-========================= -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +24,7 @@ font-family:'Poppins',sans-serif;
 background:#050505;
 color:white;
 overflow-x:hidden;
-/* Force hide cursor globally for our custom Pen Tool implementation */
+/* Force hide cursor globally for our custom Dot implementation */
 cursor: none !important; 
 }
 
@@ -39,7 +34,7 @@ a, button, .btn, .interactable {
 
 /* =========================
 MACRO BACKGROUND EFFECTS & PRODUCTION UI
-========================= -->
+========================= */
 
 /* Cinematic Film Grain */
 .noise-overlay {
@@ -193,38 +188,42 @@ MACRO BACKGROUND EFFECTS & PRODUCTION UI
 }
 
 /* =========================
-CUSTOM ENGINE CURSOR (PRO EXPLICIT IMPLEMENTATION)
+CUSTOM ENGINE CURSOR (DOTTED STYLING ACCORDING TO PREVIOUS REVISION)
 ========================= */
 
-.software-cursor {
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #d4af37;
+  border-radius: 50%;
   position: fixed;
   top: 0;
   left: 0;
-  width: 32px;
-  height: 32px;
   pointer-events: none;
   z-index: 10000;
-  /* Adjust transform origin to tip of the nib */
-  transform-origin: 0% 0%;
-  transform: translate3d(0px, 0px, 0); 
-  transition: opacity 0.2s ease;
+  transform: translate(-50%, -50%);
 }
 
-/* Custom interactive locator dot */
-.cursor-anchor-dot {
+.cursor-ring {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  border-radius: 50%;
   position: fixed;
   top: 0;
   left: 0;
-  width: 6px;
-  height: 6px;
-  background: #ffffff;
-  border: 1px solid #050505;
-  border-radius: 50%;
   pointer-events: none;
-  z-index: 10001;
+  z-index: 9999;
   transform: translate(-50%, -50%);
-  opacity: 0; 
-  transition: opacity 0.2s ease;
+  transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
+}
+
+/* Tracking extension styling when hovering over interactive variables */
+.cursor-hover {
+  width: 80px !important;
+  height: 80px !important;
+  background: rgba(212, 175, 55, 0.1);
+  border-color: rgba(212, 175, 55, 0.2);
 }
 
 /* =========================
@@ -615,7 +614,7 @@ MOBILE RESPONSIVENESS
   /* BUG FIX Restoration flags from image_eaab2c.png */
   body { cursor: auto !important; } 
   a, button, .btn, .interactable, .project-card, .tool-pill { cursor: auto !important; }
-  .software-cursor, .cursor-anchor-dot { display: none !important; }
+  .cursor-dot, .cursor-ring { display: none !important; }
   
   .section { padding: 80px 0; }
   .section::before { display: none; }
@@ -686,13 +685,11 @@ MOBILE RESPONSIVENESS
 
 <div class="noise-overlay"></div>
 
-<!-- CINEMATIC UI ELEMENTS -->
 <div class="viewfinder vf-tl"></div>
 <div class="viewfinder vf-tr"></div>
 <div class="viewfinder vf-bl"></div>
 <div class="viewfinder vf-br"></div>
 
-<!-- 3D COMPASS WIDGET -->
 <div class="axis-compass" id="blender-compass">
   <div class="axis-line axis-x"></div>
   <div class="axis-line axis-y"></div>
@@ -707,16 +704,8 @@ MOBILE RESPONSIVENESS
   REC <span id="tc-display" style="margin-left: 5px;">00:00:00:00</span>
 </div>
 
-<!-- HIGH-FIDELITY ADOBE AFTER EFFECTS / PHOTOSHOPE Nib STYLE CURSOR -->
-<svg class="software-cursor" id="custom-pen-cursor" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <g id="cursor-graphic-group" transform="rotate(-45 16 16)">
-    <!-- High-res production vector nib design layout replacing the hairpin wire shape -->
-    <path id="cursor-graphic" d="M16 2L6 14C6 14 7.5 20 12 22L16 30L20 22C24.5 20 26 14 26 14L16 2Z" fill="#111" stroke="#d4af37" stroke-width="2" stroke-linejoin="round"/>
-    <circle cx="16" cy="14" r="2" fill="#d4af37" />
-    <line x1="16" y1="14" x2="16" y2="24" stroke="#d4af37" stroke-width="1.5"/>
-  </g>
-</svg>
-<div class="cursor-anchor-dot"></div>
+<div class="cursor-dot"></div>
+<div class="cursor-ring"></div>
 
 <div class="grid-overlay"></div>
 <div class="bg-glow glow-1"></div>
@@ -1051,9 +1040,6 @@ Video Editor • Motion Graphics Artist • 3D Animator
 
 </div>
 
-<!-- =========================
-JAVASCRIPT ENGINE (ENGINE SYSTEMS)
-========================= -->
 <script>
   // 1. Scroll Reveal Engine
   const observerOptions = {
@@ -1078,23 +1064,22 @@ JAVASCRIPT ENGINE (ENGINE SYSTEMS)
     });
   });
 
-  // 2. Pro Level Vector Pen Tool Cursor Engine
-  const penCursor = document.getElementById('custom-pen-cursor');
-  const graphicGroup = document.getElementById('cursor-graphic-group');
-  const graphicPath = document.getElementById('cursor-graphic');
-  const anchorDot = document.querySelector('.cursor-anchor-dot');
+  // 2. Custom Dot & Tracking Ring Cursor Engine
+  const cursorDot = document.querySelector('.cursor-dot');
+  const cursorRing = document.querySelector('.cursor-ring');
   const compass = document.getElementById('blender-compass');
 
   let mouseX = 0, mouseY = 0;
-  let cursorX = 0, cursorY = 0;
+  let ringX = 0, ringY = 0;
 
+  // Track raw positions
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
     
-    // Precise anchor targeting alignment logic
-    anchorDot.style.left = mouseX + 'px';
-    anchorDot.style.top = mouseY + 'px';
+    // Core indicator tracks raw input flawlessly
+    cursorDot.style.left = mouseX + 'px';
+    cursorDot.style.top = mouseY + 'px';
 
     // Interactive 3D compass orientation shift
     const rotX = (window.innerWidth / 2 - mouseX) * 0.03;
@@ -1102,38 +1087,26 @@ JAVASCRIPT ENGINE (ENGINE SYSTEMS)
     compass.style.transform = `rotateX(${rotY}deg) rotateY(${rotX}deg)`;
   });
 
-  // Balanced linear interpolation rendering block matching absolute positioning parameters
+  // Linear interpolation loop for weighted micro-inertia tracking ring response
   function renderCursor() {
-    let distX = mouseX - cursorX;
-    let distY = mouseY - cursorY;
+    let distX = mouseX - ringX;
+    let distY = mouseY - ringY;
     
-    cursorX += distX * 0.28; 
-    cursorY += distY * 0.28;
+    ringX += distX * 0.15; 
+    ringY += distY * 0.15;
     
-    // Position the vector viewport node exactly matching tip coordinates
-    penCursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+    cursorRing.style.left = ringX + 'px';
+    cursorRing.style.top = ringY + 'px';
     
     requestAnimationFrame(renderCursor);
   }
   renderCursor();
 
-  // Handle active operational switching modes (Pen Tool Vector Nib -> Crosshair Target Selection Point)
+  // Handle active hover transformations on interaction boundaries
   const interactables = document.querySelectorAll('.interactable, a, button, .btn, .project-card, .tool-pill');
   interactables.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      anchorDot.style.opacity = '1';
-      // Smoothly transform styling variables to create crosshair intersection target
-      graphicGroup.style.transform = 'rotate(0deg) translate(-10px, -10px)';
-      graphicPath.setAttribute('d', 'M16 4V28M4 16H28');
-      graphicPath.setAttribute('stroke', '#ffffff');
-    });
-    el.addEventListener('mouseleave', () => {
-      anchorDot.style.opacity = '0';
-      // Restore standard operational system values instantly
-      graphicGroup.style.transform = 'rotate(-45deg 16 16)';
-      graphicPath.setAttribute('d', 'M16 2L6 14C6 14 7.5 20 12 22L16 30L20 22C24.5 20 26 14 26 14L16 2Z');
-      graphicPath.setAttribute('stroke', '#d4af37');
-    });
+    el.addEventListener('mouseenter', () => cursorRing.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => cursorRing.classList.remove('cursor-hover'));
   });
 
   // 3. 24fps Production Counter Engine
