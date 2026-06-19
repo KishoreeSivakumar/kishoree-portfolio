@@ -1,3 +1,8 @@
+<!-- =========================
+SECTION 1
+HEAD + PREMIUM CSS + ANIMATIONS + ULTRA-CINEMATIC RES FX
+========================= -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,14 +29,19 @@ font-family:'Poppins',sans-serif;
 background:#050505;
 color:white;
 overflow-x:hidden;
-cursor: none; 
+/* Force hide cursor globally for our custom Pen Tool implementation */
+cursor: none !important; 
+}
+
+a, button, .btn, .interactable {
+  cursor: none !important;
 }
 
 /* =========================
-MACRO BACKGROUND EFFECTS & CINEMATIC UI
-========================= */
+MACRO BACKGROUND EFFECTS & PRODUCTION UI
+========================= -->
 
-/* 1. Cinematic Film Grain */
+/* Cinematic Film Grain */
 .noise-overlay {
   position: fixed;
   top: 0;
@@ -44,12 +54,12 @@ MACRO BACKGROUND EFFECTS & CINEMATIC UI
   background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
 }
 
-/* 2. Director's Viewfinder Corners */
+/* Director's Viewfinder Corners */
 .viewfinder {
   position: fixed;
   width: 50px;
   height: 50px;
-  border: 2px solid rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.12);
   z-index: 998;
   pointer-events: none;
 }
@@ -58,7 +68,34 @@ MACRO BACKGROUND EFFECTS & CINEMATIC UI
 .vf-bl { bottom: 40px; left: 40px; border-right: none; border-top: none; }
 .vf-br { bottom: 40px; right: 40px; border-left: none; border-top: none; }
 
-/* 3. Live Timeline Timecode */
+/* 3D Viewport Axis Compass Widget */
+.axis-compass {
+  position: fixed;
+  top: 60px;
+  right: 70px;
+  width: 60px;
+  height: 60px;
+  z-index: 998;
+  pointer-events: none;
+  opacity: 0.7;
+}
+.axis-line {
+  position: absolute;
+  top: 50%; left: 50%;
+  height: 2px;
+  transform-origin: left center;
+}
+.axis-x { width: 25px; background: #ff4554; transform: rotate(0deg); } /* Blender Red X */
+.axis-y { width: 25px; background: #00e676; transform: rotate(120deg); } /* Blender Green Y */
+.axis-z { width: 25px; background: #2979ff; transform: rotate(-90deg); } /* Blender Blue Z */
+.axis-label {
+  position: absolute;
+  font-size: 9px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Live Timeline Timecode */
 .timecode {
   position: fixed;
   bottom: 45px;
@@ -83,7 +120,7 @@ MACRO BACKGROUND EFFECTS & CINEMATIC UI
 }
 @keyframes blink { 50% { opacity: 0; } }
 
-/* 4. Giant Scrolling Background Text */
+/* Giant Scrolling Background Text */
 .bg-text-container {
   position: fixed;
   top: 55%;
@@ -93,7 +130,7 @@ MACRO BACKGROUND EFFECTS & CINEMATIC UI
   z-index: -2;
   pointer-events: none;
   overflow: hidden;
-  opacity: 0.03;
+  opacity: 0.02;
 }
 
 .bg-text {
@@ -110,7 +147,7 @@ MACRO BACKGROUND EFFECTS & CINEMATIC UI
   100% { transform: translateX(-50%); }
 }
 
-/* 5. 3D Software Viewport Grid */
+/* 3D Software Viewport Grid */
 .grid-overlay {
   position: fixed;
   inset: 0;
@@ -122,7 +159,7 @@ MACRO BACKGROUND EFFECTS & CINEMATIC UI
   pointer-events: none;
 }
 
-/* 6. Floating Ambient Light Orbs */
+/* Floating Ambient Light Orbs */
 .bg-glow {
   position: fixed;
   border-radius: 50%;
@@ -156,41 +193,36 @@ MACRO BACKGROUND EFFECTS & CINEMATIC UI
 }
 
 /* =========================
-CUSTOM CURSOR
+CUSTOM ENGINE CURSOR (PEN TOOL & VECTOR MODES)
 ========================= */
 
-.cursor-dot {
-  width: 8px;
-  height: 8px;
-  background: #d4af37;
-  border-radius: 50%;
+.software-cursor {
   position: fixed;
   top: 0;
   left: 0;
+  width: 24px;
+  height: 24px;
   pointer-events: none;
   z-index: 10000;
-  transform: translate(-50%, -50%);
+  transform: translate(0px, 0px); /* Custom offsets managed dynamically via JS */
+  transition: opacity 0.2s ease;
 }
 
-.cursor-ring {
-  width: 40px;
-  height: 40px;
-  border: 1px solid rgba(212, 175, 55, 0.6);
-  border-radius: 50%;
+/* Custom interactive locator dot */
+.cursor-anchor-dot {
   position: fixed;
   top: 0;
   left: 0;
+  width: 6px;
+  height: 6px;
+  background: #ffffff;
+  border: 1px solid #050505;
+  border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 10001;
   transform: translate(-50%, -50%);
-  transition: width 0.3s, height 0.3s, background 0.3s;
-}
-
-.cursor-hover {
-  width: 80px !important;
-  height: 80px !important;
-  background: rgba(212, 175, 55, 0.1);
-  border-color: rgba(212, 175, 55, 0.2);
+  opacity: 0; /* Only turns visible during interactive states */
+  transition: opacity 0.2s ease;
 }
 
 /* =========================
@@ -246,7 +278,6 @@ transition:.4s cubic-bezier(0.25, 1, 0.5, 1);
 margin-right:15px;
 position: relative;
 overflow: hidden;
-cursor: none;
 }
 
 .btn::before {
@@ -283,7 +314,6 @@ font-size:26px;
 font-weight:700;
 color:#d4af37;
 transition: transform 0.3s ease;
-cursor: none;
 }
 
 .logo:hover {
@@ -300,7 +330,6 @@ text-decoration:none;
 color:white;
 font-size:15px;
 transition: color 0.3s ease;
-cursor: none;
 }
 
 .nav-links a:hover{
@@ -326,6 +355,21 @@ font-size:88px;
 line-height:1;
 font-weight:800;
 margin-bottom:25px;
+position: relative;
+}
+
+/* Faint Graphic Design Blueprint Guidelines Behind Header */
+.hero h1::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 12px; width: 100%; height: 1px;
+  background: rgba(212, 175, 55, 0.08);
+}
+.hero h1::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: 35px; width: 100%; height: 1px;
+  background: rgba(212, 175, 55, 0.08);
 }
 
 .hero p{
@@ -371,7 +415,6 @@ color:#d4af37;
 margin-bottom:10px;
 }
 
-/* 30px Grid standardization */
 .projects-grid{
 display:grid;
 grid-template-columns: repeat(auto-fit,minmax(380px,1fr));
@@ -384,7 +427,6 @@ border-radius:22px;
 overflow:hidden;
 border:1px solid rgba(212,175,55,.1);
 transition:all .5s cubic-bezier(0.25, 1, 0.5, 1);
-cursor: none;
 }
 
 .project-card:hover{
@@ -393,7 +435,6 @@ border-color:#d4af37;
 box-shadow: 0 30px 60px rgba(0,0,0,0.6), 0 0 30px rgba(212, 175, 55, 0.15);
 }
 
-/* Cinematic Color Grading on Hover */
 .project-card img{
 width:100%;
 height:260px;
@@ -422,7 +463,6 @@ color:#aaa;
 margin-bottom:20px;
 }
 
-/* Chromatic Aberration Title Glitch */
 .section-title{
 font-size:52px;
 margin-bottom:50px;
@@ -471,7 +511,6 @@ cursor: default;
   color: white;
   transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
   backdrop-filter: blur(5px);
-  cursor: none;
 }
 
 .tool-pill:hover {
@@ -481,7 +520,6 @@ cursor: default;
   box-shadow: 0 15px 30px rgba(212,175,55,0.2);
 }
 
-/* Vertical timeline style spacing for items */
 .experience-container {
   display: flex;
   flex-direction: column;
@@ -568,13 +606,13 @@ MOBILE RESPONSIVENESS
 
 @media (max-width: 1024px) {
   .contact-grid { grid-template-columns: repeat(2, 1fr); }
-  .viewfinder, .timecode { display: none; } 
+  .viewfinder, .timecode, .axis-compass { display: none; } 
 }
 
 @media (max-width: 768px) {
   
-  body { cursor: auto; } 
-  .cursor-dot, .cursor-ring { display: none; }
+  body { cursor: auto !important; } 
+  .software-cursor, .cursor-anchor-dot { display: none; }
   
   .section { padding: 80px 0; }
   .section::before { display: none; }
@@ -604,6 +642,7 @@ MOBILE RESPONSIVENESS
     font-size: 48px;
     margin-bottom: 20px;
   }
+  .hero h1::before, .hero h1::after { display: none; }
 
   .hero p {
     font-size: 16px;
@@ -644,18 +683,33 @@ MOBILE RESPONSIVENESS
 
 <div class="noise-overlay"></div>
 
+<!-- CINEMATIC UI ELEMENTS -->
 <div class="viewfinder vf-tl"></div>
 <div class="viewfinder vf-tr"></div>
 <div class="viewfinder vf-bl"></div>
 <div class="viewfinder vf-br"></div>
+
+<!-- 3D COMPASS WIDGET -->
+<div class="axis-compass" id="blender-compass">
+  <div class="axis-line axis-x"></div>
+  <div class="axis-line axis-y"></div>
+  <div class="axis-line axis-z"></div>
+  <div class="axis-label" style="top:-5px; left:22px; color:#2979ff;">Z</div>
+  <div class="axis-label" style="top:25px; left:52px; color:#ff4554;">X</div>
+  <div class="axis-label" style="top:48px; left:8px; color:#00e676;">Y</div>
+</div>
 
 <div class="timecode">
   <div class="rec-dot"></div>
   REC <span id="tc-display" style="margin-left: 5px;">00:00:00:00</span>
 </div>
 
-<div class="cursor-dot"></div>
-<div class="cursor-ring"></div>
+<!-- HIGH TECH INTERACTIVE PEN CUSTOM CURSOR -->
+<svg class="software-cursor" id="custom-pen-cursor" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Pen Tool Path Mode Vector Graphic -->
+  <path id="cursor-graphic" d="M2 22L9.58 14.42M11 13L18.34 5.66C19.28 4.72 19.28 3.28 18.34 2.34C17.4 1.4 15.96 1.4 15.02 2.34L7.68 9.68M13.25 4.25L16.4 7.4M5.5 16.5L4 20L7.5 18.5" stroke="#d4af37" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+<div class="cursor-anchor-dot"></div>
 
 <div class="grid-overlay"></div>
 <div class="bg-glow glow-1"></div>
@@ -750,7 +804,7 @@ Featured Projects
 <div class="project-info">
 <h3>Luxury Villa Showcase</h3>
 <p>Real Estate Film</p>
-<a href="https://www.youtube.com/watch?v=EVIVFBc0SSM" target="_blank" class="btn">Watch Project →</a>
+<a href="https://www.youtube.com/watch?v=EVIVFBc0SSM" target="_blank" class="btn interactable">Watch Project →</a>
 </div>
 </div>
 
@@ -759,7 +813,7 @@ Featured Projects
 <div class="project-info">
 <h3>Modern Interior Experience</h3>
 <p>Property Walkthrough</p>
-<a href="https://www.youtube.com/watch?v=lZsSIwTOrXg" target="_blank" class="btn">Watch Project →</a>
+<a href="https://www.youtube.com/watch?v=lZsSIwTOrXg" target="_blank" class="btn interactable">Watch Project →</a>
 </div>
 </div>
 
@@ -768,7 +822,7 @@ Featured Projects
 <div class="project-info">
 <h3>Premium Property Campaign</h3>
 <p>Real Estate Marketing</p>
-<a href="https://www.youtube.com/watch?v=TjIF5Mxeafo" target="_blank" class="btn">Watch Project →</a>
+<a href="https://www.youtube.com/watch?v=TjIF5Mxeafo" target="_blank" class="btn interactable">Watch Project →</a>
 </div>
 </div>
 
@@ -789,7 +843,7 @@ Portfolio Showcase
 <div class="project-info">
 <h3>Creator Vlog Storytelling</h3>
 <p>Long Form YouTube Editing</p>
-<a href="https://www.youtube.com/watch?v=GFLdsVX9Hxc" target="_blank" class="btn">View Project →</a>
+<a href="https://www.youtube.com/watch?v=GFLdsVX9Hxc" target="_blank" class="btn interactable">View Project →</a>
 </div>
 </div>
 
@@ -798,7 +852,7 @@ Portfolio Showcase
 <div class="project-info">
 <h3>3D Product Visualization</h3>
 <p>Blender • Product Rendering</p>
-<a href="https://drive.google.com/file/d/10D2uMpq47LBjJXqDMfxqMy8QOm3FQwPV/view?usp=sharing" target="_blank" class="btn">View Project →</a>
+<a href="https://drive.google.com/file/d/10D2uMpq47LBjJXqDMfxqMy8QOm3FQwPV/view?usp=sharing" target="_blank" class="btn interactable">View Project →</a>
 </div>
 </div>
 
@@ -807,7 +861,7 @@ Portfolio Showcase
 <div class="project-info">
 <h3>Motion Campaign Visuals</h3>
 <p>Motion Graphics & Branding</p>
-<a href="https://drive.google.com/file/d/1B433p5Q0_ulpdqss4cIvEwrPzSAc8uJ_/view?usp=sharing" target="_blank" class="btn">View Project →</a>
+<a href="https://drive.google.com/file/d/1B433p5Q0_ulpdqss4cIvEwrPzSAc8uJ_/view?usp=sharing" target="_blank" class="btn interactable">View Project →</a>
 </div>
 </div>
 
@@ -949,7 +1003,7 @@ Let's Work Together
 <div class="stat-card reveal interactable delay-3">
 <h3 class="gold">LinkedIn</h3>
 <br>
-<a href="https://www.linkedin.com/in/kishoree-s-948348322" target="_blank" class="btn">Visit Profile →</a>
+<a href="https://www.linkedin.com/in/kishoree-s-948348322" target="_blank" class="btn interactable">Visit Profile →</a>
 </div>
 
 </div>
@@ -990,8 +1044,11 @@ Video Editor • Motion Graphics Artist • 3D Animator
 
 </div>
 
+<!-- =========================
+JAVASCRIPT ENGINE (ENGINE SYSTEMS)
+========================= -->
 <script>
-  // 1. Scroll Reveal Animations
+  // 1. Scroll Reveal Engine
   const observerOptions = {
     root: null,
     rootMargin: '0px',
@@ -1011,41 +1068,64 @@ Video Editor • Motion Graphics Artist • 3D Animator
     observer.observe(element);
   });
 
-  // 2. Custom Cursor Logic
-  const cursorDot = document.querySelector('.cursor-dot');
-  const cursorRing = document.querySelector('.cursor-ring');
-  let mouseX = 0, mouseY = 0;
-  let ringX = 0, ringY = 0;
+  // 2. High Fidelity Pen Tool Cursor Engine
+  const penCursor = document.getElementById('custom-pen-cursor');
+  const graphicPath = document.getElementById('cursor-graphic');
+  const anchorDot = document.querySelector('.cursor-anchor-dot');
+  const compass = document.getElementById('blender-compass');
 
+  let mouseX = 0, mouseY = 0;
+  let cursorX = 0, cursorY = 0;
+
+  // Track raw positions
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
     
-    cursorDot.style.left = mouseX + 'px';
-    cursorDot.style.top = mouseY + 'px';
+    // Anchor dot stays locked onto true mouse position
+    anchorDot.style.left = mouseX + 'px';
+    anchorDot.style.top = mouseY + 'px';
+
+    // Interactive 3D compass orientation shift
+    const rotX = (window.innerWidth / 2 - mouseX) * 0.03;
+    const rotY = (window.innerHeight / 2 - mouseY) * 0.03;
+    compass.style.transform = `rotateX(${rotY}deg) rotateY(${rotX}deg)`;
   });
 
-  function animateCursor() {
-    let distX = mouseX - ringX;
-    let distY = mouseY - ringY;
+  // Linear interpolation loop for organic weight response
+  function renderCursor() {
+    let distX = mouseX - cursorX;
+    let distY = mouseY - cursorY;
     
-    ringX += distX * 0.15; 
-    ringY += distY * 0.15;
+    cursorX += distX * 0.25; 
+    cursorY += distY * 0.25;
     
-    cursorRing.style.left = ringX + 'px';
-    cursorRing.style.top = ringY + 'px';
+    // Position the vector graphic box
+    penCursor.style.left = cursorX + 'px';
+    penCursor.style.top = cursorY + 'px';
     
-    requestAnimationFrame(animateCursor);
+    requestAnimationFrame(renderCursor);
   }
-  animateCursor();
+  renderCursor();
 
-  const interactables = document.querySelectorAll('.interactable');
+  // Handle active component switching (Pen tool vs Selection Arrow Pointer)
+  const interactables = document.querySelectorAll('.interactable, a, button, .btn, .project-card, .tool-pill');
   interactables.forEach(el => {
-    el.addEventListener('mouseenter', () => cursorRing.classList.add('cursor-hover'));
-    el.addEventListener('mouseleave', () => cursorRing.classList.remove('cursor-hover'));
+    el.addEventListener('mouseenter', () => {
+      anchorDot.style.opacity = '1';
+      // Morph the SVG structure into standard selection pointer vectors
+      graphicPath.setAttribute('d', 'M3 3L10.58 18.92L13.25 12.25L19.92 9.58L3 3Z');
+      graphicPath.setAttribute('stroke', '#ffffff');
+    });
+    el.addEventListener('mouseleave', () => {
+      anchorDot.style.opacity = '0';
+      // Revert back to Pen Tool drawing coordinates
+      graphicPath.setAttribute('d', 'M2 22L9.58 14.42M11 13L18.34 5.66C19.28 4.72 19.28 3.28 18.34 2.34C17.4 1.4 15.96 1.4 15.02 2.34L7.68 9.68M13.25 4.25L16.4 7.4M5.5 16.5L4 20L7.5 18.5');
+      graphicPath.setAttribute('stroke', '#d4af37');
+    });
   });
 
-  // 3. Live Timeline Timecode Generator (24fps)
+  // 3. 24fps Production Counter Engine
   const tcDisplay = document.getElementById('tc-display');
   let frames = 0, seconds = 0, minutes = 0, hours = 1;
   
