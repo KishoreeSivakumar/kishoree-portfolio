@@ -1,8 +1,3 @@
-<!-- =========================
-SECTION 1
-HEAD + PREMIUM CSS + ANIMATIONS + CINEMATIC FX
-========================= -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -326,14 +321,6 @@ max-width:700px;
 z-index:2;
 }
 
-.hero-tag{
-color:#d4af37;
-letter-spacing:2px;
-margin-bottom:20px;
-font-size: 14px;
-text-transform: uppercase;
-}
-
 .hero h1{
 font-size:88px;
 line-height:1;
@@ -418,7 +405,7 @@ transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), filter 0.8s ease;
 
 .project-card:hover img {
   transform: scale(1.08);
-  filter: brightness(1.05) contrast(1.15) saturate(1.2); /* Cinematic LUT effect */
+  filter: brightness(1.05) contrast(1.15) saturate(1.2); 
 }
 
 .project-info{
@@ -492,6 +479,13 @@ cursor: default;
   border-color: #d4af37;
   transform: translateY(-8px);
   box-shadow: 0 15px 30px rgba(212,175,55,0.2);
+}
+
+/* Vertical timeline style spacing for items */
+.experience-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 /* =========================
@@ -574,7 +568,7 @@ MOBILE RESPONSIVENESS
 
 @media (max-width: 1024px) {
   .contact-grid { grid-template-columns: repeat(2, 1fr); }
-  .viewfinder, .timecode { display: none; } /* Hide cinematic overlays on smaller screens */
+  .viewfinder, .timecode { display: none; } 
 }
 
 @media (max-width: 768px) {
@@ -648,10 +642,8 @@ MOBILE RESPONSIVENESS
 
 <body>
 
-<!-- NOISE OVERLAY FOR TEXTURE -->
 <div class="noise-overlay"></div>
 
-<!-- CINEMATIC UI ELEMENTS -->
 <div class="viewfinder vf-tl"></div>
 <div class="viewfinder vf-tr"></div>
 <div class="viewfinder vf-bl"></div>
@@ -662,11 +654,9 @@ MOBILE RESPONSIVENESS
   REC <span id="tc-display" style="margin-left: 5px;">00:00:00:00</span>
 </div>
 
-<!-- CUSTOM CURSOR ELEMENTS -->
 <div class="cursor-dot"></div>
 <div class="cursor-ring"></div>
 
-<!-- MACRO BACKGROUNDS -->
 <div class="grid-overlay"></div>
 <div class="bg-glow glow-1"></div>
 <div class="bg-glow glow-2"></div>
@@ -697,10 +687,6 @@ MOBILE RESPONSIVENESS
 
 <div class="hero-content">
 
-<div class="hero-tag">
-OPEN TO FREELANCE & FULL-TIME — COIMBATORE, INDIA
-</div>
-
 <h1>
 Crafting stories<br>
 through <span class="text-gradient">motion, light & depth.</span>
@@ -713,7 +699,6 @@ real estate films, YouTube edits,
 branded campaigns and 3D visual experiences.
 </p>
 
-<!-- Ensure resume file is named correctly[cite: 3] -->
 <a href="Kishoree_S_Resume.pdf" target="_blank" class="btn interactable">
 Download Resume
 </a>
@@ -836,33 +821,44 @@ Portfolio Showcase
 Experience
 </h2>
 
-<div class="stat-card reveal interactable">
-<h3 class="gold">2026</h3>
-<br>
-<h2>Video Editor</h2>
-<p>Market Maker MGMT</p>
-<br>
-<p>Real Estate Videos • Long Form Content • Reels • Shorts</p>
-</div>
+<div class="experience-container">
 
-<br><br>
+  <div class="stat-card reveal interactable">
+    <h3 class="gold">March 2026 – May 2026</h3>
+    <br>
+    <h2>Video Editor</h2>
+    <p>Market Maker MGMT (Remote)</p>
+    <br>
+    <p>Real Estate Videos • Long Form Content • Reels • Shorts</p>
+  </div>
 
-<div class="stat-card reveal interactable">
-<h3 class="gold">2025</h3>
-<br>
-<h2>3D Animator & Video Editor</h2>
-<p>EC4YOU Digital Marketing</p>
-<br>
-<p>3D Animation • Product Visualization • Campaign Visuals</p>
-</div>
+  <div class="stat-card reveal interactable">
+    <h3 class="gold">September 2025 – March 2026</h3>
+    <br>
+    <h2>Freelance Video Editor</h2>
+    <p>Independent Production (Remote)</p>
+    <br>
+    <p>Commercial Videos • Cinematic Reels • Promotional Campaigns</p>
+  </div>
 
-<br><br>
+  <div class="stat-card reveal interactable">
+    <h3 class="gold">February 2025 – August 2025</h3>
+    <br>
+    <h2>3D Animator & Video Editor</h2>
+    <p>EC4YOU Digital Marketing (India)</p>
+    <br>
+    <p>3D Animation • Product Visualization • Targeted Promotional Campaigns</p>
+  </div>
 
-<div class="stat-card reveal interactable">
-<h3 class="gold">2023–2025</h3>
-<br>
-<h2>Freelance Video Editor</h2>
-<p>Worked with brands, businesses and creators.</p>
+  <div class="stat-card reveal interactable">
+    <h3 class="gold">April 2023 – January 2025</h3>
+    <br>
+    <h2>Freelance Video Editor</h2>
+    <p>Independent Creators & Brands (Remote)</p>
+    <br>
+    <p>Cinematic Video Editing • Digital Media Campaigns • Post-production Assets Management</p>
+  </div>
+
 </div>
 
 </section>
@@ -961,7 +957,6 @@ Let's Work Together
 <br><br>
 
 <div style="text-align: left;">
-<!-- Ensure resume file is named correctly[cite: 3] -->
 <a href="Kishoree_S_Resume.pdf" target="_blank" class="btn reveal interactable">
 Download Resume
 </a>
@@ -995,9 +990,6 @@ Video Editor • Motion Graphics Artist • 3D Animator
 
 </div>
 
-<!-- =========================
-JAVASCRIPT (ANIMATIONS & TIMECODE)
-========================= -->
 <script>
   // 1. Scroll Reveal Animations
   const observerOptions = {
