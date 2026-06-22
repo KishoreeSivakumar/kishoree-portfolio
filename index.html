@@ -1,195 +1,33 @@
-<!-- =========================
-SECTION 1
-HEAD + INTERNATIONAL COMPOSITION CSS + REFINED MOTION ENGINE
-========================= -->
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Kishoree Sivakumar | Creative Portfolio</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Kishoree Sivakumar | Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-scroll-behavior:smooth;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  scroll-behavior:smooth;
 }
 
 body{
-font-family:'Poppins',sans-serif;
-background:#030303;
-color:#f5f5f7;
-overflow-x:hidden;
-cursor: none !important; 
+  font-family:'Poppins',sans-serif;
+  background:#0a0a0a;
+  color:#f5f5f7;
+  overflow-x:hidden;
+  cursor: none !important; 
 }
 
-a, button, .btn, .interactable, .cms-btn, .focus-lens-card {
+a, button, .btn, .interactable {
   cursor: none !important;
 }
 
-/* =========================
-MACRO BACKGROUND EFFECTS & CINEMATIC UI
-========================= */
-
-/* Cinematic Fine Film Grain Texture */
-.noise-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 999;
-  opacity: 0.03;
-  background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-}
-
-/* Director's Studio Viewfinder Corners */
-.viewfinder {
-  position: fixed;
-  width: 40px;
-  height: 40px;
-  border: 1.5px solid rgba(255, 255, 255, 0.1);
-  z-index: 998;
-  pointer-events: none;
-}
-.vf-tl { top: 40px; left: 40px; border-right: none; border-bottom: none; }
-.vf-tr { top: 40px; right: 40px; border-left: none; border-bottom: none; }
-.vf-bl { bottom: 40px; left: 40px; border-right: none; border-top: none; }
-.vf-br { bottom: 40px; right: 40px; border-left: none; border-top: none; }
-
-/* 3D Software Coordinates Compass Widget */
-.axis-compass {
-  position: fixed;
-  top: 50px;
-  right: 50px;
-  width: 50px;
-  height: 50px;
-  z-index: 998;
-  pointer-events: none;
-  opacity: 0.6;
-  perspective: 500px;
-}
-.axis-line {
-  position: absolute;
-  top: 50%; left: 50%;
-  height: 1.5px;
-  transform-origin: left center;
-}
-.axis-x { width: 22px; background: #ff4554; transform: rotate(0deg); }
-.axis-y { width: 22px; background: #00e676; transform: rotate(120deg); }
-.axis-z { width: 22px; background: #2979ff; transform: rotate(-90deg); }
-.axis-label {
-  position: absolute;
-  font-size: 8px;
-  font-weight: 700;
-  color: #fff;
-}
-
-/* Production Timeline Timecode Node */
-.timecode {
-  position: fixed;
-  bottom: 40px;
-  right: 60px;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 12px;
-  color: #d4af37;
-  letter-spacing: 2px;
-  z-index: 998;
-  pointer-events: none;
-  opacity: 0.7;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.rec-dot {
-  width: 6px;
-  height: 6px;
-  background: #ff3333;
-  border-radius: 50%;
-  animation: pulseBlink 1s infinite;
-}
-@keyframes pulseBlink { 50% { opacity: 0; } }
-
-/* Giant Elegant Cinematic Background Text */
-.bg-text-container {
-  position: fixed;
-  top: 55%;
-  left: 0;
-  width: 100%;
-  transform: translateY(-50%);
-  z-index: -2;
-  pointer-events: none;
-  overflow: hidden;
-  opacity: 0.015;
-}
-.bg-text {
-  font-size: 260px;
-  font-weight: 800;
-  white-space: nowrap;
-  color: transparent;
-  -webkit-text-stroke: 1.5px #ffffff;
-  animation: scrollBgText 60s linear infinite;
-}
-@keyframes scrollBgText {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* Clean Viewport Grid System Overlay */
-.grid-overlay {
-  position: fixed;
-  inset: 0;
-  background-size: 80px 80px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
-  z-index: -3;
-  pointer-events: none;
-}
-
-/* Ambient Environmental Lights */
-.bg-glow {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(160px);
-  z-index: -3;
-  pointer-events: none;
-  animation: ambientFloat 25s infinite alternate ease-in-out;
-}
-.glow-1 {
-  width: 50vw;
-  height: 50vw;
-  background: rgba(212, 175, 55, 0.05);
-  top: -15%;
-  left: -10%;
-}
-.glow-2 {
-  width: 45vw;
-  height: 45vw;
-  background: rgba(255, 255, 255, 0.03);
-  bottom: -10%;
-  right: -5%;
-  animation-duration: 30s;
-}
-@keyframes ambientFloat {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(5vw, 5vh) scale(1.05); }
-}
-
-/* =========================
-INTERACTIVE DOTTED CURSOR ENGINE
-========================= */
-
+/* CUSTOM ENGINE CURSOR (SIMPLE & CLEAN) */
 .cursor-dot {
   width: 6px;
   height: 6px;
@@ -204,8 +42,8 @@ INTERACTIVE DOTTED CURSOR ENGINE
 }
 
 .cursor-ring {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border: 1px solid rgba(212, 175, 55, 0.4);
   border-radius: 50%;
   position: fixed;
@@ -214,113 +52,70 @@ INTERACTIVE DOTTED CURSOR ENGINE
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), height 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s, border-color 0.4s;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .cursor-hover {
-  width: 74px !important;
-  height: 74px !important;
-  background: rgba(212, 175, 55, 0.08);
-  border-color: rgba(212, 175, 55, 0.3);
-}
-
-.cursor-focus-mode {
   width: 50px !important;
   height: 50px !important;
-  background: rgba(255, 51, 51, 0.1) !important;
-  border-color: rgba(255, 51, 51, 0.8) !important;
-  border-style: dashed !important;
+  background: rgba(212, 175, 55, 0.05);
+  border-color: rgba(212, 175, 55, 0.6);
 }
 
-/* =========================
-LAYOUT STRUCTURE & ALIGNMENT STRATEGY
-========================= */
-
 .container {
-  max-width: 1300px;
+  max-width: 1200px;
   margin: auto;
-  padding: 0 50px;
+  padding: 0 40px;
 }
 
 .gold {
   color: #d4af37;
 }
 
-.text-gradient {
-  background: linear-gradient(135deg, #d4af37 0%, #fffadb 50%, #d4af37 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: metallicShimmer 6s linear infinite;
-}
-@keyframes metallicShimmer {
-  to { background-position: 200% center; }
-}
-
 .section {
-  padding: 150px 0;
-  position: relative;
+  padding: 100px 0;
 }
 
-.section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 1px;
-  background: rgba(212, 175, 55, 0.2);
-}
-
-/* Corporate Buttons */
 .btn {
   display: inline-block;
-  padding: 16px 34px;
+  padding: 14px 28px;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 8px;
+  border-radius: 6px;
   text-decoration: none;
   color: #ffffff;
   font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.5px;
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s ease;
   margin-right: 15px;
-  position: relative;
-  background: rgba(20, 20, 20, 0.4);
-  backdrop-filter: blur(5px);
+  background: transparent;
 }
-.btn::before {
-  content: '';
-  position: absolute;
-  top: 0; left: -100%; width: 100%; height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.15), transparent);
-  transition: left 0.6s ease;
-}
-.btn:hover::before { left: 100%; }
+
 .btn:hover {
   border-color: #d4af37;
   color: #d4af37;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), inset 0 0 15px rgba(212, 175, 55, 0.05);
-  transform: translateY(-2px);
+  background: rgba(212, 175, 55, 0.02);
 }
 
-/* Navigation */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 40px 0;
+  padding: 30px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
+
 .logo {
-  font-size: 22px;
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 700;
   color: #ffffff;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
 }
+
 .nav-links {
   display: flex;
-  gap: 40px;
+  gap: 35px;
 }
+
 .nav-links a {
   text-decoration: none;
   color: #8e8e93;
@@ -328,237 +123,151 @@ LAYOUT STRUCTURE & ALIGNMENT STRATEGY
   font-weight: 500;
   transition: color 0.3s ease;
 }
+
 .nav-links a:hover {
   color: #ffffff;
 }
 
-/* Hero Section */
 .hero {
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-.hero-content {
-  max-width: 850px;
-  z-index: 2;
-}
-.hero h1 {
-  font-size: 80px;
-  line-height: 1.1;
-  font-weight: 800;
-  margin-bottom: 30px;
-  letter-spacing: -1px;
-}
-.hero p {
-  font-size: 20px;
-  color: #aeaeb2;
-  margin-bottom: 45px;
-  line-height: 1.7;
-  font-weight: 400;
-  max-width: 750px;
+  padding: 120px 0;
 }
 
-/* Strict Professional Alignment Grids */
+.hero h1 {
+  font-size: 56px;
+  line-height: 1.2;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #ffffff;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #8e8e93;
+  margin-bottom: 40px;
+  line-height: 1.6;
+  max-width: 700px;
+}
+
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 40px; 
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 35px; 
 }
 
 .project-card {
-  background: rgba(14, 14, 16, 0.6);
-  border-radius: 16px;
+  background: #121212;
+  border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
+
 .project-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(212, 175, 55, 0.3);
-  background: rgba(20, 20, 24, 0.8);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  transform: translateY(-5px);
+  border-color: rgba(212, 175, 55, 0.4);
 }
 
 .project-card .media-container {
   width: 100%;
-  height: 250px;
+  height: 220px;
   overflow: hidden;
-  position: relative;
   background: #000;
 }
+
 .project-card img, .project-card video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  filter: brightness(0.8) contrast(1.05);
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s ease;
-}
-.project-card:hover img, .project-card:hover video {
-  transform: scale(1.05);
-  filter: brightness(1) contrast(1);
 }
 
 .project-info {
-  padding: 35px;
+  padding: 25px;
 }
+
 .project-info h3 {
-  margin-bottom: 8px;
-  font-size: 22px;
+  margin-bottom: 6px;
+  font-size: 20px;
   font-weight: 600;
-  letter-spacing: -0.3px;
 }
+
 .project-info p {
   color: #8e8e93;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   font-size: 14px;
 }
 
 .section-title {
-  font-size: 44px;
-  font-weight: 800;
-  margin-bottom: 60px;
-  text-align: left;
-  letter-spacing: -0.5px;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 45px;
+  color: #ffffff;
 }
 
-/* About Layout Matrix */
 .about-split-row {
   display: grid;
-  grid-template-columns: 1.6fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
   gap: 40px;
-  align-items: stretch;
 }
+
 .about-side-stack {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  justify-content: space-between;
+  gap: 20px;
 }
 
 .stat-card {
-  background: rgba(14, 14, 16, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  border-radius: 16px;
-  padding: 40px;
-  backdrop-filter: blur(10px);
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
+  background: #121212;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 30px;
 }
-.stat-card:hover {
-  border-color: rgba(212, 175, 55, 0.2);
-  background: rgba(18, 18, 22, 0.7);
-  transform: scale(1.01);
-}
+
 .stat-card h2 {
-  font-size: 48px;
-  font-weight: 800;
+  font-size: 36px;
+  font-weight: 700;
   color: #d4af37;
   margin-bottom: 5px;
 }
 
-/* =========================
-CINEMATIC CAMERA FOCUS REVEAL SYSTEM CSS 
-========================= */
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-}
-
-.focus-lens-card {
-  position: relative;
-  overflow: hidden;
-  user-select: none;
-}
-
-.focus-lens-card .actual-content {
-  filter: blur(14px);
-  opacity: 0.08;
-  transform: scale(0.96);
-  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.focus-lens-card .shutter-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: rgba(10, 10, 12, 0.1);
-  color: rgba(212, 175, 55, 0.7);
-  font-family: monospace;
-  font-size: 11px;
-  letter-spacing: 2px;
-  font-weight: 600;
-  gap: 10px;
-  opacity: 1;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  z-index: 10;
-}
-
-.focus-lens-card .shutter-icon {
-  width: 24px;
-  height: 24px;
-  stroke: currentColor;
-  fill: none;
-  animation: rotateShutter 8s linear infinite;
-}
-
-@keyframes rotateShutter { 100% { transform: rotate(360deg); } }
-
-/* Focused Enabled State Overrides via JS Trigger Node */
-.focus-lens-card.lens-focused .actual-content {
-  filter: blur(0px);
-  opacity: 1;
-  transform: scale(1);
-}
-
-.focus-lens-card.lens-focused .shutter-overlay {
-  opacity: 0;
-  pointer-events: none;
-  transform: scale(1.1);
+  gap: 25px;
 }
 
 .tools-flex {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 14px;
+  gap: 12px;
 }
+
 .tool-pill {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  padding: 14px 28px;
-  border-radius: 8px;
-  font-size: 15px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 14px;
   color: #e5e5ea;
-  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.tool-pill:hover {
-  background: rgba(212, 175, 55, 0.05);
-  border-color: rgba(212, 175, 55, 0.4);
-  color: #ffffff;
-  transform: translateY(-4px);
 }
 
 .experience-container {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 30px;
 }
+
 .experience-node {
-  padding-left: 30px;
-  border-left: 1px solid rgba(212, 175, 55, 0.15);
+  padding-left: 25px;
+  border-left: 1px solid rgba(212, 175, 55, 0.2);
   position: relative;
 }
+
 .experience-node::after {
   content: '';
   position: absolute;
   left: -4px;
-  top: 6px;
+  top: 8px;
   width: 7px;
   height: 7px;
   background: #d4af37;
@@ -566,35 +275,13 @@ CINEMATIC CAMERA FOCUS REVEAL SYSTEM CSS
 }
 
 /* =========================
-LIVE REARRANGE DASHBOARD POPUP INTERFACE
+HIDDEN BACKEND EDIT MODE PANEL
 ========================= */
-
-.fixed-edit-trigger {
-  position: fixed;
-  bottom: 30px;
-  left: 30px;
-  background: rgba(15, 15, 15, 0.85);
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  padding: 12px 24px;
-  border-radius: 30px;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  backdrop-filter: blur(10px);
-  z-index: 999;
-  transition: all 0.3s ease;
-}
-.fixed-edit-trigger:hover {
-  border-color: #d4af37;
-  color: #d4af37;
-}
-
 .cms-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
   z-index: 10000;
   display: flex;
   justify-content: center;
@@ -603,601 +290,310 @@ LIVE REARRANGE DASHBOARD POPUP INTERFACE
   pointer-events: none;
   transition: opacity 0.3s ease;
 }
+
 .cms-modal-overlay.active {
   opacity: 1;
   pointer-events: auto;
 }
 
 .cms-dropdown-menu {
-  background: rgba(18, 18, 20, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
-  width: 320px;
-  padding: 12px;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
+  background: #1a1a1a;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  width: 300px;
+  padding: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 10px;
 }
 
 .cms-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 11px 14px;
-  border-radius: 8px;
-  color: #aeaeb2;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 6px;
+  color: #8e8e93;
   font-size: 14px;
-  font-weight: 500;
-  text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease;
+  cursor: pointer;
   position: relative;
 }
+
 .cms-item:hover {
-  background: rgba(255, 255, 255, 0.04);
-  color: #ffffff;
-}
-.cms-item svg { width: 18px; height: 18px; stroke: currentColor; fill: none; }
-.cms-divider { height: 1px; background: rgba(255, 255, 255, 0.06); margin: 6px 4px; }
-.cms-badge { background: rgba(212, 175, 55, 0.12); color: #d4af37; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; margin-left: auto; }
-.cms-hidden-input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; }
-
-/* =========================
-PREMIUM SCROLL REVEAL TIMING
-========================= */
-
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
 }
 
-.hero h1 {
+.cms-hidden-input {
+  position: absolute;
+  inset: 0;
   opacity: 0;
-  animation: executiveFadeUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+  cursor: pointer;
 }
-.hero p {
-  opacity: 0;
-  animation: executiveFadeUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
-}
-.hero .btn {
-  opacity: 0;
-  animation: executiveFadeUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
-}
-@keyframes executiveFadeUp {
-  0% { opacity: 0; transform: translateY(20px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-/* =========================
-MOBILE & TABLET RESET RULES
-========================= */
 
 @media (max-width: 1024px) {
   .contact-grid { grid-template-columns: repeat(2, 1fr); }
-  .viewfinder, .timecode, .axis-compass, .fixed-edit-trigger { display: none !important; }
 }
 
 @media (max-width: 768px) {
   body { cursor: auto !important; }
-  a, button, .btn, .interactable, .project-card, .tool-pill { cursor: auto !important; }
+  a, button, .btn, .interactable { cursor: auto !important; }
   .cursor-dot, .cursor-ring { display: none !important; }
-  
-  .section { padding: 90px 0; }
-  .navbar { flex-direction: column; gap: 20px; padding: 30px 0; }
-  .nav-links { flex-wrap: wrap; justify-content: center; gap: 20px; }
-  
-  .hero { text-align: left; padding-top: 40px; min-height: auto; }
-  .hero h1 { font-size: 46px; margin-bottom: 20px; }
-  .hero h1::before, .hero h1::after { display: none; }
-  .hero p { font-size: 17px; margin-bottom: 35px; }
-  .hero .btn { display: block; margin: 0 0 15px 0; width: 100%; text-align: center; }
-
-  .bg-text { font-size: 130px; }
-  .projects-grid, .contact-grid { grid-template-columns: 1fr; gap: 24px; }
-  
-  /* Reset mobile lens filter behavior so contact data displays directly */
-  .focus-lens-card .actual-content { filter: blur(0) !important; opacity: 1 !important; transform: scale(1) !important; }
-  .focus-lens-card .shutter-overlay { display: none !important; }
-
-  .about-split-row { grid-template-columns: 1fr; gap: 24px; }
-  .section-title { font-size: 32px; margin-bottom: 40px; }
+  .navbar { flex-direction: column; gap: 15px; }
+  .hero h1 { font-size: 38px; }
+  .projects-grid, .contact-grid, .about-split-row { grid-template-columns: 1fr; }
 }
-
 </style>
-
 </head>
 
 <body>
 
-<div class="noise-overlay"></div>
-
-<!-- CINEMATIC BACKGROUND UI -->
-<div class="viewfinder vf-tl"></div>
-<div class="viewfinder vf-tr"></div>
-<div class="viewfinder vf-bl"></div>
-<div class="viewfinder vf-br"></div>
-
-<!-- FIXED EDIT WORKSPACE CONTROL LAYER -->
-<button class="fixed-edit-trigger cms-btn" id="open-cms-trigger">⚙️ Edit Portfolio</button>
-
-<!-- CONTROL POPUP MODULE -->
+<!-- POPUP CONTROL PANEL (HIDDEN VISUALLY - OPENS ONLY VIA CTRL+SHIFT+E) -->
 <div class="cms-modal-overlay" id="cms-popup-modal">
   <div class="cms-dropdown-menu">
-    <div class="cms-item cms-btn">
-      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-      <span>Upload files</span>
-      <input type="file" class="cms-hidden-input" id="universal-file-uploader" accept=".jpeg,.jpg,.png,.mov,.wav,.mp3,.mp4">
+    <div style="font-size: 12px; color: #666; font-weight: 600; text-transform: uppercase;">Workspace Asset Ingest</div>
+    <div class="cms-item">
+      <span>📁 Upload File (Image/Video)</span>
+      <input type="file" class="cms-hidden-input" id="universal-file-uploader" accept=".jpeg,.jpg,.png,.mov,.mp4">
     </div>
-    <div class="cms-item cms-btn" onclick="alert('Connected to secure asset workspace streaming mount.')">
-      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-      <span>Add from Drive</span>
-    </div>
-    <div class="cms-divider"></div>
-    <div class="cms-item cms-btn">
-      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-      <span>Create image</span>
-      <span class="cms-badge">New</span>
-      <input type="file" class="cms-hidden-input" id="image-only-uploader" accept=".jpeg,.jpg,.png">
-    </div>
-    <div class="cms-item cms-btn">
-      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7a2 2 0 0 0-2.45-1.45L16 7V5a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2l4.55 1.45A2 2 0 0 0 23 17V7z"/></svg>
-      <span>Create video</span>
-      <input type="file" class="cms-hidden-input" id="video-only-uploader" accept=".mp4,.mov">
-    </div>
-    <div class="cms-divider"></div>
-    <div class="cms-item cms-btn" id="close-cms-modal" style="color: #ff4554; justify-content: center; font-weight: 700;">
-      <span>Close Menu</span>
-    </div>
+    <div id="close-cms-modal" style="color: #ff4554; text-align: center; margin-top: 10px; font-size: 13px; cursor: pointer; font-weight: 600;">Close Panel</div>
   </div>
 </div>
 
-<!-- 3D GRID GRAPHIC COMPASS -->
-<div class="axis-compass" id="blender-compass">
-  <div class="axis-line axis-x"></div>
-  <div class="axis-line axis-y"></div>
-  <div class="axis-line axis-z"></div>
-  <div class="axis-label" style="top:-5px; left:22px; color:#2979ff;">Z</div>
-  <div class="axis-label" style="top:25px; left:52px; color:#ff4554;">X</div>
-  <div class="axis-label" style="top:48px; left:8px; color:#00e676;">Y</div>
-</div>
-
-<div class="timecode">
-  <div class="rec-dot"></div>
-  REC <span id="tc-display" style="margin-left: 5px;">00:00:00:00</span>
-</div>
-
-<!-- ACTIVE REFINED CURSOR INTERFACES -->
+<!-- SIMPLE INTERACTIVE POINTERS -->
 <div class="cursor-dot"></div>
 <div class="cursor-ring"></div>
 
-<div class="grid-overlay"></div>
-<div class="bg-glow glow-1"></div>
-<div class="bg-glow glow-2"></div>
-
-<div class="bg-text-container">
-  <div class="bg-text">
-    KISHOREE SIVAKUMAR • Video Editor • 3D Animator • Motion Graphics Artist • KISHOREE SIVAKUMAR • Video Editor • 3D Animator • Motion Graphics Artist •
-  </div>
-</div>
-
 <div class="container">
+  
   <header class="navbar">
-    <div class="logo interactable">KS</div>
+    <div class="logo">KISHOREE SIVAKUMAR</div>
     <nav class="nav-links">
       <a href="#work" class="interactable">Work</a>
       <a href="#projects" class="interactable">Showcase</a>
       <a href="#experience" class="interactable">Experience</a>
-      <a href="#tools" class="interactable">Capabilities</a>
       <a href="#about" class="interactable">About</a>
       <a href="#contact" class="interactable">Contact</a>
     </nav>
   </header>
 
-  <!-- HERO PANEL -->
+  <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
-      <h1>Crafting stories through <span class="text-gradient">motion, light & depth.</span></h1>
-      <p>Video Editor, Motion Graphics Artist, and 3D Animator creating clean social media edits, real estate walkthroughs, promotional campaigns, and 3D visual experiences.</p>
+      <h1>Video Editor, Motion Graphics Artist & 3D Animator</h1>
+      <p>I create clean social media edits, real estate property walkthroughs, promotional brand campaigns, and 3D visual renders focused on crisp pacing and professional post-production.</p>
       <a href="Kishoree_S_Resume.pdf" target="_blank" class="btn interactable">Download CV</a>
-      <a href="https://www.linkedin.com/in/kishoree-s-948348322" target="_blank" class="btn interactable">LinkedIn Network</a>
+      <a href="https://www.linkedin.com/in/kishoree-s-948348322" target="_blank" class="btn interactable">LinkedIn</a>
     </div>
   </section>
 
-  <!-- HORIZONTAL MARQUEE PANEL -->
-  <section class="section" style="padding: 0;">
-    <div class="services">
-      <div class="services-track">
-        <span class="interactable">VIDEO EDITING</span>
-        <span class="interactable">MOTION GRAPHICS</span>
-        <span class="interactable">3D ANIMATION & MODELING</span>
-        <span class="interactable">REAL ESTATE FILMS</span>
-        <span class="interactable">PRODUCT VISUALIZATION</span>
-        <span class="interactable">COLOR GRADING</span>
-        <span class="interactable">POST PRODUCTION</span>
-        
-        <span class="interactable">VIDEO EDITING</span>
-        <span class="interactable">MOTION GRAPHICS</span>
-        <span class="interactable">3D ANIMATION & MODELING</span>
-        <span class="interactable">REAL ESTATE FILMS</span>
-        <span class="interactable">PRODUCT VISUALIZATION</span>
-        <span class="interactable">COLOR GRADING</span>
-        <span class="interactable">POST PRODUCTION</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMMERCIAL FILM FEATURE GRID -->
+  <!-- FEATURED VIDEOS -->
   <section id="work" class="section">
-    <h2 class="section-title gold reveal interactable">Featured Projects</h2>
+    <h2 class="section-title">Featured Projects</h2>
     <div class="projects-grid">
-      <div class="project-card reveal interactable" id="card-work-1">
+      <div class="project-card" id="card-work-1">
         <div class="media-container" id="media-work-1">
           <img src="https://img.youtube.com/vi/EVIVFBc0SSM/maxresdefault.jpg" alt="Luxury Villa Showcase">
         </div>
         <div class="project-info">
           <h3>Luxury Villa Showcase</h3>
-          <p>Real Estate Film • Property Walkthrough</p>
-          <a href="https://www.youtube.com/watch?v=EVIVFBc0SSM" target="_blank" class="btn interactable">Watch Project →</a>
+          <p>Real Estate Film & Property Walkthrough</p>
+          <a href="https://www.youtube.com/watch?v=EVIVFBc0SSM" target="_blank" class="btn interactable">Watch Video →</a>
         </div>
       </div>
-      <div class="project-card reveal interactable" id="card-work-2">
+      <div class="project-card" id="card-work-2">
         <div class="media-container" id="media-work-2">
           <img src="https://img.youtube.com/vi/lZsSIwTOrXg/maxresdefault.jpg" alt="Modern Interior Experience">
         </div>
         <div class="project-info">
           <h3>Modern Interior Experience</h3>
-          <p>Property Walkthrough Video</p>
-          <a href="https://www.youtube.com/watch?v=lZsSIwTOrXg" target="_blank" class="btn interactable">Watch Project →</a>
+          <p>Property Walkthrough Production</p>
+          <a href="https://www.youtube.com/watch?v=lZsSIwTOrXg" target="_blank" class="btn interactable">Watch Video →</a>
         </div>
       </div>
-      <div class="project-card reveal interactable" id="card-work-3">
+      <div class="project-card" id="card-work-3">
         <div class="media-container" id="media-work-3">
           <img src="https://img.youtube.com/vi/TjIF5Mxeafo/maxresdefault.jpg" alt="Premium Property Campaign">
         </div>
         <div class="project-info">
           <h3>Premium Property Campaign</h3>
           <p>Real Estate Marketing Campaign</p>
-          <a href="https://www.youtube.com/watch?v=TjIF5Mxeafo" target="_blank" class="btn interactable">Watch Project →</a>
+          <a href="https://www.youtube.com/watch?v=TjIF5Mxeafo" target="_blank" class="btn interactable">Watch Video →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SOCIAL MEDIA / 3D RENDERING SYSTEM GRID -->
+  <!-- ADDITIONAL PORTFOLIO EXTRA ELEMENTS -->
   <section id="projects" class="section">
-    <h2 class="section-title gold reveal interactable">Portfolio Showcase</h2>
+    <h2 class="section-title">Portfolio Showcase</h2>
     <div class="projects-grid">
-      <div class="project-card reveal interactable" id="card-project-1">
+      <div class="project-card" id="card-project-1">
         <div class="media-container" id="media-project-1">
           <img src="https://img.youtube.com/vi/GFLdsVX9Hxc/maxresdefault.jpg" alt="Creator Vlog Storytelling">
         </div>
         <div class="project-info">
           <h3>Creator Vlog Storytelling</h3>
-          <p>Long Form YouTube Editing</p>
+          <p>Long Form YouTube Content Editing</p>
           <a href="https://www.youtube.com/watch?v=GFLdsVX9Hxc" target="_blank" class="btn interactable">View Project →</a>
         </div>
       </div>
-      <div class="project-card reveal interactable" id="card-project-2">
+      <div class="project-card" id="card-project-2">
         <div class="media-container" id="media-project-2">
           <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200" alt="3D Product Visualization">
         </div>
         <div class="project-info">
           <h3>3D Product Visualization</h3>
-          <p>Blender • Product Rendering & Modeling</p>
+          <p>Blender Modeling & Product Rendering</p>
           <a href="https://drive.google.com/file/d/10D2uMpq47LBjJXqDMfxqMy8QOm3FQwPV/view?usp=sharing" target="_blank" class="btn interactable">View Project →</a>
         </div>
       </div>
-      <div class="project-card reveal interactable" id="card-project-3">
+      <div class="project-card" id="card-project-3">
         <div class="media-container" id="media-project-3">
           <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1200" alt="Motion Campaign Visuals">
         </div>
         <div class="project-info">
           <h3>Motion Campaign Visuals</h3>
-          <p>Motion Graphics & Branded Content</p>
+          <p>Motion Graphics & Social Media Branding</p>
           <a href="https://drive.google.com/file/d/1B433p5Q0_ulpdqss4cIvEwrPzSAc8uJ_/view?usp=sharing" target="_blank" class="btn interactable">View Project →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- REGROUNDED PROFESSIONAL TIMELINE PIPELINE (image_8f891f.jpg / image_8f8928.jpg adjustments) -->
+  <!-- ACCURATE HONEST WORK TIMELINE -->
   <section id="experience" class="section">
-    <h2 class="section-title gold reveal interactable">Professional Timeline</h2>
+    <h2 class="section-title">Experience Timeline</h2>
     <div class="experience-container">
-      <div class="stat-card reveal interactable experience-node">
+      <div class="experience-node">
         <h3 class="gold">March 2026 – May 2026</h3>
-        <br>
-        <!-- FIXED TITLES: Cleaned of over-hyping modifications verbatim[cite: 1] -->
-        <h2>Video Editor</h2>
-        <p>Market Maker MGMT (Remote)</p>
-        <br>
-        <p>Edited long-form vlogs, short-form reels, and real estate property walkthroughs using clean transitions, color grading, and motion graphics.</p>
+        <strong>Video Editor</strong> — Market Maker MGMT (Remote)[cite: 1]
+        <p style="color:#8e8e93; margin-top:8px;">Edited long-form vlogs, short-form reels, and real estate property walkthroughs using clean transitions, color grading, and motion graphics.</p>
       </div>
-      <div class="stat-card reveal interactable experience-node">
+      <div class="experience-node">
         <h3 class="gold">September 2025 – March 2026</h3>
-        <br>
-        <h2>Freelance Video Editor</h2>
-        <p>Independent Client Projects (Remote)</p>
-        <br>
-        <p>Edited commercial clips, cinematic reels, and short-form video assets based on platform requirements and client brand styles.</p>
+        <strong>Freelance Video Editor</strong> — Remote Projects
+        <p style="color:#8e8e93; margin-top:8px;">Edited commercial clips, cinematic reels, and short-form video assets based on platform requirements and client brand styles.</p>
       </div>
-      <div class="stat-card reveal interactable experience-node">
+      <div class="experience-node">
         <h3 class="gold">February 2025 – August 2025</h3>
-        <br>
-        <h2>3D Animator & Video Editor</h2>
-        <p>EC4YOU Digital Marketing (India)</p>
-        <br>
-        <p>Created 3D animations and promotional graphics for marketing workflows. Designed banners, brochures, and branded social media visuals.</p>
+        <strong>3D Animator & Video Editor</strong> — EC4YOU Digital Marketing (India)
+        <p style="color:#8e8e93; margin-top:8px;">Created 3D animations and promotional graphics for marketing workflows. Designed banners, brochures, and branded social media visuals.</p>
       </div>
-      <div class="stat-card reveal interactable experience-node">
+      <div class="experience-node">
         <h3 class="gold">April 2023 – January 2025</h3>
-        <br>
-        <h2>Freelance Video Editor</h2>
-        <p>Creators & Brands (Remote)</p>
-        <br>
-        <p>Edited cinematic and promotional videos for online campaigns, handled timeline asset assembly, and managed projects from initial editing to final file delivery.</p>
+        <strong>Freelance Video Editor</strong> — Creators & Brands (Remote)
+        <p style="color:#8e8e93; margin-top:8px;">Edited cinematic and promotional videos for online campaigns, handled timeline asset assembly, and managed projects from initial editing to final file delivery.</p>
       </div>
     </div>
   </section>
 
-  <!-- CAPABILITIES / TOOLS MATRIX -->
-  <section id="tools" class="section">
-    <h2 class="section-title gold reveal interactable">Tools & Software Suite</h2>
-    <div class="tools-flex reveal">
-      <div class="tool-pill interactable">Adobe Premiere Pro</div>
-      <div class="tool-pill interactable">Adobe After Effects</div>
-      <div class="tool-pill interactable">Blender 3D Suite</div>
-      <div class="tool-pill interactable">Adobe Photoshop</div>
-      <div class="tool-pill interactable">Adobe Illustrator</div>
-      <div class="tool-pill interactable">Adobe Lightroom</div>
-      <div class="tool-pill interactable">CapCut PC</div>
-    </div>
-  </section>
-
-  <!-- GROUNDED PROFESSIONAL BIO BLOCK (image_8f88c7.jpg adjustments) -->
+  <!-- ABOUT -->
   <section id="about" class="section">
-    <h2 class="section-title gold reveal interactable">About Me</h2>
+    <h2 class="section-title">About Me</h2>
     <div class="about-split-row">
-      <div class="stat-card reveal interactable" style="display: flex; align-items: center;">
-        <p style="font-size:19px; line-height:1.9; color:#d1d1d6; font-weight: 300;">
-          I am Kishoree Sivakumar, a Video Editor, Motion Graphics Artist, and 3D Animator based in Coimbatore, India. I create clean edits, real estate films, social media content, and 3D product renders for brands and businesses. My work balances story structure, pacing, clear layout composition, and professional post-production choices to build engaging content that hits project deadlines.
+      <div class="stat-card" style="display: flex; align-items: center;">
+        <p style="font-size:16px; line-height:1.8; color:#aeaeb2;">
+          I am Kishoree Sivakumar, a Video Editor, Motion Graphics Artist, and 3D Animator based in Coimbatore, India. I create clean edits, real estate films, social media content, and 3D product renders for brands and businesses. My work focuses on story structure, pacing, clear layout composition, and professional post-production choices to build engaging content that hits project deadlines.
         </p>
       </div>
       <div class="about-side-stack">
-        <div class="stat-card reveal interactable" style="padding: 24px 35px;">
+        <div class="stat-card">
           <h2>3+ Years</h2>
-          <p style="color: #8e8e93; font-size: 14px;">Active Experience</p>
+          <p style="color: #8e8e93; font-size: 14px;">Active Industry Experience</p>
         </div>
-        <div class="stat-card reveal interactable" style="padding: 24px 35px;">
+        <div class="stat-card">
           <h2>50+ Projects</h2>
-          <p style="color: #8e8e93; font-size: 14px;">Completed Visual Deliveries</p>
-        </div>
-        <div class="stat-card reveal interactable" style="padding: 24px 35px;">
-          <h2>India</h2>
-          <p style="color: #8e8e93; font-size: 14px;">Based Operations</p>
+          <p style="color: #8e8e93; font-size: 14px;">Completed Deliveries</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- RESTRUCTURED STABLE CONTACT SECTION WITH CAM REVEAL (image_8f7e23.jpg Layout) -->
+  <!-- CLEAN TRANSPARENT CONTACT CARDS -->
   <section id="contact" class="section">
-    <h2 class="section-title gold reveal interactable">Global Inquiries</h2>
+    <h2 class="section-title">Contact</h2>
     <div class="contact-grid">
-      
-      <!-- Card Item 1: Email -->
-      <div class="stat-card reveal interactable focus-lens-card" onclick="focusCardLens(this)">
-        <div class="shutter-overlay">
-          <svg class="shutter-icon" viewBox="0 0 24 24"><path d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2ZM12 4A8 8 0 0 1 18.57 7.43L7.43 18.57A8 8 0 0 1 4 12A8 8 0 0 1 12 4Z"/></svg>
-          <span>[ CLICK TO FOCUS LENS ]</span>
-        </div>
-        <div class="actual-content">
-          <h3 class="gold" style="font-size: 14px; text-transform: uppercase; opacity: 0.5;">Secure Communications</h3>
-          <br>
-          <p style="font-size: 16px; font-weight: 600;">kishoreesivakumar2001@gmail.com</p>
-        </div>
+      <div class="stat-card">
+        <div style="font-size:12px; text-transform:uppercase; color:#8e8e93; margin-bottom:10px;">Email</div>
+        <p style="font-size:15px; font-weight:600;">kishoreesivakumar2001@gmail.com</p>
       </div>
-
-      <!-- Card Item 2: Phone -->
-      <div class="stat-card reveal interactable focus-lens-card" onclick="focusCardLens(this)">
-        <div class="shutter-overlay">
-          <svg class="shutter-icon" viewBox="0 0 24 24"><path d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2ZM12 4A8 8 0 0 1 18.57 7.43L7.43 18.57A8 8 0 0 1 4 12A8 8 0 0 1 12 4Z"/></svg>
-          <span>[ CLICK TO FOCUS LENS ]</span>
-        </div>
-        <div class="actual-content">
-          <h3 class="gold" style="font-size: 14px; text-transform: uppercase; opacity: 0.5;">Direct Telecom</h3>
-          <br>
-          <p style="font-size: 16px; font-weight: 600;">+91 63745 35370</p>
-        </div>
+      <div class="stat-card">
+        <div style="font-size:12px; text-transform:uppercase; color:#8e8e93; margin-bottom:10px;">Phone</div>
+        <p style="font-size:15px; font-weight:600;">+91 63745 35370</p>
       </div>
-
-      <!-- Card Item 3: Location -->
-      <div class="stat-card reveal interactable focus-lens-card" onclick="focusCardLens(this)">
-        <div class="shutter-overlay">
-          <svg class="shutter-icon" viewBox="0 0 24 24"><path d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2ZM12 4A8 8 0 0 1 18.57 7.43L7.43 18.57A8 8 0 0 1 4 12A8 8 0 0 1 12 4Z"/></svg>
-          <span>[ CLICK TO FOCUS LENS ]</span>
-        </div>
-        <div class="actual-content">
-          <h3 class="gold" style="font-size: 14px; text-transform: uppercase; opacity: 0.5;">HQ Operations Base</h3>
-          <br>
-          <p style="font-size: 16px; font-weight: 600;">Coimbatore, Tamil Nadu, India</p>
-        </div>
+      <div class="stat-card">
+        <div style="font-size:12px; text-transform:uppercase; color:#8e8e93; margin-bottom:10px;">Location</div>
+        <p style="font-size:15px; font-weight:600;">Coimbatore, Tamil Nadu, India</p>
       </div>
-
-    </div>
-    <br><br>
-    <div style="text-align: left;">
-      <a href="Kishoree_S_Resume.pdf" target="_blank" class="btn reveal interactable">Acquire Resume CV</a>
     </div>
   </section>
 
-  <!-- STUDIO FOOTER -->
-  <footer style="padding:120px 0 60px 0; border-top:1px solid rgba(255,255,255,0.05); text-align:center; position: relative;">
-    <h2 style="font-size:32px; font-weight: 800; margin-bottom:15px;" class="gold reveal interactable">KISHOREE SIVAKUMAR</h2>
-    <p style="font-size:15px; color:#8e8e93; margin-bottom:40px;" class="reveal">Video Editor • Motion Graphics Artist • 3D Animator</p>
-    <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-bottom:50px;" class="reveal">
-      <a href="#work" class="interactable" style="color:#636366; text-decoration:none; font-size: 14px; font-weight: 500;">Work</a>
-      <a href="#projects" class="interactable" style="color:#636366; text-decoration:none; font-size: 14px; font-weight: 500;">Showcase</a>
-      <a href="#experience" class="interactable" style="color:#636366; text-decoration:none; font-size: 14px; font-weight: 500;">Experience</a>
-      <a href="#about" class="interactable" style="color:#636366; text-decoration:none; font-size: 14px; font-weight: 500;">About</a>
-      <a href="#contact" class="interactable" style="color:#636366; text-decoration:none; font-size: 14px; font-weight: 500;">Contact</a>
-    </div>
-    <p style="color:#3a3a3c; font-size: 13px;" class="reveal">© 2026 Kishoree Sivakumar. All Rights Reserved.</p>
+  <!-- FOOTER -->
+  <footer style="padding: 60px 0; border-top:1px solid rgba(255,255,255,0.05); text-align:center; color: #666; font-size: 13px;">
+    <p>© 2026 Kishoree Sivakumar. All Rights Reserved.</p>
   </footer>
 
 </div>
 
-<!-- =========================
-JAVASCRIPT ENGINE (HIGH PERFORMANCE SYSTEMS)
-========================= -->
 <script>
-  // 1. Scroll-Driven Intersection Cascade
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.08
-  };
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-      }
-    });
-  }, observerOptions);
-
-  window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.reveal').forEach((element) => {
-      observer.observe(element);
-    });
-  });
-
-  // 2. Linear Interpolated Custom Pointer Engine
+  // 1. Simple Custom Pointer Engine
   const cursorDot = document.querySelector('.cursor-dot');
   const cursorRing = document.querySelector('.cursor-ring');
-  const compass = document.getElementById('blender-compass');
-
-  let mouseX = 0, mouseY = 0;
-  let ringX = 0, ringY = 0;
+  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
 
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    
     cursorDot.style.left = mouseX + 'px';
     cursorDot.style.top = mouseY + 'px';
-
-    // Interactive 3D compass widget orientation tilt
-    const rotX = (window.innerWidth / 2 - mouseX) * 0.04;
-    const rotY = (window.innerHeight / 2 - mouseY) * 0.04;
-    compass.style.transform = `rotateX(${rotY}deg) rotateY(${rotX}deg)`;
   });
 
   function renderCursor() {
-    let distX = mouseX - ringX;
-    let distY = mouseY - ringY;
-    
-    ringX += distX * 0.14; 
-    ringY += distY * 0.14;
-    
+    ringX += (mouseX - ringX) * 0.15; 
+    ringY += (mouseY - ringY) * 0.15;
     cursorRing.style.left = ringX + 'px';
     cursorRing.style.top = ringY + 'px';
-    
     requestAnimationFrame(renderCursor);
   }
   renderCursor();
 
-  function resetPointerTargets() {
-    const interactables = document.querySelectorAll('.interactable, a, button, .btn, .project-card, .tool-pill, .cms-btn, .focus-lens-card');
-    interactables.forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        if(el.classList.contains('focus-lens-card') && !el.classList.contains('lens-focused')) {
-          cursorRing.classList.add('cursor-focus-mode');
-        } else {
-          cursorRing.classList.add('cursor-hover');
-        }
-      });
-      el.addEventListener('mouseleave', () => {
-        cursorRing.classList.remove('cursor-hover');
-        cursorRing.classList.remove('cursor-focus-mode');
-      });
-    });
-  }
-  resetPointerTargets();
+  const interactables = document.querySelectorAll('.interactable, a, button, .btn, .project-card');
+  interactables.forEach(el => {
+    el.addEventListener('mouseenter', () => cursorRing.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => cursorRing.classList.remove('cursor-hover'));
+  });
 
-  // Camera Lens Focus Trigger System Handler
-  function focusCardLens(cardElement) {
-    if(!cardElement.classList.contains('lens-focused')) {
-      cardElement.classList.add('lens-focused');
-      cursorRing.classList.remove('cursor-focus-mode');
-      cursorRing.classList.add('cursor-hover');
-    }
-  }
-
-  // 3. Automated 24fps Media Frame Timecode Calculator
-  const tcDisplay = document.getElementById('tc-display');
-  let frames = 0, seconds = 0, minutes = 0, hours = 1;
-  
-  setInterval(() => {
-    frames++;
-    if(frames >= 24) { frames = 0; seconds++; }
-    if(seconds >= 60) { seconds = 0; minutes++; }
-    if(minutes >= 60) { minutes = 0; hours++; }
-    
-    const pad = (num) => num.toString().padStart(2, '0');
-    tcDisplay.innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}:${pad(frames)}`;
-  }, 1000 / 24);
-
-  // 4. Interactive Local Ingest Workspace Layout Tools
-  const openCmsBtn = document.getElementById('open-cms-trigger');
-  const closeCmsBtn = document.getElementById('close-cms-modal');
+  // 2. Secret Ingest Workspace Layout Tools (Ctrl + Shift + E Only)
   const cmsOverlay = document.getElementById('cms-popup-modal');
-  
-  openCmsBtn.addEventListener('click', () => cmsOverlay.classList.add('active'));
-  closeCmsBtn.addEventListener('click', () => cmsOverlay.classList.remove('active'));
+  document.getElementById('close-cms-modal').addEventListener('click', () => cmsOverlay.classList.remove('active'));
   
   document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'e') {
       e.preventDefault();
-      cmsOverlay.toggle('active');
+      cmsOverlay.classList.toggle('active');
     }
   });
 
-  function handleMediaIngest(file) {
+  document.getElementById('universal-file-uploader').addEventListener('change', (e) => {
+    const file = e.target.files[0];
     if (!file) return;
     
     const fileURL = URL.createObjectURL(file);
-    const fileType = file.type;
-
-    const cardId = prompt("Enter targeted section card ID slot path (e.g. 'work-1', 'work-2', 'project-3'):");
-    if (!cardId) return;
-
+    const cardId = prompt("Enter targeted card slot path (e.g., 'work-1', 'work-2', 'project-3'):");
     const container = document.getElementById(`media-${cardId}`);
-    if (!container) {
-      alert("Specified target card layout path can't be resolved.");
-      return;
-    }
-
-    if (fileType.includes('video') || file.name.endsWith('.mov') || file.name.endsWith('.mp4')) {
-      container.innerHTML = `<video src="${fileURL}" autoplay loop muted playsinline></video>`;
-    } else {
-      container.innerHTML = `<img src="${fileURL}" alt="Uploaded Visual Layer Instance" />`;
-    }
     
+    if (container) {
+      if (file.type.includes('video') || file.name.endsWith('.mov') || file.name.endsWith('.mp4')) {
+        container.innerHTML = `<video src="${fileURL}" autoplay loop muted playsinline></video>`;
+      } else {
+        container.innerHTML = `<img src="${fileURL}" alt="Uploaded Visual Layer" />`;
+      }
+    }
     cmsOverlay.classList.remove('active');
-    resetPointerTargets(); 
-  }
-
-  document.getElementById('universal-file-uploader').addEventListener('change', (e) => handleMediaIngest(e.target.files[0]));
-  document.getElementById('image-only-uploader').addEventListener('change', (e) => handleMediaIngest(e.target.files[0]));
-  document.getElementById('video-only-uploader').addEventListener('change', (e) => handleMediaIngest(e.target.files[0]));
+  });
 </script>
 
 </body>
-
 </html>
