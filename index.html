@@ -1,1154 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kishoree Sivakumar | Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kishoree Sivakumar | Creative Portfolio</title>
+    <style>
+        /* =========================================================================
+           CORE ARCHITECTURE & DESIGN TOKENS
+           ========================================================================= */
+        :root {
+            --bg-deep: #030303;
+            --surface-panel: #0d0d0d;
+            --accent-gold: #d4af37;
+            --text-main: #e0e0e0;
+            --text-dim: #777;
+            --transition-curve: cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
 
-<style>
-/* =========================
-MATHEMATICAL SYSTEM DEFINITIONS
-========================= */
-:root {
-  --grid-gap: 30px;
-  --max-width: 1200px;
-  --panel-radius: 12px;
-  --motion-easing: cubic-bezier(0.25, 1, 0.5, 1);
-  --color-dark-bg: #050505;
-  --color-card-surface: #121214;
-  --color-border-line: rgba(255, 255, 255, 0.06);
-  --color-accent-gold: #d4af37;
-  --color-text-primary: #f5f5f7;
-  --color-text-secondary: #8e8e93;
-}
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none !important; }
+        body { background: var(--bg-deep); color: var(--text-main); font-family: 'Inter', system-ui, sans-serif; overflow-x: hidden; }
 
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  scroll-behavior:smooth;
-}
+        /* =========================================================================
+           HIGH-FIDELITY ANIMATION & PHYSICS ENGINE
+           ========================================================================= */
+        #cursor-follower {
+            position: fixed; top: 0; left: 0; width: 20px; height: 20px;
+            background: var(--accent-gold); border-radius: 50%; pointer-events: none;
+            z-index: 9999; transition: transform 0.1s ease-out; mix-blend-mode: difference;
+        }
 
-body{
-  font-family:'Poppins',sans-serif;
-  background: var(--color-dark-bg);
-  color: var(--color-text-primary);
-  overflow-x:hidden;
-  cursor: none !important; 
-}
+        .reveal-node { opacity: 0; transform: translateY(80px); transition: all 1.2s var(--transition-curve); }
+        .reveal-node.visible { opacity: 1; transform: translateY(0); }
 
-a, button, .btn, .interactable, .focus-lens-card {
-  cursor: none !important;
-}
-
-/* =========================
-CINEMATIC BACKGROUND SYSTEM
-========================= */
-.noise-overlay {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 999;
-  opacity: 0.03;
-  background: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
-}
-
-.viewfinder {
-  position: fixed;
-  width: 40px;
-  height: 40px;
-  border: 1.5px solid rgba(255, 255, 255, 0.08);
-  z-index: 998;
-  pointer-events: none;
-}
-.vf-tl { top: 40px; left: 40px; border-right: none; border-bottom: none; }
-.vf-tr { top: 40px; right: 40px; border-left: none; border-bottom: none; }
-.vf-bl { bottom: 40px; left: 40px; border-right: none; top: none; }
-.vf-br { bottom: 40px; right: 40px; border-left: none; top: none; }
-
-.axis-compass {
-  position: fixed;
-  top: 50px;
-  right: 50px;
-  width: 50px;
-  height: 50px;
-  z-index: 998;
-  pointer-events: none;
-  opacity: 0.5;
-  perspective: 500px;
-}
-.axis-line {
-  position: absolute;
-  top: 50%; left: 50%;
-  height: 1.5px;
-  transform-origin: left center;
-}
-.axis-x { width: 22px; background: #ff4554; transform: rotate(0deg); }
-.axis-y { width: 22px; background: #00e676; transform: rotate(120deg); }
-.axis-z { width: 22px; background: #2979ff; transform: rotate(-90deg); }
-.axis-label {
-  position: absolute;
-  font-size: 8px;
-  font-weight: 700;
-  color: #fff;
-}
-
-.timecode {
-  position: fixed;
-  bottom: 40px;
-  right: 60px;
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 12px;
-  color: var(--color-accent-gold);
-  letter-spacing: 2px;
-  z-index: 998;
-  pointer-events: none;
-  opacity: 0.7;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.rec-dot {
-  width: 6px;
-  height: 6px;
-  background: #ff3333;
-  border-radius: 50%;
-  animation: pulseBlink 1s infinite;
-}
-@keyframes pulseBlink { 50% { opacity: 0; } }
-
-.bg-text-container {
-  position: fixed;
-  top: 55%;
-  left: 0;
-  width: 100%;
-  transform: translateY(-50%);
-  z-index: -2;
-  pointer-events: none;
-  overflow: hidden;
-  opacity: 0.012;
-}
-.bg-text {
-  font-size: 260px;
-  font-weight: 800;
-  white-space: nowrap;
-  color: transparent;
-  -webkit-text-stroke: 1.5px #ffffff;
-  animation: scrollBgText 60s linear infinite;
-}
-@keyframes scrollBgText {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-.grid-overlay {
-  position: fixed;
-  inset: 0;
-  background-size: 80px 80px;
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.01) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
-  z-index: -3;
-  pointer-events: none;
-}
-
-.bg-glow {
-  position: fixed;
-  border-radius: 50%;
-  filter: blur(160px);
-  z-index: -3;
-  pointer-events: none;
-  animation: ambientFloat 25s infinite alternate ease-in-out;
-}
-.glow-1 {
-  width: 50vw;
-  height: 50vw;
-  background: rgba(212, 175, 55, 0.03);
-  top: -15%;
-  left: -10%;
-}
-.glow-2 {
-  width: 45vw;
-  height: 45vw;
-  background: rgba(255, 255, 255, 0.02);
-  bottom: -10%;
-  right: -5%;
-  animation-duration: 30s;
-}
-@keyframes ambientFloat {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(5vw, 5vh) scale(1.05); }
-}
-
-/* =========================
-INTERACTIVE DOTTED CURSOR ENGINE
-========================= */
-.cursor-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--color-accent-gold);
-  border-radius: 50%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 10000;
-  transform: translate(-50%, -50%);
-}
-
-.cursor-ring {
-  width: 32px;
-  height: 32px;
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  border-radius: 50%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.3s var(--motion-easing), height 0.3s var(--motion-easing);
-}
-
-.cursor-hover {
-  width: 54px !important;
-  height: 54px !important;
-  background: rgba(212, 175, 55, 0.05);
-  border-color: rgba(212, 175, 55, 0.6);
-}
-
-.cursor-focus-mode {
-  width: 50px !important;
-  height: 50px !important;
-  background: rgba(255, 51, 51, 0.08) !important;
-  border-color: rgba(255, 51, 51, 0.6) !important;
-  border-style: dashed !important;
-}
-
-/* =========================
-CONTAINER & PROPORTIONAL GEOMETRY
-========================= */
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 40px;
-}
-
-.gold {
-  color: var(--color-accent-gold);
-}
-
-.text-gradient {
-  background: linear-gradient(135deg, var(--color-accent-gold) 0%, #fffadb 50%, var(--color-accent-gold) 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: metallicShimmer 6s linear infinite;
-}
-@keyframes metallicShimmer {
-  to { background-position: 200% center; }
-}
-
-.section {
-  padding: 120px 0;
-  position: relative;
-}
-
-.section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 1px;
-  background: rgba(212, 175, 55, 0.2);
-}
-
-.btn {
-  display: inline-block;
-  padding: 14px 30px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 8px;
-  text-decoration: none;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  transition: all 0.3s var(--motion-easing);
-  background: rgba(20, 20, 20, 0.4);
-  backdrop-filter: blur(5px);
-}
-.btn:hover {
-  border-color: var(--color-accent-gold);
-  color: var(--color-accent-gold);
-  background: rgba(212, 175, 55, 0.02);
-  transform: translateY(-2px);
-}
-
-/* Navbar System */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 40px 0;
-  border-bottom: 1px solid var(--color-border-line);
-}
-.logo {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--color-accent-gold);
-  letter-spacing: 0.5px;
-  user-select: none;
-}
-.nav-links {
-  display: flex;
-  gap: 40px;
-}
-.nav-links a {
-  text-decoration: none;
-  color: var(--color-text-secondary);
-  font-size: 14px;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-.nav-links a:hover {
-  color: #ffffff;
-}
-
-/* Hero Section */
-.hero {
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
-  position: relative;
-}
-.hero-content {
-  max-width: 800px;
-  z-index: 2;
-}
-.hero h1 {
-  font-size: 80px;
-  line-height: 1.15;
-  font-weight: 800;
-  margin-bottom: 25px;
-  letter-spacing: -1px;
-}
-.hero p {
-  font-size: 20px;
-  color: #aeaeb2;
-  margin-bottom: 40px;
-  line-height: 1.65;
-  font-weight: 400;
-}
-
-/* 3-Column Proportional Grids */
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--grid-gap); 
-}
-
-.project-card {
-  background: var(--color-card-surface);
-  border-radius: var(--panel-radius);
-  overflow: hidden;
-  border: 1px solid var(--color-border-line);
-  transition: all 0.5s var(--motion-easing);
-}
-.project-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(212, 175, 55, 0.3);
-  background: rgba(20, 20, 24, 0.8);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
-}
-
-.project-card .media-container {
-  width: 100%;
-  height: 230px;
-  overflow: hidden;
-  position: relative;
-  background: #000;
-}
-.project-card img, .project-card video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  filter: brightness(0.85) contrast(1.02);
-  transition: transform 0.7s var(--motion-easing), filter 0.7s ease;
-}
-.project-card:hover img, .project-card:hover video {
-  transform: scale(1.04);
-  filter: brightness(1) contrast(1);
-}
-
-.project-info {
-  padding: 30px;
-}
-.project-info h3 {
-  margin-bottom: 8px;
-  font-size: 20px;
-  font-weight: 600;
-  letter-spacing: -0.2px;
-}
-.project-info p {
-  color: var(--color-text-secondary);
-  font-size: 14px;
-}
-
-.section-title {
-  font-size: 40px;
-  font-weight: 800;
-  margin-bottom: 50px;
-  text-align: left;
-  letter-spacing: -0.5px;
-}
-
-/* Proportional Layout Framework */
-.about-split-row {
-  display: grid;
-  grid-template-columns: 1.6fr 1fr;
-  gap: var(--grid-gap);
-  align-items: stretch;
-}
-.about-side-stack {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  justify-content: space-between;
-}
-
-.stat-card {
-  background: var(--color-card-surface);
-  border: 1px solid var(--color-border-line);
-  border-radius: var(--panel-radius);
-  padding: 35px;
-  backdrop-filter: blur(10px);
-  transition: all 0.4s var(--motion-easing);
-}
-.stat-card:hover {
-  border-color: rgba(212, 175, 55, 0.2);
-  background: rgba(18, 18, 22, 0.7);
-}
-.stat-card h2 {
-  font-size: 42px;
-  font-weight: 800;
-  color: var(--color-accent-gold);
-  margin-bottom: 4px;
-}
-
-/* Proportional 3-Column Contact System */
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--grid-gap);
-}
-
-.focus-lens-card {
-  position: relative;
-  overflow: hidden;
-  user-select: none;
-}
-.focus-lens-card .actual-content {
-  filter: blur(14px);
-  opacity: 0.08;
-  transform: scale(0.96);
-  transition: filter 0.6s var(--motion-easing), opacity 0.6s ease, transform 0.6s var(--motion-easing);
-}
-.focus-lens-card .shutter-overlay {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: rgba(10, 10, 12, 0.1);
-  color: rgba(212, 175, 55, 0.6);
-  font-family: monospace;
-  font-size: 11px;
-  letter-spacing: 2px;
-  font-weight: 600;
-  gap: 10px;
-  opacity: 1;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  z-index: 10;
-}
-.focus-lens-card .shutter-icon {
-  width: 22px;
-  height: 22px;
-  stroke: currentColor;
-  fill: none;
-  animation: rotateShutter 8s linear infinite;
-}
-@keyframes rotateShutter { 100% { transform: rotate(360deg); } }
-
-.focus-lens-card.lens-focused .actual-content {
-  filter: blur(0px);
-  opacity: 1;
-  transform: scale(1);
-}
-.focus-lens-card.lens-focused .shutter-overlay {
-  opacity: 0;
-  pointer-events: none;
-  transform: scale(1.1);
-}
-
-.tools-flex {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 12px;
-}
-.tool-pill {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--color-border-line);
-  padding: 12px 24px;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #e5e5ea;
-}
-
-.experience-container {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-.experience-node {
-  padding-left: 30px;
-  border-left: 1px solid rgba(212, 175, 55, 0.15);
-  position: relative;
-}
-.experience-node::after {
-  content: '';
-  position: absolute;
-  left: -4px;
-  top: 8px;
-  width: 7px;
-  height: 7px;
-  background: var(--color-accent-gold);
-  border-radius: 50%;
-}
-
-/* =========================
-WORKSPACE INPUT MENU OVERLAY LAYER
-========================= */
-.cms-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.82);
-  backdrop-filter: blur(8px);
-  z-index: 10000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-.cms-modal-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.cms-dropdown-menu {
-  background: rgba(18, 18, 20, 0.98);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 14px;
-  width: 320px;
-  padding: 18px;
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.cms-heading {
-  font-size: 11px;
-  color: #555;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  margin-bottom: 4px;
-}
-
-.cms-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 11px 14px;
-  border-radius: 8px;
-  color: #aeaeb2;
-  font-size: 14px;
-  font-weight: 500;
-  background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease;
-  position: relative;
-  cursor: pointer;
-}
-.cms-item:hover {
-  background: rgba(255, 255, 255, 0.04);
-  color: #ffffff;
-  border-color: rgba(212, 175, 55, 0.3);
-}
-.cms-item svg { width: 18px; height: 18px; stroke: currentColor; fill: none; }
-.cms-divider { height: 1px; background: rgba(255, 255, 255, 0.06); margin: 6px 4px; }
-.cms-hidden-input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
-
-/* PREMIUM SCROLL REVEAL TIMING */
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 1s var(--motion-easing), transform 1s var(--motion-easing);
-}
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.services {
-  overflow: hidden;
-  padding: 30px 0;
-  border-top: 1px solid rgba(255,255,255,0.04);
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  white-space: nowrap;
-  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-  position: relative;
-}
-.services-track {
-  display: flex;
-  gap: 60px;
-  animation: scrollMarquee 25s linear infinite;
-}
-.services-track span {
-  font-size: 18px;
-  font-weight: 600;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(212, 175, 55, 0.5);
-}
-@keyframes scrollMarquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-
-/* =========================
-RESPONSIVE RECONFIGURATIONS
-========================= */
-@media (max-width: 1024px) {
-  .projects-grid { grid-template-columns: repeat(2, 1fr); }
-  .contact-grid { grid-template-columns: repeat(2, 1fr); }
-  .viewfinder, .timecode, .axis-compass { display: none !important; }
-}
-
-@media (max-width: 768px) {
-  body { cursor: auto !important; }
-  a, button, .btn, .interactable, .project-card, .tool-pill { cursor: auto !important; }
-  .cursor-dot, .cursor-ring { display: none !important; }
-  
-  .section { padding: 80px 0; }
-  .navbar { flex-direction: column; gap: 20px; padding: 30px 0; }
-  .nav-links { flex-wrap: wrap; justify-content: center; gap: 20px; }
-  
-  .hero h1 { font-size: 44px; margin-bottom: 25px; }
-  .hero p { font-size: 18px; }
-
-  .bg-text { font-size: 130px; }
-  .projects-grid, .contact-grid { grid-template-columns: 1fr; gap: 24px; }
-  
-  .focus-lens-card .actual-content { filter: blur(0) !important; opacity: 1 !important; transform: scale(1) !important; }
-  .focus-lens-card .shutter-overlay { display: none !important; }
-  .section-title { font-size: 32px; margin-bottom: 35px; }
-}
-</style>
+        /* =========================================================================
+           UI COMPONENT SYSTEM
+           ========================================================================= */
+        .viewport-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        .hero-section { height: 90vh; display: flex; flex-direction: column; justify-content: center; }
+        
+        .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
+        .project-card { 
+            background: var(--surface-panel); border: 1px solid #1a1a1a; border-radius: 12px; 
+            overflow: hidden; transition: 0.4s var(--transition-curve); position: relative;
+        }
+        .project-card:hover { border-color: var(--accent-gold); transform: translateY(-15px); }
+        
+        /* =========================================================================
+           HIDDEN ASSET WORKSPACE (TRIGGER: Ctrl+Shift+E)
+           ========================================================================= */
+        #admin-workspace {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 10000;
+            display: none; align-items: center; justify-content: center;
+        }
+        .workspace-panel { background: #111; padding: 50px; border-radius: 20px; width: 400px; }
+    </style>
 </head>
-
 <body>
 
-<div class="noise-overlay"></div>
+<div id="cursor-follower"></div>
 
-<!-- CINEMATIC VISUAL FOOTPRINT LAYOUTS -->
-<div class="viewfinder vf-tl"></div>
-<div class="viewfinder vf-tr"></div>
-<div class="viewfinder vf-bl"></div>
-<div class="viewfinder vf-br"></div>
-
-<!-- ASSET MODAL POPUP DASHBOARD GRID -->
-<div class="cms-modal-overlay" id="cms-popup-modal">
-  <div class="cms-dropdown-menu">
-    <div class="cms-heading">Asset Injection</div>
-    <div class="cms-item cms-btn" onclick="triggerLinkManager()">
-      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-      <span style="font-weight:600; color:#fff;">Link & Thumbnail Setup</span>
+<!-- ASSET WORKSPACE -->
+<div id="admin-workspace">
+    <div class="workspace-panel">
+        <h2 style="margin-bottom:20px;">Asset Injection</h2>
+        <input type="file" id="asset-upload" style="margin-bottom:20px; display:block;">
+        <button onclick="document.getElementById('admin-workspace').style.display='none'">Close Workspace</button>
     </div>
-    
-    <div class="cms-item cms-btn">
-      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-      <span>Upload Local Media</span>
-      <input type="file" class="cms-hidden-input" id="universal-file-uploader" accept=".jpeg,.jpg,.png,.mov,.mp4">
-    </div>
-
-    <div class="cms-divider"></div>
-    <div class="cms-item cms-btn" id="close-cms-modal" style="color: #ff4554; justify-content: center; font-weight: 700; text-transform: uppercase;">
-      <span>Close Menu</span>
-    </div>
-  </div>
 </div>
 
-<!-- WIREFRAME SPACE COMPASS INTERFACE -->
-<div class="axis-compass" id="blender-compass">
-  <div class="axis-line axis-x"></div>
-  <div class="axis-line axis-y"></div>
-  <div class="axis-line axis-z"></div>
-  <div class="axis-label" style="top:-5px; left:22px; color:#2979ff;">Z</div>
-  <div class="axis-label" style="top:25px; left:52px; color:#ff4554;">X</div>
-  <div class="axis-label" style="top:48px; left:8px; color:#00e676;">Y</div>
-</div>
+<main class="viewport-wrapper">
+    <header style="display:flex; justify-content:space-between; padding:40px 0;">
+        <div class="logo" ondblclick="document.getElementById('admin-workspace').style.display='flex'">KISHOREE SIVAKUMAR</div>
+        <nav style="display:flex; gap:30px;">
+            <a href="#work" style="color:white; text-decoration:none;">Work</a>
+            <a href="#experience" style="color:white; text-decoration:none;">Timeline</a>
+            <a href="#contact" style="color:white; text-decoration:none;">Contact</a>
+        </nav>
+    </header>
 
-<div class="timecode">
-  <div class="rec-dot"></div>
-  REC <span id="tc-display" style="margin-left: 5px;">00:00:00:00</span>
-</div>
-
-<div class="cursor-dot"></div>
-<div class="cursor-ring"></div>
-
-<div class="grid-overlay"></div>
-<div class="bg-glow glow-1"></div>
-<div class="bg-glow glow-2"></div>
-
-<div class="bg-text-container">
-  <div class="bg-text">
-    KISHOREE SIVAKUMAR • Video Editor • 3D Animator • Motion Graphics Artist • KISHOREE SIVAKUMAR • Video Editor • 3D Animator • Motion Graphics Artist •
-  </div>
-</div>
-
-<div class="container">
-  <header class="navbar">
-    <div class="logo interactable" id="logo-trigger">KS</div>
-    <nav class="nav-links">
-      <a href="#work" class="interactable">Work</a>
-      <a href="#projects" class="interactable">Showcase</a>
-      <a href="#experience" class="interactable">Experience</a>
-      <a href="#about" class="interactable">About</a>
-      <a href="#contact" class="interactable">Contact</a>
-    </nav>
-  </header>
-
-  <!-- HERO PANEL -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Crafting stories through <span class="text-gradient">motion, light & depth.</span></h1>
-      <p>Video Editor, Motion Graphics Artist, and 3D Animator creating clean social media edits, real estate walkthroughs, promotional campaigns, and 3D visual experiences.</p>
-      <a href="https://www.linkedin.com/in/kishoree-s-948348322" target="_blank" class="btn interactable">LinkedIn Network</a>
-    </div>
-  </section>
-
-  <!-- AUTOMATED COMPOSITION MARQUEE TRACK -->
-  <section class="section" style="padding: 0;">
-    <div class="services">
-      <div class="services-track">
-        <span>VIDEO EDITING</span>
-        <span>MOTION GRAPHICS</span>
-        <span>3D ANIMATION & MODELING</span>
-        <span>REAL ESTATE FILMS</span>
-        <span>PRODUCT VISUALIZATION</span>
-        <span>COLOR GRADING</span>
-        <span>POST PRODUCTION</span>
-        
-        <span>VIDEO EDITING</span>
-        <span>MOTION GRAPHICS</span>
-        <span>3D ANIMATION & MODELING</span>
-        <span>REAL ESTATE FILMS</span>
-        <span>PRODUCT VISUALIZATION</span>
-        <span>COLOR GRADING</span>
-        <span>POST PRODUCTION</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- MAIN ASSIGNED PROJECTS GRID -->
-  <section id="work" class="section">
-    <h2 class="section-title gold reveal interactable">Featured Projects</h2>
-    <div class="projects-grid">
-      <div class="project-card reveal interactable" id="card-work-1">
-        <div class="media-container" id="media-slot-1">
-          <img src="https://img.youtube.com/vi/EVIVFBc0SSM/maxresdefault.jpg" alt="Luxury Villa Showcase" id="thumb-slot-1">
-        </div>
-        <div class="project-info">
-          <h3 id="title-slot-1">Luxury Villa Showcase</h3>
-          <p id="desc-slot-1">Real Estate Film • Property Walkthrough</p>
-          <a href="https://www.youtube.com/watch?v=EVIVFBc0SSM" target="_blank" class="btn interactable" id="link-slot-1">Watch Project →</a>
-        </div>
-      </div>
-      <div class="project-card reveal interactable" id="card-work-2">
-        <div class="media-container" id="media-slot-2">
-          <img src="https://img.youtube.com/vi/lZsSIwTOrXg/maxresdefault.jpg" alt="Modern Interior Experience" id="thumb-slot-2">
-        </div>
-        <div class="project-info">
-          <h3 id="title-slot-2">Modern Interior Experience</h3>
-          <p id="desc-slot-2">Property Walkthrough Video</p>
-          <a href="https://www.youtube.com/watch?v=lZsSIwTOrXg" target="_blank" class="btn interactable" id="link-slot-2">Watch Project →</a>
-        </div>
-      </div>
-      <div class="project-card reveal interactable" id="card-work-3">
-        <div class="media-container" id="media-slot-3">
-          <img src="https://img.youtube.com/vi/TjIF5Mxeafo/maxresdefault.jpg" alt="Premium Property Campaign" id="thumb-slot-3">
-        </div>
-        <div class="project-info">
-          <h3 id="title-slot-3">Premium Property Campaign</h3>
-          <p id="desc-slot-3">Real Estate Marketing Campaign</p>
-          <a href="https://www.youtube.com/watch?v=TjIF5Mxeafo" target="_blank" class="btn interactable" id="link-slot-3">Watch Project →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EXTRA PORTFOLIO DECK CHANNELS -->
-  <section id="projects" class="section">
-    <h2 class="section-title gold reveal interactable">Portfolio Showcase</h2>
-    <div class="projects-grid">
-      <div class="project-card reveal interactable" id="card-project-1">
-        <div class="media-container" id="media-slot-4">
-          <img src="https://img.youtube.com/vi/GFLdsVX9Hxc/maxresdefault.jpg" alt="Creator Vlog Storytelling" id="thumb-slot-4">
-        </div>
-        <div class="project-info">
-          <h3 id="title-slot-4">Creator Vlog Storytelling</h3>
-          <p id="desc-slot-4">Long Form YouTube Content Editing</p>
-          <a href="https://www.youtube.com/watch?v=GFLdsVX9Hxc" target="_blank" class="btn interactable" id="link-slot-4">View Project →</a>
-        </div>
-      </div>
-      <div class="project-card reveal interactable" id="card-project-2">
-        <div class="media-container" id="media-slot-5">
-          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200" alt="3D Product Visualization" id="thumb-slot-5">
-        </div>
-        <div class="project-info">
-          <h3 id="title-slot-5">3D Product Visualization</h3>
-          <p id="desc-slot-5">Blender • Product Rendering & Modeling</p>
-          <a href="https://drive.google.com/file/d/10D2uMpq47LBjJXqDMfxqMy8QOm3FQwPV/view?usp=sharing" target="_blank" class="btn interactable" id="link-slot-5">View Project →</a>
-        </div>
-      </div>
-      <div class="project-card reveal interactable" id="card-project-3">
-        <div class="media-container" id="media-slot-6">
-          <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1200" alt="Motion Campaign Visuals" id="thumb-slot-6">
-        </div>
-        <div class="project-info">
-          <h3 id="title-slot-6">Motion Campaign Visuals</h3>
-          <p id="desc-slot-6">Motion Graphics & Branded Content</p>
-          <a href="https://drive.google.com/file/d/1B433p5Q0_ulpdqss4cIvEwrPzSAc8uJ_/view?usp=sharing" target="_blank" class="btn interactable" id="link-slot-6">View Project →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROFESSIONAL WORK HISTORY MATRIX (REMOVED BUGGED STRINGS ACCORDING TO image_9acf8a.jpg / image_9acfa8.jpg) -->
-  <section id="experience" class="section">
-    <h2 class="section-title gold reveal interactable">Professional Timeline</h2>
-    <div class="experience-container">
-      <div class="stat-card reveal interactable experience-node">
-        <h3 class="gold">March 2026 – May 2026</h3>
-        <br>
-        <h2>Video Editor</h2>
-        <p>Market Maker MGMT (Remote)</p>
-        <br>
-        <p>Edited long-form vlogs, short-form reels, and real estate property walkthroughs using clean transitions, color grading, and motion graphics[cite: 1].</p>
-      </div>
-      <div class="stat-card reveal interactable experience-node">
-        <h3 class="gold">September 2025 – March 2026</h3>
-        <br>
-        <h2>Freelance Video Editor</h2>
-        <p>Independent Client Projects (Remote)</p>
-        <br>
-        <p>Edited commercial clips, cinematic reels, and short-form video assets based on platform requirements and client brand styles[cite: 1].</p>
-      </div>
-      <div class="stat-card reveal interactable experience-node">
-        <h3 class="gold">February 2025 – August 2025</h3>
-        <br>
-        <h2>3D Animator & Video Editor</h2>
-        <p>EC4YOU Digital Marketing (India)</p>
-        <br>
-        <p>Created 3D animations and promotional graphics for marketing workflows. Designed banners, brochures, and branded social media visuals[cite: 1].</p>
-      </div>
-      <div class="stat-card reveal interactable experience-node">
-        <h3 class="gold">April 2023 – January 2025</h3>
-        <br>
-        <h2>Freelance Video Editor</h2>
-        <p>Creators & Brands (Remote)</p>
-        <br>
-        <p>Edited cinematic and promotional videos for online campaigns, handled timeline asset assembly, and managed projects from initial editing to final file delivery[cite: 1].</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- OPERATIONAL CAPABILITIES MATRIX -->
-  <section id="tools" class="section">
-    <h2 class="section-title gold reveal interactable">Tools & Software Suite</h2>
-    <div class="tools-flex reveal">
-      <div class="tool-pill interactable">Adobe Premiere Pro</div>
-      <div class="tool-pill interactable">Adobe After Effects</div>
-      <div class="tool-pill interactable">Blender 3D Suite</div>
-      <div class="tool-pill interactable">Adobe Photoshop</div>
-      <div class="tool-pill interactable">Adobe Illustrator</div>
-      <div class="tool-pill interactable">Adobe Lightroom</div>
-      <div class="tool-pill interactable">CapCut PC</div>
-    </div>
-  </section>
-
-  <!-- BIOGRAPHY MODULE -->
-  <section id="about" class="section">
-    <h2 class="section-title gold reveal interactable">About Me</h2>
-    <div class="about-split-row">
-      <div class="stat-card reveal interactable" style="display: flex; align-items: center;">
-        <p style="font-size:16px; line-height:1.8; color:#aeaeb2; font-weight: 400;">
-          I am Kishoree Sivakumar, a Video Editor, Motion Graphics Artist, and 3D Animator based in Coimbatore, India[cite: 1]. I create clean edits, real estate films, social media content, and 3D product renders for brands and businesses. My work focuses on story structure, pacing, clear layout composition, and professional post-production choices to build engaging content that hits project deadlines.
+    <section class="hero-section">
+        <h1>Crafting stories through motion, light & depth.</h1>
+        <p style="font-size: 20px; color: var(--text-dim); margin-top: 20px;">
+            Video Editor, Motion Graphics Artist, and 3D Animator.
         </p>
-      </div>
-      <div class="about-side-stack">
-        <div class="stat-card reveal interactable">
-          <h2>3+ Years</h2>
-          <p style="color: var(--color-text-secondary); font-size: 14px;">Active Experience</p>
-        </div>
-        <div class="stat-card reveal interactable">
-          <h2>50+ Projects</h2>
-          <p style="color: #8e8e93; font-size: 14px;">Completed Visual Deliveries</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- CONTACT LAYOUT SECTION WITH FOCUS REVEAL -->
-  <section id="contact" class="section">
-    <h2 class="section-title gold reveal interactable">Global Inquiries</h2>
-    <div class="contact-grid">
-      
-      <!-- Card Item 1: Email -->
-      <div class="stat-card reveal interactable focus-lens-card" onclick="focusCardLens(this)">
-        <div class="shutter-overlay">
-          <svg class="shutter-icon" viewBox="0 0 24 24"><path d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2ZM12 4A8 8 0 0 1 18.57 7.43L7.43 18.57A8 8 0 0 1 4 12A8 8 0 0 1 12 4Z"/></svg>
-          <span>[ CLICK TO FOCUS LENS ]</span>
+    <!-- PROJECT SLOTS -->
+    <section id="work" class="reveal-node">
+        <h2 style="font-size: 40px; margin-bottom: 20px;">Featured Work</h2>
+        <div class="project-grid">
+            <div class="project-card"><div style="height:200px; background:#1a1a1a;"></div><div style="padding:20px;"><h3>Luxury Villa</h3><p>Real Estate Film</p></div></div>
+            <div class="project-card"><div style="height:200px; background:#1a1a1a;"></div><div style="padding:20px;"><h3>Modern Interior</h3><p>Property Edit</p></div></div>
+            <div class="project-card"><div style="height:200px; background:#1a1a1a;"></div><div style="padding:20px;"><h3>Premium Promo</h3><p>Marketing Campaign</p></div></div>
+            <div class="project-card"><div style="height:200px; background:#1a1a1a;"></div><div style="padding:20px;"><h3>YouTube Story</h3><p>Vlog Editing</p></div></div>
+            <div class="project-card"><div style="height:200px; background:#1a1a1a;"></div><div style="padding:20px;"><h3>Product Render</h3><p>3D Visualization</p></div></div>
+            <div class="project-card"><div style="height:200px; background:#1a1a1a;"></div><div style="padding:20px;"><h3>Motion Assets</h3><p>Branded Content</p></div></div>
         </div>
-        <div class="actual-content">
-          <h3 class="gold" style="font-size: 13px; text-transform: uppercase; opacity: 0.5; letter-spacing: 0.5px;">Communications</h3>
-          <br>
-          <p style="font-size: 16px; font-weight: 600;">kishoreesivakumar2001@gmail.com</p>
+    </section>
+
+    <!-- TIMELINE -->
+    <section id="experience" class="section reveal-node">
+        <h2 style="font-size: 40px; margin-bottom: 40px;">Professional Timeline</h2>
+        <div style="display:flex; flex-direction:column; gap:40px;">
+            <div><h3>March 2026 – May 2026</h3><p>Video Editor | Market Maker MGMT (Remote)</p></div>
+            <div><h3>September 2025 – March 2026</h3><p>Freelance Video Editor | Independent Projects</p></div>
+            <div><h3>February 2025 – August 2025</h3><p>3D Animator & Video Editor | EC4YOU Digital Marketing</p></div>
+            <div><h3>April 2023 – January 2025</h3><p>Freelance Video Editor | Creators & Brands</p></div>
         </div>
-      </div>
+    </section>
 
-      <!-- Card Item 2: Phone -->
-      <div class="stat-card reveal interactable focus-lens-card" onclick="focusCardLens(this)">
-        <div class="shutter-overlay">
-          <svg class="shutter-icon" viewBox="0 0 24 24"><path d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2ZM12 4A8 8 0 0 1 18.57 7.43L7.43 18.57A8 8 0 0 1 4 12A8 8 0 0 1 12 4Z"/></svg>
-          <span>[ CLICK TO FOCUS LENS ]</span>
-        </div>
-        <div class="actual-content">
-          <h3 class="gold" style="font-size: 13px; text-transform: uppercase; opacity: 0.5; letter-spacing: 0.5px;">Direct Telecom</h3>
-          <br>
-          <p style="font-size: 16px; font-weight: 600;">+91 63745 35370</p>
-        </div>
-      </div>
+    <!-- BIO -->
+    <section id="about" class="section reveal-node">
+        <h2 style="font-size: 40px; margin-bottom: 20px;">About Me</h2>
+        <p style="font-size: 18px; line-height: 1.6;">I am Kishoree Sivakumar, a Video Editor, Motion Graphics Artist, and 3D Animator based in Coimbatore, India. I create clean edits, real estate films, social media content, and 3D product renders. My work focuses on story structure, pacing, clear layout composition, and professional post-production choices.</p>
+    </section>
+</main>
 
-      <!-- Card Item 3: Location -->
-      <div class="stat-card reveal interactable focus-lens-card" onclick="focusCardLens(this)">
-        <div class="shutter-overlay">
-          <svg class="shutter-icon" viewBox="0 0 24 24"><path d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2ZM12 4A8 8 0 0 1 18.57 7.43L7.43 18.57A8 8 0 0 1 4 12A8 8 0 0 1 12 4Z"/></svg>
-          <span>[ CLICK TO FOCUS LENS ]</span>
-        </div>
-        <div class="actual-content">
-          <h3 class="gold" style="font-size: 13px; text-transform: uppercase; opacity: 0.5; letter-spacing: 0.5px;">Operations Base</h3>
-          <br>
-          <p style="font-size: 16px; font-weight: 600;">Coimbatore, Tamil Nadu, India</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer style="padding:120px 0 60px 0; border-top:1px solid rgba(255,255,255,0.05); text-align:center;">
-    <h2 style="font-size:28px; font-weight: 800; margin-bottom:15px;" class="gold reveal interactable">KISHOREE SIVAKUMAR[cite: 1]</h2>
-    <p style="font-size:14px; color: var(--color-text-secondary); margin-bottom:40px;" class="reveal">Video Editor • Motion Graphics Artist • 3D Animator</p>
-    <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-bottom:40px;" class="reveal">
-      <a href="#work" class="interactable" style="color:#636366; text-decoration:none; font-size: 14px;">Work</a>
-      <a href="#projects" class="interactable" style="color:#636366; text-decoration:none; font-size: 14px;">Showcase</a>
-      <a href="#experience" class="interactable" style="color:#636366; text-decoration:none; font-size: 14px;">Experience</a>
-      <a href="#about" class="interactable" style="color:#636366; text-decoration:none; font-size: 14px;">About</a>
-      <a href="#contact" class="interactable" style="color:#636366; text-decoration:none; font-size: 14px;">Contact</a>
-    </div>
-    <p style="color:#3a3a3c; font-size: 13px;" class="reveal">© 2026 Kishoree Sivakumar. All Rights Reserved.</p>
-  </footer>
-
-</div>
-
-<!-- =========================
-JAVASCRIPT SYSTEM ENGINE
-========================= -->
 <script>
-  const FALLBACK_THUMBNAIL = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="360" height="250" viewBox="0 0 360 250"><rect width="360" height="250" fill="%23121212"/><rect width="360" height="250" stroke="%23d4af37" stroke-width="1" stroke-opacity="0.1" fill="none"/><text x="180" y="130" font-family="sans-serif" font-size="11" fill="%23666" text-anchor="middle" letter-spacing="1">CINEMATIC PROJECT LAYER</text></svg>`;
-
-  // Scroll Reveal Implementation
-  const observerOptions = { root: null, rootMargin: '0px', threshold: 0.08 };
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('active');
-      }
+    /* Cursor Physics */
+    document.addEventListener('mousemove', (e) => {
+        const cursor = document.getElementById('cursor-follower');
+        cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
     });
-  }, observerOptions);
 
-  window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.reveal').forEach((element) => {
-      observer.observe(element);
+    /* Scroll Reveals */
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
     });
-    
-    for (let i = 1; i <= 6; i++) {
-      const savedLink = localStorage.getItem(`custom_link_slot_${i}`);
-      const savedThumb = localStorage.getItem(`custom_thumb_slot_${i}`);
-      const savedTitle = localStorage.getItem(`custom_title_slot_${i}`);
-      const savedDesc = localStorage.getItem(`custom_desc_slot_${i}`);
+    document.querySelectorAll('.reveal-node').forEach(node => observer.observe(node));
 
-      if (savedLink) document.getElementById(`link-slot-${i}`).href = savedLink;
-      if (savedThumb) {
-        document.getElementById(`thumb-slot-${i}`).src = savedThumb;
-      } else if (localStorage.getItem(`custom_link_slot_${i}`)) {
-        document.getElementById(`thumb-slot-${i}`).src = FALLBACK_THUMBNAIL;
-      }
-      if (savedTitle) document.getElementById(`title-slot-${i}`).innerText = savedTitle;
-      if (savedDesc) document.getElementById(`desc-slot-${i}`).innerText = savedDesc;
-    }
-  });
-
-  // Custom Inertia Tracking Cursor Engine
-  const cursorDot = document.querySelector('.cursor-dot');
-  const cursorRing = document.querySelector('.cursor-ring');
-  const compass = document.getElementById('blender-compass');
-
-  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursorDot.style.left = mouseX + 'px';
-    cursorDot.style.top = mouseY + 'px';
-
-    const rotX = (window.innerWidth / 2 - mouseX) * 0.04;
-    const rotY = (window.innerHeight / 2 - mouseY) * 0.04;
-    compass.style.transform = `rotateX(${rotY}deg) rotateY(${rotX}deg)`;
-  });
-
-  function renderCursor() {
-    ringX += (mouseX - ringX) * 0.14; 
-    ringY += (mouseY - ringY) * 0.14;
-    cursorRing.style.left = ringX + 'px';
-    cursorRing.style.top = ringY + 'px';
-    requestAnimationFrame(renderCursor);
-  }
-  renderCursor();
-
-  function resetPointerTargets() {
-    const interactables = document.querySelectorAll('.interactable, a, button, .btn, .project-card, .tool-pill, .cms-btn, .focus-lens-card');
-    interactables.forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        if(el.classList.contains('focus-lens-card') && !el.classList.contains('lens-focused')) {
-          cursorRing.classList.add('cursor-focus-mode');
-        } else {
-          cursorRing.classList.add('cursor-hover');
+    /* Admin Workspace Trigger */
+    document.addEventListener('keydown', (e) => {
+        if(e.ctrlKey && e.shiftKey && e.key === 'E') {
+            document.getElementById('admin-workspace').style.display = 'flex';
         }
-      });
-      el.addEventListener('mouseleave', () => {
-        cursorRing.classList.remove('cursor-hover');
-        cursorRing.classList.remove('cursor-focus-mode');
-      });
     });
-  }
-  resetPointerTargets();
-
-  function focusCardLens(cardElement) {
-    if(!cardElement.classList.contains('lens-focused')) {
-      cardElement.classList.add('lens-focused');
-      cursorRing.classList.remove('cursor-focus-mode');
-      cursorRing.classList.add('cursor-hover');
-    }
-  }
-
-  // 24fps Production Counter Engine
-  const tcDisplay = document.getElementById('tc-display');
-  let frames = 0, seconds = 0, minutes = 0, hours = 1;
-  setInterval(() => {
-    frames++;
-    if(frames >= 24) { frames = 0; seconds++; }
-    if(seconds >= 60) { seconds = 0; minutes++; }
-    if(minutes >= 60) { minutes = 0; hours++; }
-    const pad = (num) => num.toString().padStart(2, '0');
-    tcDisplay.innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}:${pad(frames)}`;
-  }, 1000 / 24);
-
-  // Hidden Dashboard Logic Trigger
-  const closeCmsBtn = document.getElementById('close-cms-modal');
-  const cmsOverlay = document.getElementById('cms-popup-modal');
-  const logoTrigger = document.getElementById('logo-trigger');
-  
-  closeCmsBtn.addEventListener('click', () => cmsOverlay.classList.remove('active'));
-  document.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'e') {
-      e.preventDefault();
-      cmsOverlay.toggle('active');
-    }
-  });
-  logoTrigger.addEventListener('dblclick', () => {
-    cmsOverlay.classList.add('active');
-  });
-
-  function triggerLinkManager() {
-    const slotInput = prompt("Select slot target index number [Enter 1 to 6]:");
-    const idx = parseInt(slotInput);
-
-    if (isNaN(idx) || idx < 1 || idx > 6) {
-      alert("Invalid range configuration sequence.");
-      return;
-    }
-
-    const destinationURL = prompt(`[Slot ${idx}] Paste destination work link destination URL:`);
-    if (!destinationURL) return;
-
-    const thumbnailURL = prompt(`[Slot ${idx}] Paste thumbnail preview layer image URL path:`);
-    const slotTitle = prompt(`[Slot ${idx}] Enter customized target heading text:`);
-    const slotDesc = prompt(`[Slot ${idx}] Enter customized target context description subtext:`);
-
-    localStorage.setItem(`custom_link_slot_${idx}`, destinationURL);
-    if(thumbnailURL) localStorage.setItem(`custom_thumb_slot_${idx}`, thumbnailURL);
-    if(slotTitle) localStorage.setItem(`custom_title_slot_${idx}`, slotTitle);
-    if(slotDesc) localStorage.setItem(`custom_desc_slot_${idx}`, slotDesc);
-
-    document.getElementById(`link-slot-${idx}`).href = destinationURL;
-    document.getElementById(`thumb-slot-${idx}`).src = thumbnailURL ? thumbnailURL : FALLBACK_THUMBNAIL;
-    if(slotTitle) document.getElementById(`title-slot-${idx}`).innerText = slotTitle;
-    if(slotDesc) document.getElementById(`desc-slot-${idx}`).innerText = slotDesc;
-
-    alert("Slot node modified successfully.");
-    cmsOverlay.classList.remove('active');
-  }
-
-  function handleMediaIngest(file) {
-    if (!file) return;
-    const fileURL = URL.createObjectURL(file);
-    const cardId = prompt("Enter target element index tracking position (1 to 6):");
-    const targetImg = document.getElementById(`thumb-slot-${cardId}`);
-    
-    if (targetImg) {
-      targetImg.src = fileURL;
-      localStorage.setItem(`custom_thumb_slot_${cardId}`, fileURL);
-      alert("Local visual map updated.");
-    } else {
-      alert("Target element identifier resolve sequence failed.");
-    }
-    cmsOverlay.classList.remove('active');
-  }
-
-  document.getElementById('universal-file-uploader').addEventListener('change', (e) => handleMediaIngest(e.target.files[0]));
 </script>
-
 </body>
 </html>
