@@ -9,19 +9,19 @@
 
 <style>
 /* =========================
-MATHEMATICAL DESIGN SYSTEM VARIABLES
+MATHEMATICAL SYSTEM DEFINITIONS
 ========================= */
 :root {
-  --grid-gutter: 40px;
-  --container-max: 1200px;
-  --base-radius: 16px;
-  --transition-smooth: cubic-bezier(0.16, 1, 0.3, 1);
-  --color-bg: #050505;
-  --color-surface: rgba(18, 18, 20, 0.6);
-  --color-border: rgba(255, 255, 255, 0.05);
-  --color-gold: #d4af37;
-  --color-text-main: #f5f5f7;
-  --color-text-muted: #8e8e93;
+  --grid-gap: 30px;
+  --max-width: 1200px;
+  --panel-radius: 12px;
+  --motion-easing: cubic-bezier(0.25, 1, 0.5, 1);
+  --color-dark-bg: #050505;
+  --color-card-surface: #121214;
+  --color-border-line: rgba(255, 255, 255, 0.06);
+  --color-accent-gold: #d4af37;
+  --color-text-primary: #f5f5f7;
+  --color-text-secondary: #8e8e93;
 }
 
 *{
@@ -33,8 +33,8 @@ MATHEMATICAL DESIGN SYSTEM VARIABLES
 
 body{
   font-family:'Poppins',sans-serif;
-  background: var(--color-bg);
-  color: var(--color-text-main);
+  background: var(--color-dark-bg);
+  color: var(--color-text-primary);
   overflow-x:hidden;
   cursor: none !important; 
 }
@@ -44,7 +44,7 @@ a, button, .btn, .interactable, .focus-lens-card {
 }
 
 /* =========================
-MACRO BACKGROUND EFFECTS & CINEMATIC UI
+CINEMATIC BACKGROUND SYSTEM
 ========================= */
 .noise-overlay {
   position: fixed;
@@ -101,7 +101,7 @@ MACRO BACKGROUND EFFECTS & CINEMATIC UI
   right: 60px;
   font-family: 'Courier New', Courier, monospace;
   font-size: 12px;
-  color: var(--color-gold);
+  color: var(--color-accent-gold);
   letter-spacing: 2px;
   z-index: 998;
   pointer-events: none;
@@ -188,7 +188,7 @@ INTERACTIVE DOTTED CURSOR ENGINE
 .cursor-dot {
   width: 6px;
   height: 6px;
-  background: var(--color-gold);
+  background: var(--color-accent-gold);
   border-radius: 50%;
   position: fixed;
   top: 0;
@@ -209,7 +209,7 @@ INTERACTIVE DOTTED CURSOR ENGINE
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: width 0.3s var(--transition-smooth), height 0.3s var(--transition-smooth);
+  transition: width 0.3s var(--motion-easing), height 0.3s var(--motion-easing);
 }
 
 .cursor-hover {
@@ -228,20 +228,20 @@ INTERACTIVE DOTTED CURSOR ENGINE
 }
 
 /* =========================
-CORE LAYOUT AND GRID GEOMETRY
+CONTAINER & PROPORTIONAL GEOMETRY
 ========================= */
 .container {
-  max-width: var(--container-max);
+  max-width: var(--max-width);
   margin: 0 auto;
   padding: 0 40px;
 }
 
 .gold {
-  color: var(--color-gold);
+  color: var(--color-accent-gold);
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, var(--color-gold) 0%, #fffadb 50%, var(--color-gold) 100%);
+  background: linear-gradient(135deg, var(--color-accent-gold) 0%, #fffadb 50%, var(--color-accent-gold) 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -275,29 +275,30 @@ CORE LAYOUT AND GRID GEOMETRY
   color: #ffffff;
   font-size: 14px;
   font-weight: 500;
-  transition: all 0.3s var(--transition-smooth);
+  letter-spacing: 0.5px;
+  transition: all 0.3s var(--motion-easing);
   background: rgba(20, 20, 20, 0.2);
   backdrop-filter: blur(5px);
 }
 .btn:hover {
-  border-color: var(--color-gold);
-  color: var(--color-gold);
+  border-color: var(--color-accent-gold);
+  color: var(--color-accent-gold);
   background: rgba(212, 175, 55, 0.02);
   transform: translateY(-2px);
 }
 
-/* Navigation Geometry */
+/* Navbar System */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 40px 0;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border-line);
 }
 .logo {
   font-size: 22px;
   font-weight: 800;
-  color: var(--color-gold);
+  color: var(--color-accent-gold);
   letter-spacing: 0.5px;
   user-select: none;
 }
@@ -307,7 +308,7 @@ CORE LAYOUT AND GRID GEOMETRY
 }
 .nav-links a {
   text-decoration: none;
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
   font-size: 14px;
   font-weight: 500;
   transition: color 0.3s ease;
@@ -316,7 +317,7 @@ CORE LAYOUT AND GRID GEOMETRY
   color: #ffffff;
 }
 
-/* Hero Geometry */
+/* Hero Section */
 .hero {
   min-height: 70vh;
   display: flex;
@@ -342,19 +343,19 @@ CORE LAYOUT AND GRID GEOMETRY
   font-weight: 400;
 }
 
-/* Perfect 3-Column Mathematical Grids */
+/* 3-Column Proportional Grids */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--grid-gutter); 
+  gap: var(--grid-gap); 
 }
 
 .project-card {
-  background: var(--color-surface);
-  border-radius: var(--base-radius);
+  background: var(--color-card-surface);
+  border-radius: var(--panel-radius);
   overflow: hidden;
-  border: 1px solid var(--color-border);
-  transition: all 0.5s var(--transition-smooth);
+  border: 1px solid var(--color-border-line);
+  transition: all 0.5s var(--motion-easing);
 }
 .project-card:hover {
   transform: translateY(-8px);
@@ -376,7 +377,7 @@ CORE LAYOUT AND GRID GEOMETRY
   object-fit: cover;
   display: block;
   filter: brightness(0.85) contrast(1.02);
-  transition: transform 0.7s var(--transition-smooth), filter 0.7s ease;
+  transition: transform 0.7s var(--motion-easing), filter 0.7s ease;
 }
 .project-card:hover img, .project-card:hover video {
   transform: scale(1.04);
@@ -393,7 +394,7 @@ CORE LAYOUT AND GRID GEOMETRY
   letter-spacing: -0.2px;
 }
 .project-info p {
-  color: var(--color-text-muted);
+  color: var(--color-text-secondary);
   font-size: 14px;
 }
 
@@ -405,11 +406,11 @@ CORE LAYOUT AND GRID GEOMETRY
   letter-spacing: -0.5px;
 }
 
-/* About Grid Layout System */
+/* Proportional Layout Framework */
 .about-split-row {
   display: grid;
   grid-template-columns: 1.6fr 1fr;
-  gap: var(--grid-gutter);
+  gap: var(--grid-gap);
   align-items: stretch;
 }
 .about-side-stack {
@@ -420,12 +421,12 @@ CORE LAYOUT AND GRID GEOMETRY
 }
 
 .stat-card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--base-radius);
+  background: var(--color-card-surface);
+  border: 1px solid var(--color-border-line);
+  border-radius: var(--panel-radius);
   padding: 35px;
   backdrop-filter: blur(10px);
-  transition: all 0.4s var(--transition-smooth);
+  transition: all 0.4s var(--motion-easing);
 }
 .stat-card:hover {
   border-color: rgba(212, 175, 55, 0.2);
@@ -434,15 +435,15 @@ CORE LAYOUT AND GRID GEOMETRY
 .stat-card h2 {
   font-size: 42px;
   font-weight: 800;
-  color: var(--color-gold);
+  color: var(--color-accent-gold);
   margin-bottom: 4px;
 }
 
-/* Balanced Contact 3-Column Deck Layout */
+/* Proportional 3-Column Contact System */
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: var(--grid-gap);
 }
 
 .focus-lens-card {
@@ -454,7 +455,7 @@ CORE LAYOUT AND GRID GEOMETRY
   filter: blur(14px);
   opacity: 0.08;
   transform: scale(0.96);
-  transition: filter 0.6s var(--transition-smooth), opacity 0.6s ease, transform 0.6s var(--transition-smooth);
+  transition: filter 0.6s var(--motion-easing), opacity 0.6s ease, transform 0.6s var(--motion-easing);
 }
 .focus-lens-card .shutter-overlay {
   position: absolute;
@@ -502,7 +503,7 @@ CORE LAYOUT AND GRID GEOMETRY
 }
 .tool-pill {
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--color-border-line);
   padding: 12px 24px;
   border-radius: 8px;
   font-size: 14px;
@@ -526,12 +527,12 @@ CORE LAYOUT AND GRID GEOMETRY
   top: 8px;
   width: 7px;
   height: 7px;
-  background: var(--color-gold);
+  background: var(--color-accent-gold);
   border-radius: 50%;
 }
 
 /* =========================
-LIVE ASSET CMS CONTROL POPUP OVERLAY
+WORKSPACE INPUT MENU OVERLAY LAYER
 ========================= */
 .cms-modal-overlay {
   position: fixed;
@@ -601,7 +602,7 @@ LIVE ASSET CMS CONTROL POPUP OVERLAY
 .reveal {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 1s var(--transition-smooth), transform 1s var(--transition-smooth);
+  transition: opacity 1s var(--motion-easing), transform 1s var(--motion-easing);
 }
 .reveal.active {
   opacity: 1;
@@ -635,7 +636,7 @@ LIVE ASSET CMS CONTROL POPUP OVERLAY
 }
 
 /* =========================
-RESPONSIVE LAYOUT TRANSLATION MATRIX
+RESPONSIVE RECONFIGURATIONS
 ========================= */
 @media (max-width: 1024px) {
   .projects-grid { grid-template-columns: repeat(2, 1fr); }
@@ -656,7 +657,7 @@ RESPONSIVE LAYOUT TRANSLATION MATRIX
   .hero p { font-size: 18px; }
 
   .bg-text { font-size: 130px; }
-  .projects-grid, .contact-grid, .about-split-row { grid-template-columns: 1fr; gap: 24px; }
+  .projects-grid, .contact-grid { grid-template-columns: 1fr; gap: 24px; }
   
   .focus-lens-card .actual-content { filter: blur(0) !important; opacity: 1 !important; transform: scale(1) !important; }
   .focus-lens-card .shutter-overlay { display: none !important; }
@@ -669,13 +670,11 @@ RESPONSIVE LAYOUT TRANSLATION MATRIX
 
 <div class="noise-overlay"></div>
 
-<!-- CINEMATIC BACKGROUND ELEMENTS -->
 <div class="viewfinder vf-tl"></div>
 <div class="viewfinder vf-tr"></div>
 <div class="viewfinder vf-bl"></div>
 <div class="viewfinder vf-br"></div>
 
-<!-- SECURE WORKSPACE MENU (ACCESSIBLE VIA DOUBLE-CLICKING LOGO OR CTRL+SHIFT+E) -->
 <div class="cms-modal-overlay" id="cms-popup-modal">
   <div class="cms-dropdown-menu">
     <div class="cms-heading">Asset Injection</div>
@@ -697,7 +696,6 @@ RESPONSIVE LAYOUT TRANSLATION MATRIX
   </div>
 </div>
 
-<!-- COMPASS AXIS INTERFACE -->
 <div class="axis-compass" id="blender-compass">
   <div class="axis-line axis-x"></div>
   <div class="axis-line axis-y"></div>
@@ -737,16 +735,14 @@ RESPONSIVE LAYOUT TRANSLATION MATRIX
     </nav>
   </header>
 
-  <!-- HERO SECTION -->
   <section class="hero">
     <div class="hero-content">
       <h1>Crafting stories through <span class="text-gradient">motion, light & depth.</span></h1>
-      <p>Video Editor, Motion Graphics Artist, and 3D Animator creating clean social media edits, real estate walkthroughs, promotional campaigns, and 3D visual experiences.</p>
+      <p>Video Editor, Motion Graphics Artist, and 3D Animator creating social media edits, real estate walkthroughs, promotional brand campaigns, and 3D visual experiences[cite: 4, 6, 7].</p>
       <a href="https://www.linkedin.com/in/kishoree-s-948348322" target="_blank" class="btn interactable">LinkedIn Network</a>
     </div>
   </section>
 
-  <!-- MARQUEE TRACK -->
   <section class="section" style="padding: 0;">
     <div class="services">
       <div class="services-track">
@@ -769,7 +765,6 @@ RESPONSIVE LAYOUT TRANSLATION MATRIX
     </div>
   </section>
 
-  <!-- PROJECTS GRID (SLOTS 1, 2, 3) -->
   <section id="work" class="section">
     <h2 class="section-title gold reveal interactable">Featured Projects</h2>
     <div class="projects-grid">
@@ -779,7 +774,7 @@ RESPONSIVE LAYOUT TRANSLATION MATRIX
         </div>
         <div class="project-info">
           <h3 id="title-slot-1">Luxury Villa Showcase</h3>
-          <p id="desc-slot-1">Real Estate Film • Property Walkthrough</p>
+          <p id="desc-slot-1">Real Estate Film • Property Walkthrough [cite: 7]</p>
           <a href="https://www.youtube.com/watch?v=EVIVFBc0SSM" target="_blank" class="btn interactable" id="link-slot-1">Watch Project →</a>
         </div>
       </div>
@@ -789,7 +784,7 @@ RESPONSIVE LAYOUT TRANSLATION MATRIX
         </div>
         <div class="project-info">
           <h3 id="title-slot-2">Modern Interior Experience</h3>
-          <p id="desc-slot-2">Property Walkthrough Video</p>
+          <p id="desc-slot-2">Property Walkthrough Video [cite: 7]</p>
           <a href="https://www.youtube.com/watch?v=lZsSIwTOrXg" target="_blank" class="btn interactable" id="link-slot-2">Watch Project →</a>
         </div>
       </div>
@@ -799,14 +794,13 @@ RESPONSIVE LAYOUT TRANSLATION MATRIX
         </div>
         <div class="project-info">
           <h3 id="title-slot-3">Premium Property Campaign</h3>
-          <p id="desc-slot-3">Real Estate Marketing Campaign</p>
+          <p id="desc-slot-3">Real Estate Marketing Campaign [cite: 7]</p>
           <a href="https://www.youtube.com/watch?v=TjIF5Mxeafo" target="_blank" class="btn interactable" id="link-slot-3">Watch Project →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SHOWCASE GRID (SLOTS 4, 5, 6) -->
   <section id="projects" class="section">
     <h2 class="section-title gold reveal interactable">Portfolio Showcase</h2>
     <div class="projects-grid">
@@ -816,7 +810,7 @@ RESPONSIVE LAYOUT TRANSLATION MATRIX
         </div>
         <div class="project-info">
           <h3 id="title-slot-4">Creator Vlog Storytelling</h3>
-          <p id="desc-slot-4">Long Form YouTube Content Editing</p>
+          <p id="desc-slot-4">Long Form YouTube Content Editing [cite: 14]</p>
           <a href="https://www.youtube.com/watch?v=GFLdsVX9Hxc" target="_blank" class="btn interactable" id="link-slot-4">View Project →</a>
         </div>
       </div>
@@ -826,7 +820,7 @@ RESPONSIVE LAYOUT TRANSLATION MATRIX
         </div>
         <div class="project-info">
           <h3 id="title-slot-5">3D Product Visualization</h3>
-          <p id="desc-slot-5">Blender • Product Rendering & Modeling</p>
+          <p id="desc-slot-5">Blender • Product Rendering & Modeling [cite: 12, 17, 24]</p>
           <a href="https://drive.google.com/file/d/10D2uMpq47LBjJXqDMfxqMy8QOm3FQwPV/view?usp=sharing" target="_blank" class="btn interactable" id="link-slot-5">View Project →</a>
         </div>
       </div>
@@ -836,93 +830,85 @@ RESPONSIVE LAYOUT TRANSLATION MATRIX
         </div>
         <div class="project-info">
           <h3 id="title-slot-6">Motion Campaign Visuals</h3>
-          <p id="desc-slot-6">Motion Graphics & Branded Content</p>
+          <p id="desc-slot-6">Motion Graphics & Branded Content [cite: 7, 11]</p>
           <a href="https://drive.google.com/file/d/1B433p5Q0_ulpdqss4cIvEwrPzSAc8uJ_/view?usp=sharing" target="_blank" class="btn interactable" id="link-slot-6">View Project →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- WORK TIMELINE -->
   <section id="experience" class="section">
     <h2 class="section-title gold reveal interactable">Professional Timeline</h2>
     <div class="experience-container">
       <div class="stat-card reveal interactable experience-node">
-        <h3 class="gold">March 2026 – May 2026</h3>
+        <h3 class="gold">March 2026 – May 2026 [cite: 28]</h3>
         <br>
-        <h2>Video Editor</h2>
-        <p>Market Maker MGMT (Remote)[cite: 1]</p>
+        <h2>Video Editor [cite: 26]</h2>
+        <p>Market Maker MGMT (Remote) [cite: 27]</p>
         <br>
-        <p>Edited long-form vlogs, short-form reels, and real estate property walkthroughs using clean transitions, color grading, and motion graphics[cite: 1].</p>
+        <p>Edited long-form vlogs, short-form reels, and real estate property walkthroughs using clean transitions, color grading, and motion graphics[cite: 29, 30].</p>
       </div>
       <div class="stat-card reveal interactable experience-node">
-        <h3 class="gold">September 2025 – March 2026</h3>
+        <h3 class="gold">September 2025 – March 2026 [cite: 32]</h3>
         <br>
-        <h2>Freelance Video Editor</h2>
-        <p>Independent Client Projects (Remote)[cite: 1]</p>
+        <h2>Freelance Video Editor [cite: 31]</h2>
+        <p>Independent Client Projects (Remote) [cite: 32]</p>
         <br>
-        <p>Edited commercial clips, cinematic reels, and short-form video assets based on platform requirements and client brand styles[cite: 1].</p>
+        <p>Edited commercial clips, cinematic reels, and short-form video assets based on platform requirements and client brand styles[cite: 33, 34].</p>
       </div>
       <div class="stat-card reveal interactable experience-node">
-        <h3 class="gold">February 2025 – August 2025</h3>
+        <h3 class="gold">February 2025 – August 2025 [cite: 36]</h3>
         <br>
-        <h2>3D Animator & Video Editor</h2>
-        <p>EC4YOU Digital Marketing (India)[cite: 1]</p>
+        <h2>3D Animator & Video Editor [cite: 35]</h2>
+        <p>EC4YOU Digital Marketing (India) [cite: 36, 37]</p>
         <br>
-        <p>Created 3D animations and promotional graphics for marketing workflows. Designed banners, brochures, and branded social media visuals[cite: 1].</p>
+        <p>Created 3D animations and promotional graphics for marketing workflows. Designed banners, brochures, and branded social media visuals[cite: 38, 39].</p>
       </div>
       <div class="stat-card reveal interactable experience-node">
-        <h3 class="gold">April 2023 – January 2025</h3>
+        <h3 class="gold">April 2023 – January 2025 [cite: 42]</h3>
         <br>
-        <h2>Freelance Video Editor</h2>
-        <p>Creators & Brands (Remote)[cite: 1]</p>
+        <h2>Freelance Video Editor [cite: 41]</h2>
+        <p>Creators & Brands (Remote) [cite: 42]</p>
         <br>
-        <p>Edited cinematic and promotional videos for online campaigns, handled timeline asset assembly, and managed projects from initial editing to final file delivery[cite: 1].</p>
+        <p>Edited cinematic and promotional videos for online campaigns, handled timeline asset assembly, and managed projects from initial editing to final file delivery[cite: 43, 46].</p>
       </div>
     </div>
   </section>
 
-  <!-- SOFTWARE CAPABILITIES -->
   <section id="tools" class="section">
     <h2 class="section-title gold reveal interactable">Tools & Software Suite</h2>
     <div class="tools-flex reveal">
-      <div class="tool-pill interactable">Adobe Premiere Pro</div>
-      <div class="tool-pill interactable">Adobe After Effects</div>
-      <div class="tool-pill interactable">Blender 3D Suite</div>
-      <div class="tool-pill interactable">Adobe Photoshop</div>
-      <div class="tool-pill interactable">Adobe Illustrator</div>
+      <div class="tool-pill interactable">Adobe Premiere Pro [cite: 22]</div>
+      <div class="tool-pill interactable">Adobe After Effects [cite: 22]</div>
+      <div class="tool-pill interactable">Blender 3D Suite [cite: 24]</div>
+      <div class="tool-pill interactable">Adobe Photoshop [cite: 24]</div>
+      <div class="tool-pill interactable">Adobe Illustrator [cite: 24]</div>
       <div class="tool-pill interactable">Adobe Lightroom</div>
-      <div class="tool-pill interactable">CapCut PC</div>
+      <div class="tool-pill interactable">CapCut PC [cite: 22]</div>
     </div>
   </section>
 
-  <!-- BIOGRAPHY -->
   <section id="about" class="section">
     <h2 class="section-title gold reveal interactable">About Me</h2>
     <div class="about-split-row">
       <div class="stat-card reveal interactable" style="display: flex; align-items: center;">
         <p style="font-size:16px; line-height:1.8; color:#aeaeb2; font-weight: 400;">
-          I am Kishoree Sivakumar, a Video Editor, Motion Graphics Artist, and 3D Animator based in Coimbatore, India[cite: 1]. I create clean edits, real estate films, social media content, and 3D product renders for brands and businesses[cite: 1]. My work focuses on story structure, pacing, clear layout composition, and professional post-production choices to build engaging content that hits project deadlines[cite: 1].
+          I am Kishoree Sivakumar, a Video Editor, Motion Graphics Artist, and 3D Animator based in Coimbatore, India[cite: 1, 2, 4]. I create clean edits, real estate films, social media content, and 3D product renders for brands and businesses[cite: 6, 7, 17]. My work focuses on story structure, pacing, clear layout composition, and professional post-production choices to build engaging content that hits project deadlines[cite: 8, 46].
         </p>
       </div>
       <div class="about-side-stack">
         <div class="stat-card reveal interactable">
           <h2>3+ Years</h2>
-          <p style="color: var(--color-text-muted); font-size: 14px;">Active Experience[cite: 1]</p>
+          <p style="color: var(--color-text-secondary); font-size: 14px;">Active Experience</p>
         </div>
         <div class="stat-card reveal interactable">
           <h2>50+ Projects</h2>
-          <p style="color: var(--color-text-muted); font-size: 14px;">Completed Visual Deliveries[cite: 1]</p>
-        </div>
-        <div class="stat-card reveal interactable">
-          <h2>India</h2>
-          <p style="color: var(--color-text-muted); font-size: 14px;">Based Operations[cite: 1]</p>
+          <p style="color: #8e8e93; font-size: 14px;">Completed Visual Deliveries</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- BALANCED CONTACT GRID SECTION -->
   <section id="contact" class="section">
     <h2 class="section-title gold reveal interactable">Global Inquiries</h2>
     <div class="contact-grid">
@@ -935,7 +921,7 @@ RESPONSIVE LAYOUT TRANSLATION MATRIX
         <div class="actual-content">
           <h3 class="gold" style="font-size: 13px; text-transform: uppercase; opacity: 0.5; letter-spacing: 0.5px;">Communications</h3>
           <br>
-          <p style="font-size: 16px; font-weight: 600;">kishoreesivakumar2001@gmail.com</p>
+          <p style="font-size: 16px; font-weight: 600;">kishoreesivakumar2001@gmail.com [cite: 3]</p>
         </div>
       </div>
 
@@ -947,7 +933,7 @@ RESPONSIVE LAYOUT TRANSLATION MATRIX
         <div class="actual-content">
           <h3 class="gold" style="font-size: 13px; text-transform: uppercase; opacity: 0.5; letter-spacing: 0.5px;">Direct Telecom</h3>
           <br>
-          <p style="font-size: 16px; font-weight: 600;">+91 63745 35370</p>
+          <p style="font-size: 16px; font-weight: 600;">+91 63745 35370 [cite: 3]</p>
         </div>
       </div>
 
@@ -959,17 +945,16 @@ RESPONSIVE LAYOUT TRANSLATION MATRIX
         <div class="actual-content">
           <h3 class="gold" style="font-size: 13px; text-transform: uppercase; opacity: 0.5; letter-spacing: 0.5px;">Operations Base</h3>
           <br>
-          <p style="font-size: 16px; font-weight: 600;">Coimbatore, Tamil Nadu, India</p>
+          <p style="font-size: 16px; font-weight: 600;">Coimbatore, Tamil Nadu, India [cite: 2]</p>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer style="padding:120px 0 60px 0; border-top:1px solid rgba(255,255,255,0.05); text-align:center;">
-    <h2 style="font-size:28px; font-weight: 800; margin-bottom:15px;" class="gold reveal interactable">KISHOREE SIVAKUMAR</h2>
-    <p style="font-size:14px; color: var(--color-text-muted); margin-bottom:40px;" class="reveal">Video Editor • Motion Graphics Artist • 3D Animator</p>
+    <h2 style="font-size:28px; font-weight: 800; margin-bottom:15px;" class="gold reveal interactable">KISHOREE SIVAKUMAR [cite: 1]</h2>
+    <p style="font-size:14px; color: var(--color-text-secondary); margin-bottom:40px;" class="reveal">Video Editor • Motion Graphics Artist • 3D Animator [cite: 4]</p>
     <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-bottom:40px;" class="reveal">
       <a href="#work" class="interactable" style="color:#636366; text-decoration:none; font-size: 14px;">Work</a>
       <a href="#projects" class="interactable" style="color:#636366; text-decoration:none; font-size: 14px;">Showcase</a>
@@ -982,9 +967,6 @@ RESPONSIVE LAYOUT TRANSLATION MATRIX
 
 </div>
 
-<!-- =========================
-JAVASCRIPT SYSTEM ENGINE
-========================= -->
 <script>
   const FALLBACK_THUMBNAIL = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="360" height="250" viewBox="0 0 360 250"><rect width="360" height="250" fill="%23121212"/><rect width="360" height="250" stroke="%23d4af37" stroke-width="1" stroke-opacity="0.1" fill="none"/><text x="180" y="130" font-family="sans-serif" font-size="11" fill="%23666" text-anchor="middle" letter-spacing="1">CINEMATIC PROJECT LAYER</text></svg>`;
 
@@ -1127,7 +1109,7 @@ JAVASCRIPT SYSTEM ENGINE
     if(slotTitle) document.getElementById(`title-slot-${idx}`).innerText = slotTitle;
     if(slotDesc) document.getElementById(`desc-slot-${idx}`).innerText = slotDesc;
 
-    alert(`Slot ${idx} node modified successfully.`);
+    alert("Slot node modified successfully.");
     cmsOverlay.classList.remove('active');
   }
 
