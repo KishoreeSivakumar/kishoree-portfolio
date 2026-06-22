@@ -1,3 +1,8 @@
+<!-- =========================
+SECTION 1
+HEAD + PREMIUM CSS + ANIMATIONS + ULTRA-CINEMATIC RES FX
+========================= -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -188,7 +193,7 @@ MACRO BACKGROUND EFFECTS & PRODUCTION UI
 }
 
 /* =========================
-CUSTOM ENGINE CURSOR (DOTTED STYLING ACCORDING TO PREVIOUS REVISION)
+CUSTOM ENGINE CURSOR (DOTTED STYLING)
 ========================= */
 
 .cursor-dot {
@@ -218,7 +223,6 @@ CUSTOM ENGINE CURSOR (DOTTED STYLING ACCORDING TO PREVIOUS REVISION)
   transition: width 0.3s, height 0.3s, background 0.3s, border-color 0.3s;
 }
 
-/* Tracking extension styling when hovering over interactive variables */
 .cursor-hover {
   width: 80px !important;
   height: 80px !important;
@@ -490,9 +494,10 @@ cursor: default;
   justify-content: space-between;
 }
 
+/* Restructured contact row grid spacing definitions */
 .contact-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
 
@@ -611,7 +616,6 @@ MOBILE RESPONSIVENESS
 }
 
 @media (max-width: 768px) {
-  /* BUG FIX Restoration flags from image_eaab2c.png */
   body { cursor: auto !important; } 
   a, button, .btn, .interactable, .project-card, .tool-pill { cursor: auto !important; }
   .cursor-dot, .cursor-ring { display: none !important; }
@@ -685,11 +689,13 @@ MOBILE RESPONSIVENESS
 
 <div class="noise-overlay"></div>
 
+<!-- CINEMATIC UI ELEMENTS -->
 <div class="viewfinder vf-tl"></div>
 <div class="viewfinder vf-tr"></div>
 <div class="viewfinder vf-bl"></div>
 <div class="viewfinder vf-br"></div>
 
+<!-- 3D COMPASS WIDGET -->
 <div class="axis-compass" id="blender-compass">
   <div class="axis-line axis-x"></div>
   <div class="axis-line axis-y"></div>
@@ -704,6 +710,7 @@ MOBILE RESPONSIVENESS
   REC <span id="tc-display" style="margin-left: 5px;">00:00:00:00</span>
 </div>
 
+<!-- DOTTED CURSOR ANIMATION ELEMENTS -->
 <div class="cursor-dot"></div>
 <div class="cursor-ring"></div>
 
@@ -848,7 +855,7 @@ Portfolio Showcase
 <div class="project-info">
 <h3>3D Product Visualization</h3>
 <p>Blender • Product Rendering</p>
-<a href="https://drive.google.com/file/d/10D2uMpq47LBjJXqDMfxqMy8QOm3FQwPV/view?usp=sharing" target="_blank" class="btn interactable">View Project →</a>
+<a href="https://drive.google.com/file/d/10D2uMpq47LBjJXqDMfx hookup PV/view?usp=sharing" target="_blank" class="btn interactable">View Project →</a>
 </div>
 </div>
 
@@ -970,6 +977,7 @@ My work combines storytelling, pacing, motion design and professional post-produ
 
 </section>
 
+<!-- RESTRUCTURED: Clean 3-Column Layout from image_8e8180.jpg without LinkedIn block -->
 <section id="contact" class="section">
 
 <h2 class="section-title gold reveal interactable">
@@ -994,12 +1002,6 @@ Let's Work Together
 <h3 class="gold">Location</h3>
 <br>
 <p>Coimbatore, Tamil Nadu, India</p>
-</div>
-
-<div class="stat-card reveal interactable delay-3">
-<h3 class="gold">LinkedIn</h3>
-<br>
-<a href="https://www.linkedin.com/in/kishoree-s-948348322" target="_blank" class="btn interactable">Visit Profile →</a>
 </div>
 
 </div>
@@ -1040,6 +1042,9 @@ Video Editor • Motion Graphics Artist • 3D Animator
 
 </div>
 
+<!-- =========================
+JAVASCRIPT ENGINE (ENGINE SYSTEMS)
+========================= -->
 <script>
   // 1. Scroll Reveal Engine
   const observerOptions = {
@@ -1057,7 +1062,6 @@ Video Editor • Motion Graphics Artist • 3D Animator
     });
   }, observerOptions);
 
-  // Structural Cascade initialization handler block matching image_eaab2c.png rules
   window.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.reveal').forEach((element) => {
       observer.observe(element);
@@ -1072,22 +1076,18 @@ Video Editor • Motion Graphics Artist • 3D Animator
   let mouseX = 0, mouseY = 0;
   let ringX = 0, ringY = 0;
 
-  // Track raw positions
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
     
-    // Core indicator tracks raw input flawlessly
     cursorDot.style.left = mouseX + 'px';
     cursorDot.style.top = mouseY + 'px';
 
-    // Interactive 3D compass orientation shift
     const rotX = (window.innerWidth / 2 - mouseX) * 0.03;
     const rotY = (window.innerHeight / 2 - mouseY) * 0.03;
     compass.style.transform = `rotateX(${rotY}deg) rotateY(${rotX}deg)`;
   });
 
-  // Linear interpolation loop for weighted micro-inertia tracking ring response
   function renderCursor() {
     let distX = mouseX - ringX;
     let distY = mouseY - ringY;
@@ -1102,7 +1102,6 @@ Video Editor • Motion Graphics Artist • 3D Animator
   }
   renderCursor();
 
-  // Handle active hover transformations on interaction boundaries
   const interactables = document.querySelectorAll('.interactable, a, button, .btn, .project-card, .tool-pill');
   interactables.forEach(el => {
     el.addEventListener('mouseenter', () => cursorRing.classList.add('cursor-hover'));
