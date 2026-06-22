@@ -1,3 +1,8 @@
+<!-- =========================
+SECTION 1
+HEAD + INTERNATIONAL COMPOSITION CSS + REFINED MOTION ENGINE
+========================= -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +32,7 @@ overflow-x:hidden;
 cursor: none !important; 
 }
 
-a, button, .btn, .interactable, .cms-btn {
+a, button, .btn, .interactable, .cms-btn, .focus-lens-card {
   cursor: none !important;
 }
 
@@ -200,7 +205,7 @@ INTERACTIVE DOTTED CURSOR ENGINE
 
 .cursor-ring {
   width: 36px;
-  height: 46px;
+  height: 36px;
   border: 1px solid rgba(212, 175, 55, 0.4);
   border-radius: 50%;
   position: fixed;
@@ -217,6 +222,14 @@ INTERACTIVE DOTTED CURSOR ENGINE
   height: 74px !important;
   background: rgba(212, 175, 55, 0.08);
   border-color: rgba(212, 175, 55, 0.3);
+}
+
+.cursor-focus-mode {
+  width: 50px !important;
+  height: 50px !important;
+  background: rgba(255, 51, 51, 0.1) !important;
+  border-color: rgba(255, 51, 51, 0.8) !important;
+  border-style: dashed !important;
 }
 
 /* =========================
@@ -445,11 +458,68 @@ LAYOUT STRUCTURE & ALIGNMENT STRATEGY
   margin-bottom: 5px;
 }
 
-/* Clean Corporate 3-Column Contact Deck */
+/* =========================
+CINEMATIC CAMERA FOCUS REVEAL SYSTEM CSS 
+========================= */
 .contact-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
+}
+
+.focus-lens-card {
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+}
+
+.focus-lens-card .actual-content {
+  filter: blur(14px);
+  opacity: 0.08;
+  transform: scale(0.96);
+  transition: filter 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.focus-lens-card .shutter-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(10, 10, 12, 0.1);
+  color: rgba(212, 175, 55, 0.7);
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  font-weight: 600;
+  gap: 10px;
+  opacity: 1;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  z-index: 10;
+}
+
+.focus-lens-card .shutter-icon {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  fill: none;
+  animation: rotateShutter 8s linear infinite;
+}
+
+@keyframes rotateShutter { 100% { transform: rotate(360deg); } }
+
+/* Focused Enabled State Overrides via JS Trigger Node */
+.focus-lens-card.lens-focused .actual-content {
+  filter: blur(0px);
+  opacity: 1;
+  transform: scale(1);
+}
+
+.focus-lens-card.lens-focused .shutter-overlay {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(1.1);
 }
 
 .tools-flex {
@@ -496,7 +566,7 @@ LAYOUT STRUCTURE & ALIGNMENT STRATEGY
 }
 
 /* =========================
-NEW LIVE REARRANGE DASHBOARD POPUP INTERFACE
+LIVE REARRANGE DASHBOARD POPUP INTERFACE
 ========================= */
 
 .fixed-edit-trigger {
@@ -629,6 +699,11 @@ MOBILE & TABLET RESET RULES
 
   .bg-text { font-size: 130px; }
   .projects-grid, .contact-grid { grid-template-columns: 1fr; gap: 24px; }
+  
+  /* Reset mobile lens filter behavior so contact data displays directly */
+  .focus-lens-card .actual-content { filter: blur(0) !important; opacity: 1 !important; transform: scale(1) !important; }
+  .focus-lens-card .shutter-overlay { display: none !important; }
+
   .about-split-row { grid-template-columns: 1fr; gap: 24px; }
   .section-title { font-size: 32px; margin-bottom: 40px; }
 }
@@ -641,13 +716,16 @@ MOBILE & TABLET RESET RULES
 
 <div class="noise-overlay"></div>
 
+<!-- CINEMATIC BACKGROUND UI -->
 <div class="viewfinder vf-tl"></div>
 <div class="viewfinder vf-tr"></div>
 <div class="viewfinder vf-bl"></div>
 <div class="viewfinder vf-br"></div>
 
+<!-- FIXED EDIT WORKSPACE CONTROL LAYER -->
 <button class="fixed-edit-trigger cms-btn" id="open-cms-trigger">⚙️ Edit Portfolio</button>
 
+<!-- CONTROL POPUP MODULE -->
 <div class="cms-modal-overlay" id="cms-popup-modal">
   <div class="cms-dropdown-menu">
     <div class="cms-item cms-btn">
@@ -678,6 +756,7 @@ MOBILE & TABLET RESET RULES
   </div>
 </div>
 
+<!-- 3D GRID GRAPHIC COMPASS -->
 <div class="axis-compass" id="blender-compass">
   <div class="axis-line axis-x"></div>
   <div class="axis-line axis-y"></div>
@@ -692,6 +771,7 @@ MOBILE & TABLET RESET RULES
   REC <span id="tc-display" style="margin-left: 5px;">00:00:00:00</span>
 </div>
 
+<!-- ACTIVE REFINED CURSOR INTERFACES -->
 <div class="cursor-dot"></div>
 <div class="cursor-ring"></div>
 
@@ -718,6 +798,7 @@ MOBILE & TABLET RESET RULES
     </nav>
   </header>
 
+  <!-- HERO PANEL -->
   <section class="hero">
     <div class="hero-content">
       <h1>Crafting stories through <span class="text-gradient">motion, light & depth.</span></h1>
@@ -727,6 +808,7 @@ MOBILE & TABLET RESET RULES
     </div>
   </section>
 
+  <!-- HORIZONTAL MARQUEE PANEL -->
   <section class="section" style="padding: 0;">
     <div class="services">
       <div class="services-track">
@@ -749,6 +831,7 @@ MOBILE & TABLET RESET RULES
     </div>
   </section>
 
+  <!-- COMMERCIAL FILM FEATURE GRID -->
   <section id="work" class="section">
     <h2 class="section-title gold reveal interactable">Featured Commercial Works</h2>
     <div class="projects-grid">
@@ -785,6 +868,7 @@ MOBILE & TABLET RESET RULES
     </div>
   </section>
 
+  <!-- SOCIAL MEDIA / 3D RENDERING SYSTEM GRID -->
   <section id="projects" class="section">
     <h2 class="section-title gold reveal interactable">Portfolio Showcase</h2>
     <div class="projects-grid">
@@ -821,14 +905,16 @@ MOBILE & TABLET RESET RULES
     </div>
   </section>
 
+  <!-- PROFESSIONAL TIMELINE PIPELINE -->
   <section id="experience" class="section">
     <h2 class="section-title gold reveal interactable">Professional Timeline</h2>
     <div class="experience-container">
       <div class="stat-card reveal interactable experience-node">
         <h3 class="gold">March 2026 – May 2026</h3>
         <br>
-        <h2>Senior Video Editor</h2>
-        <p>Market Maker MGMT (Remote Contract)</p>
+        <!-- FIXED CORRECTION: demoted senior tag to reflect standard professional alignment -->
+        <h2>Video Editor</h2>
+        <p>Market Maker MGMT (Remote Contract)[cite: 1]</p>
         <br>
         <p>Managed high-end commercial property walkthrough campaigns, localized conversion reels, asset timeline management, and color calibration pipelines.</p>
       </div>
@@ -859,6 +945,7 @@ MOBILE & TABLET RESET RULES
     </div>
   </section>
 
+  <!-- CAPABILITIES / TOOLS MATRIX -->
   <section id="tools" class="section">
     <h2 class="section-title gold reveal interactable">Capabilities & Studio Stack</h2>
     <div class="tools-flex reveal">
@@ -872,12 +959,13 @@ MOBILE & TABLET RESET RULES
     </div>
   </section>
 
+  <!-- EXECUTIVE PROFILE DECK -->
   <section id="about" class="section">
     <h2 class="section-title gold reveal interactable">Executive Overview</h2>
     <div class="about-split-row">
       <div class="stat-card reveal interactable" style="display: flex; align-items: center;">
         <p style="font-size:19px; line-height:1.9; color:#d1d1d6; font-weight: 300;">
-          I am Kishoree Sivakumar, an elite Video Editor, Motion Graphics Designer, and 3D Visual Artist operating globally from Coimbatore, India. I translate executive brand concepts into cinematic pipeline results, specializing in corporate property films, high-fidelity 3D visualization grids, and crisp audience engagement systems. My focus balances complex artistic direction with strict logistical project deadlines to scale bottom-line audience performance metrics.
+          I am Kishoree Sivakumar, a Video Editor, Motion Graphics Designer, and 3D Visual Artist operating globally from Coimbatore, India. I translate brand concepts into cinematic pipeline results, specializing in corporate property films, high-fidelity 3D visualization grids, and crisp audience engagement systems. My focus balances complex artistic direction with strict logistical project deadlines to scale bottom-line audience performance metrics.
         </p>
       </div>
       <div class="about-side-stack">
@@ -897,24 +985,50 @@ MOBILE & TABLET RESET RULES
     </div>
   </section>
 
+  <!-- RESTRUCTURED STABLE CONTACT SECTION WITH CAM REVEAL (image_8f7e23.jpg Layout) -->
   <section id="contact" class="section">
     <h2 class="section-title gold reveal interactable">Global Inquiries</h2>
     <div class="contact-grid">
-      <div class="stat-card reveal interactable">
-        <h3 class="gold" style="font-size: 14px; text-transform: uppercase; opacity: 0.5;">Secure Communications</h3>
-        <br>
-        <p style="font-size: 16px; font-weight: 600;">kishoreesivakumar2001@gmail.com</p>
+      
+      <!-- Card Item 1: Email -->
+      <div class="stat-card reveal interactable focus-lens-card" onclick="focusCardLens(this)">
+        <div class="shutter-overlay">
+          <svg class="shutter-icon" viewBox="0 0 24 24"><path d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2ZM12 4A8 8 0 0 1 18.57 7.43L7.43 18.57A8 8 0 0 1 4 12A8 8 0 0 1 12 4Z"/></svg>
+          <span>[ CLICK TO FOCUS LENS ]</span>
+        </div>
+        <div class="actual-content">
+          <h3 class="gold" style="font-size: 14px; text-transform: uppercase; opacity: 0.5;">Secure Communications</h3>
+          <br>
+          <p style="font-size: 16px; font-weight: 600;">kishoreesivakumar2001@gmail.com</p>
+        </div>
       </div>
-      <div class="stat-card reveal interactable">
-        <h3 class="gold" style="font-size: 14px; text-transform: uppercase; opacity: 0.5;">Direct Telecom</h3>
-        <br>
-        <p style="font-size: 16px; font-weight: 600;">+91 63745 35370</p>
+
+      <!-- Card Item 2: Phone -->
+      <div class="stat-card reveal interactable focus-lens-card" onclick="focusCardLens(this)">
+        <div class="shutter-overlay">
+          <svg class="shutter-icon" viewBox="0 0 24 24"><path d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2ZM12 4A8 8 0 0 1 18.57 7.43L7.43 18.57A8 8 0 0 1 4 12A8 8 0 0 1 12 4Z"/></svg>
+          <span>[ CLICK TO FOCUS LENS ]</span>
+        </div>
+        <div class="actual-content">
+          <h3 class="gold" style="font-size: 14px; text-transform: uppercase; opacity: 0.5;">Direct Telecom</h3>
+          <br>
+          <p style="font-size: 16px; font-weight: 600;">+91 63745 35370</p>
+        </div>
       </div>
-      <div class="stat-card reveal interactable">
-        <h3 class="gold" style="font-size: 14px; text-transform: uppercase; opacity: 0.5;">HQ Operations Base</h3>
-        <br>
-        <p style="font-size: 16px; font-weight: 600;">Coimbatore, Tamil Nadu, India</p>
+
+      <!-- Card Item 3: Location -->
+      <div class="stat-card reveal interactable focus-lens-card" onclick="focusCardLens(this)">
+        <div class="shutter-overlay">
+          <svg class="shutter-icon" viewBox="0 0 24 24"><path d="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2ZM12 4A8 8 0 0 1 18.57 7.43L7.43 18.57A8 8 0 0 1 4 12A8 8 0 0 1 12 4Z"/></svg>
+          <span>[ CLICK TO FOCUS LENS ]</span>
+        </div>
+        <div class="actual-content">
+          <h3 class="gold" style="font-size: 14px; text-transform: uppercase; opacity: 0.5;">HQ Operations Base</h3>
+          <br>
+          <p style="font-size: 16px; font-weight: 600;">Coimbatore, Tamil Nadu, India</p>
+        </div>
       </div>
+
     </div>
     <br><br>
     <div style="text-align: left;">
@@ -922,6 +1036,7 @@ MOBILE & TABLET RESET RULES
     </div>
   </section>
 
+  <!-- STUDIO FOOTER -->
   <footer style="padding:120px 0 60px 0; border-top:1px solid rgba(255,255,255,0.05); text-align:center; position: relative;">
     <h2 style="font-size:32px; font-weight: 800; margin-bottom:15px;" class="gold reveal interactable">KISHOREE SIVAKUMAR</h2>
     <p style="font-size:15px; color:#8e8e93; margin-bottom:40px;" class="reveal">Creative Director • Video Engineering • 3D Motion Asset Management</p>
@@ -937,6 +1052,9 @@ MOBILE & TABLET RESET RULES
 
 </div>
 
+<!-- =========================
+JAVASCRIPT ENGINE (HIGH PERFORMANCE SYSTEMS)
+========================= -->
 <script>
   // 1. Scroll-Driven Intersection Cascade
   const observerOptions = {
@@ -971,7 +1089,6 @@ MOBILE & TABLET RESET RULES
     mouseX = e.clientX;
     mouseY = e.clientY;
     
-    // Core cursor locked safely onto instant values
     cursorDot.style.left = mouseX + 'px';
     cursorDot.style.top = mouseY + 'px';
 
@@ -985,7 +1102,6 @@ MOBILE & TABLET RESET RULES
     let distX = mouseX - ringX;
     let distY = mouseY - ringY;
     
-    // Smooth weighted inertia tracking loop
     ringX += distX * 0.14; 
     ringY += distY * 0.14;
     
@@ -997,13 +1113,31 @@ MOBILE & TABLET RESET RULES
   renderCursor();
 
   function resetPointerTargets() {
-    const interactables = document.querySelectorAll('.interactable, a, button, .btn, .project-card, .tool-pill, .cms-btn');
+    const interactables = document.querySelectorAll('.interactable, a, button, .btn, .project-card, .tool-pill, .cms-btn, .focus-lens-card');
     interactables.forEach(el => {
-      el.addEventListener('mouseenter', () => cursorRing.classList.add('cursor-hover'));
-      el.addEventListener('mouseleave', () => cursorRing.classList.remove('cursor-hover'));
+      el.addEventListener('mouseenter', () => {
+        if(el.classList.contains('focus-lens-card') && !el.classList.contains('lens-focused')) {
+          cursorRing.classList.add('cursor-focus-mode');
+        } else {
+          cursorRing.classList.add('cursor-hover');
+        }
+      });
+      el.addEventListener('mouseleave', () => {
+        cursorRing.classList.remove('cursor-hover');
+        cursorRing.classList.remove('cursor-focus-mode');
+      });
     });
   }
   resetPointerTargets();
+
+  // Camera Lens Focus Trigger System Handler
+  function focusCardLens(cardElement) {
+    if(!cardElement.classList.contains('lens-focused')) {
+      cardElement.classList.add('lens-focused');
+      cursorRing.classList.remove('cursor-focus-mode');
+      cursorRing.classList.add('cursor-hover');
+    }
+  }
 
   // 3. Automated 24fps Media Frame Timecode Calculator
   const tcDisplay = document.getElementById('tc-display');
