@@ -566,29 +566,8 @@ CINEMATIC CAMERA FOCUS REVEAL SYSTEM CSS
 }
 
 /* =========================
-LIVE REARRANGE DASHBOARD POPUP INTERFACE
+LIVE REARRANGE DASHBOARD POPUP INTERFACE (ASSET MANAGEMENT CORE)
 ========================= */
-
-.fixed-edit-trigger {
-  position: fixed;
-  bottom: 30px;
-  left: 30px;
-  background: rgba(15, 15, 15, 0.85);
-  border: 1px solid rgba(212, 175, 55, 0.2);
-  padding: 12px 24px;
-  border-radius: 30px;
-  color: #fff;
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  backdrop-filter: blur(10px);
-  z-index: 999;
-  transition: all 0.3s ease;
-}
-.fixed-edit-trigger:hover {
-  border-color: #d4af37;
-  color: #d4af37;
-}
 
 .cms-modal-overlay {
   position: fixed;
@@ -679,7 +658,7 @@ MOBILE & TABLET RESET RULES
 
 @media (max-width: 1024px) {
   .contact-grid { grid-template-columns: repeat(2, 1fr); }
-  .viewfinder, .timecode, .axis-compass, .fixed-edit-trigger { display: none !important; }
+  .viewfinder, .timecode, .axis-compass { display: none !important; }
 }
 
 @media (max-width: 768px) {
@@ -722,10 +701,7 @@ MOBILE & TABLET RESET RULES
 <div class="viewfinder vf-bl"></div>
 <div class="viewfinder vf-br"></div>
 
-<!-- FIXED EDIT WORKSPACE CONTROL LAYER -->
-<button class="fixed-edit-trigger cms-btn" id="open-cms-trigger">⚙️ Edit Portfolio</button>
-
-<!-- CONTROL POPUP MODULE -->
+<!-- CONTROL POPUP MODULE (SECURE SELECTION MATRIX ACCORDING TO image_8ff9e3.png) -->
 <div class="cms-modal-overlay" id="cms-popup-modal">
   <div class="cms-dropdown-menu">
     <div class="cms-item cms-btn">
@@ -750,7 +726,7 @@ MOBILE & TABLET RESET RULES
       <input type="file" class="cms-hidden-input" id="video-only-uploader" accept=".mp4,.mov">
     </div>
     <div class="cms-divider"></div>
-    <div class="cms-item cms-btn" id="close-cms-modal" style="color: #ff4554; justify-content: center; font-weight: 700;">
+    <div class="cms-item cms-btn" id="close-cms-modal" style="color: #ff4554; justify-content: center; font-weight: 700; text-transform: uppercase;">
       <span>Close Menu</span>
     </div>
   </div>
@@ -916,7 +892,7 @@ MOBILE & TABLET RESET RULES
         <h2>Video Editor</h2>
         <p>Market Maker MGMT (Remote)</p>
         <br>
-        <p>Edited long-form vlogs, short-form reels, and real estate property walkthroughs using clean transitions, color grading, and motion graphics.</p>
+        <p>Edited long-form vlogs, short-form reels, and real estate property walkthroughs using clean transitions, color grading, and motion graphics[cite: 1].</p>
       </div>
       <div class="stat-card reveal interactable experience-node">
         <h3 class="gold">September 2025 – March 2026</h3>
@@ -1040,7 +1016,7 @@ MOBILE & TABLET RESET RULES
   <footer style="padding:120px 0 60px 0; border-top:1px solid rgba(255,255,255,0.05); text-align:center; position: relative;">
     <h2 style="font-size:32px; font-weight: 800; margin-bottom:15px;" class="gold reveal interactable">KISHOREE SIVAKUMAR</h2>
     <p style="font-size:15px; color:#8e8e93; margin-bottom:40px;" class="reveal">Video Editor • Motion Graphics Artist • 3D Animator</p>
-    <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-bottom:50px;" class="reveal">
+    <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap; margin-bottom:40px;" class="reveal">
       <a href="#work" class="interactable" style="color:#636366; text-decoration:none; font-size: 14px; font-weight: 500;">Work</a>
       <a href="#projects" class="interactable" style="color:#636366; text-decoration:none; font-size: 14px; font-weight: 500;">Showcase</a>
       <a href="#experience" class="interactable" style="color:#636366; text-decoration:none; font-size: 14px; font-weight: 500;">Experience</a>
@@ -1153,12 +1129,10 @@ JAVASCRIPT ENGINE (HIGH PERFORMANCE SYSTEMS)
     tcDisplay.innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}:${pad(frames)}`;
   }, 1000 / 24);
 
-  // 4. Interactive Local Ingest Workspace Layout Tools
-  const openCmsBtn = document.getElementById('open-cms-trigger');
+  // 4. Interactive Local Ingest Workspace Layout Tools (Secret Access Only)
   const closeCmsBtn = document.getElementById('close-cms-modal');
   const cmsOverlay = document.getElementById('cms-popup-modal');
   
-  openCmsBtn.addEventListener('click', () => cmsOverlay.classList.add('active'));
   closeCmsBtn.addEventListener('click', () => cmsOverlay.classList.remove('active'));
   
   document.addEventListener('keydown', (e) => {
