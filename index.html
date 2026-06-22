@@ -1,6 +1,6 @@
 <!-- =========================
 SECTION 1
-HEAD + INTERNATIONAL COMPOSITION CSS + REFINED MOTION ENGINE
+HEAD + INTERNATIONAL COMPOSITION CSS + FULL MOTION ENGINE
 ========================= -->
 
 <!DOCTYPE html>
@@ -120,7 +120,7 @@ MACRO BACKGROUND EFFECTS & CINEMATIC UI
 }
 @keyframes pulseBlink { 50% { opacity: 0; } }
 
-/* Giant Elegant Cinematic Background Text */
+/* Giant Elegant Background Text */
 .bg-text-container {
   position: fixed;
   top: 55%;
@@ -272,7 +272,7 @@ LAYOUT STRUCTURE & ALIGNMENT STRATEGY
   background: rgba(212, 175, 55, 0.2);
 }
 
-/* Corporate Buttons */
+/* Interactive Buttons */
 .btn {
   display: inline-block;
   padding: 16px 34px;
@@ -314,8 +314,9 @@ LAYOUT STRUCTURE & ALIGNMENT STRATEGY
 .logo {
   font-size: 22px;
   font-weight: 800;
-  color: #ffffff;
+  color: #d4af37;
   letter-spacing: 1px;
+  user-select: none;
 }
 .nav-links {
   display: flex;
@@ -359,7 +360,7 @@ LAYOUT STRUCTURE & ALIGNMENT STRATEGY
   max-width: 750px;
 }
 
-/* Strict Professional Alignment Grids */
+/* Project Alignment Grids */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
@@ -385,7 +386,7 @@ LAYOUT STRUCTURE & ALIGNMENT STRATEGY
   height: 250px;
   overflow: hidden;
   position: relative;
-  background: #000;
+  background: #111;
 }
 .project-card img, .project-card video {
   width: 100%;
@@ -509,7 +510,6 @@ CINEMATIC CAMERA FOCUS REVEAL SYSTEM CSS
 
 @keyframes rotateShutter { 100% { transform: rotate(360deg); } }
 
-/* Focused Enabled State Overrides via JS Trigger Node */
 .focus-lens-card.lens-focused .actual-content {
   filter: blur(0px);
   opacity: 1;
@@ -566,13 +566,13 @@ CINEMATIC CAMERA FOCUS REVEAL SYSTEM CSS
 }
 
 /* =========================
-LIVE REARRANGE DASHBOARD POPUP INTERFACE (ASSET MANAGEMENT CORE)
+LIVE ASSET WORKSPACE POPUP INTERFACE
 ========================= */
 
 .cms-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(8px);
   z-index: 10000;
   display: flex;
@@ -592,11 +592,20 @@ LIVE REARRANGE DASHBOARD POPUP INTERFACE (ASSET MANAGEMENT CORE)
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 14px;
   width: 320px;
-  padding: 12px;
+  padding: 16px;
   box-shadow: 0 40px 80px rgba(0, 0, 0, 0.7);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
+}
+
+.cms-heading {
+  font-size: 11px;
+  color: #666;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 4px;
 }
 
 .cms-item {
@@ -608,18 +617,22 @@ LIVE REARRANGE DASHBOARD POPUP INTERFACE (ASSET MANAGEMENT CORE)
   color: #aeaeb2;
   font-size: 14px;
   font-weight: 500;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
   text-decoration: none;
   transition: background 0.2s ease, color 0.2s ease;
   position: relative;
+  cursor: pointer;
 }
 .cms-item:hover {
   background: rgba(255, 255, 255, 0.04);
   color: #ffffff;
+  border-color: rgba(212, 175, 55, 0.3);
 }
 .cms-item svg { width: 18px; height: 18px; stroke: currentColor; fill: none; }
 .cms-divider { height: 1px; background: rgba(255, 255, 255, 0.06); margin: 6px 4px; }
 .cms-badge { background: rgba(212, 175, 55, 0.12); color: #d4af37; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 20px; margin-left: auto; }
-.cms-hidden-input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; }
+.cms-hidden-input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
 
 /* =========================
 PREMIUM SCROLL REVEAL TIMING
@@ -701,36 +714,30 @@ MOBILE & TABLET RESET RULES
 <div class="viewfinder vf-bl"></div>
 <div class="viewfinder vf-br"></div>
 
-<!-- CONTROL POPUP MODULE (SECURE SELECTION MATRIX ACCORDING TO image_8ff9e3.png) -->
+<!-- CONTROL POPUP MODULE (SECURE SELECTION MATRIX) -->
 <div class="cms-modal-overlay" id="cms-popup-modal">
   <div class="cms-dropdown-menu">
+    <div class="cms-heading">Asset Injection</div>
+    <div class="cms-item cms-btn" onclick="triggerLinkManager()">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      <span style="font-weight:600; color:#fff;">Link & Thumbnail Setup</span>
+    </div>
+    
     <div class="cms-item cms-btn">
       <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
-      <span>Upload files</span>
+      <span>Upload Local Media</span>
       <input type="file" class="cms-hidden-input" id="universal-file-uploader" accept=".jpeg,.jpg,.png,.mov,.wav,.mp3,.mp4">
     </div>
-    <div class="cms-item cms-btn" onclick="alert('Connected to secure asset workspace streaming mount.')">
-      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-      <span>Add from Drive</span>
-    </div>
+
     <div class="cms-divider"></div>
-    <div class="cms-item cms-btn">
-      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-      <span>Create image</span>
-      <span class="cms-badge">New</span>
-      <input type="file" class="cms-hidden-input" id="image-only-uploader" accept=".jpeg,.jpg,.png">
-    </div>
-    <div class="cms-item cms-btn">
-      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 7a2 2 0 0 0-2.45-1.45L16 7V5a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2l4.55 1.45A2 2 0 0 0 23 17V7z"/></svg>
-      <span>Create video</span>
-      <input type="file" class="cms-hidden-input" id="video-only-uploader" accept=".mp4,.mov">
-    </div>
-    <!-- NEW: HIDDEN DYNAMIC RESUME INTERFACE MODULE FOR DRAG & DROP INGEST -->
-    <div class="cms-item cms-btn" style="border: 1px dashed rgba(212, 175, 55, 0.4); margin-top: 4px; background: rgba(212, 175, 55, 0.02);">
-      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-      <span style="color: #ffffff; font-weight: 600;">Update Resume / CV</span>
+    <div class="cms-heading">Resume Configuration</div>
+
+    <div class="cms-item cms-btn" style="border: 1px dashed rgba(212, 175, 55, 0.3); background: rgba(212, 175, 55, 0.02);">
+      <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <span style="color: #ffffff; font-weight: 600;">Replace Resume / CV (PDF)</span>
       <input type="file" class="cms-hidden-input" id="resume-document-uploader" accept=".pdf">
     </div>
+
     <div class="cms-divider"></div>
     <div class="cms-item cms-btn" id="close-cms-modal" style="color: #ff4554; justify-content: center; font-weight: 700; text-transform: uppercase;">
       <span>Close Menu</span>
@@ -769,7 +776,8 @@ MOBILE & TABLET RESET RULES
 
 <div class="container">
   <header class="navbar">
-    <div class="logo interactable">KS</div>
+    <!-- DOUBLE CLICK LOGO FOR CMS POPUP OVERLAY PANEL MENU SYSTEM -->
+    <div class="logo interactable" id="logo-trigger">KS</div>
     <nav class="nav-links">
       <a href="#work" class="interactable">Work</a>
       <a href="#projects" class="interactable">Showcase</a>
@@ -785,8 +793,7 @@ MOBILE & TABLET RESET RULES
     <div class="hero-content">
       <h1>Crafting stories through <span class="text-gradient">motion, light & depth.</span></h1>
       <p>Video Editor, Motion Graphics Artist, and 3D Animator creating clean social media edits, real estate walkthroughs, promotional campaigns, and 3D visual experiences.</p>
-      <!-- REPLACED TARGET DESTINATION ANCHOR VIA LOCALSTORAGE ATTACHMENT -->
-      <a href="Kishoree_S_Resume.pdf" target="_blank" class="btn interactable dynamic-cv-link">Download CV</a>
+      <a href="Kishoree_S_Resume.pdf" download="Kishoree_S_Resume.pdf" class="btn interactable dynamic-cv-link">Download CV</a>
       <a href="https://www.linkedin.com/in/kishoree-s-948348322" target="_blank" class="btn interactable">LinkedIn Network</a>
     </div>
   </section>
@@ -814,90 +821,89 @@ MOBILE & TABLET RESET RULES
     </div>
   </section>
 
-  <!-- COMMERCIAL FILM FEATURE GRID -->
+  <!-- COMMERCIAL FILM FEATURE GRID (SLOTS 1, 2, 3) -->
   <section id="work" class="section">
     <h2 class="section-title gold reveal interactable">Featured Projects</h2>
     <div class="projects-grid">
       <div class="project-card reveal interactable" id="card-work-1">
-        <div class="media-container" id="media-work-1">
-          <img src="https://img.youtube.com/vi/EVIVFBc0SSM/maxresdefault.jpg" alt="Luxury Villa Showcase">
+        <div class="media-container" id="media-slot-1">
+          <img src="https://img.youtube.com/vi/EVIVFBc0SSM/maxresdefault.jpg" alt="Luxury Villa Showcase" id="thumb-slot-1">
         </div>
         <div class="project-info">
-          <h3>Luxury Villa Showcase</h3>
-          <p>Real Estate Film • Property Walkthrough</p>
-          <a href="https://www.youtube.com/watch?v=EVIVFBc0SSM" target="_blank" class="btn interactable">Watch Project →</a>
+          <h3 id="title-slot-1">Luxury Villa Showcase</h3>
+          <p id="desc-slot-1">Real Estate Film • Property Walkthrough</p>
+          <a href="https://www.youtube.com/watch?v=EVIVFBc0SSM" target="_blank" class="btn interactable" id="link-slot-1">Watch Project →</a>
         </div>
       </div>
       <div class="project-card reveal interactable" id="card-work-2">
-        <div class="media-container" id="media-work-2">
-          <img src="https://img.youtube.com/vi/lZsSIwTOrXg/maxresdefault.jpg" alt="Modern Interior Experience">
+        <div class="media-container" id="media-slot-2">
+          <img src="https://img.youtube.com/vi/lZsSIwTOrXg/maxresdefault.jpg" alt="Modern Interior Experience" id="thumb-slot-2">
         </div>
         <div class="project-info">
-          <h3>Modern Interior Experience</h3>
-          <p>Property Walkthrough Video</p>
-          <a href="https://www.youtube.com/watch?v=lZsSIwTOrXg" target="_blank" class="btn interactable">Watch Project →</a>
+          <h3 id="title-slot-2">Modern Interior Experience</h3>
+          <p id="desc-slot-2">Property Walkthrough Video</p>
+          <a href="https://www.youtube.com/watch?v=lZsSIwTOrXg" target="_blank" class="btn interactable" id="link-slot-2">Watch Project →</a>
         </div>
       </div>
       <div class="project-card reveal interactable" id="card-work-3">
-        <div class="media-container" id="media-work-3">
-          <img src="https://img.youtube.com/vi/TjIF5Mxeafo/maxresdefault.jpg" alt="Premium Property Campaign">
+        <div class="media-container" id="media-slot-3">
+          <img src="https://img.youtube.com/vi/TjIF5Mxeafo/maxresdefault.jpg" alt="Premium Property Campaign" id="thumb-slot-3">
         </div>
         <div class="project-info">
-          <h3>Premium Property Campaign</h3>
-          <p>Real Estate Marketing Campaign</p>
-          <a href="https://www.youtube.com/watch?v=TjIF5Mxeafo" target="_blank" class="btn interactable">Watch Project →</a>
+          <h3 id="title-slot-3">Premium Property Campaign</h3>
+          <p id="desc-slot-3">Real Estate Marketing Campaign</p>
+          <a href="https://www.youtube.com/watch?v=TjIF5Mxeafo" target="_blank" class="btn interactable" id="link-slot-3">Watch Project →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SOCIAL MEDIA / 3D RENDERING SYSTEM GRID -->
+  <!-- SHOWCASE GRID (SLOTS 4, 5, 6) -->
   <section id="projects" class="section">
     <h2 class="section-title gold reveal interactable">Portfolio Showcase</h2>
     <div class="projects-grid">
       <div class="project-card reveal interactable" id="card-project-1">
-        <div class="media-container" id="media-project-1">
-          <img src="https://img.youtube.com/vi/GFLdsVX9Hxc/maxresdefault.jpg" alt="Creator Vlog Storytelling">
+        <div class="media-container" id="media-slot-4">
+          <img src="https://img.youtube.com/vi/GFLdsVX9Hxc/maxresdefault.jpg" alt="Creator Vlog Storytelling" id="thumb-slot-4">
         </div>
         <div class="project-info">
-          <h3>Creator Vlog Storytelling</h3>
-          <p>Long Form YouTube Editing</p>
-          <a href="https://www.youtube.com/watch?v=GFLdsVX9Hxc" target="_blank" class="btn interactable">View Project →</a>
+          <h3 id="title-slot-4">Creator Vlog Storytelling</h3>
+          <p id="desc-slot-4">Long Form YouTube Content Editing</p>
+          <a href="https://www.youtube.com/watch?v=GFLdsVX9Hxc" target="_blank" class="btn interactable" id="link-slot-4">View Project →</a>
         </div>
       </div>
       <div class="project-card reveal interactable" id="card-project-2">
-        <div class="media-container" id="media-project-2">
-          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200" alt="3D Product Visualization">
+        <div class="media-container" id="media-slot-5">
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200" alt="3D Product Visualization" id="thumb-slot-5">
         </div>
         <div class="project-info">
-          <h3>3D Product Visualization</h3>
-          <p>Blender • Product Rendering & Modeling</p>
-          <a href="https://drive.google.com/file/d/10D2uMpq47LBjJXqDMfxqMy8QOm3FQwPV/view?usp=sharing" target="_blank" class="btn interactable">View Project →</a>
+          <h3 id="title-slot-5">3D Product Visualization</h3>
+          <p id="desc-slot-5">Blender • Product Rendering & Modeling</p>
+          <a href="https://drive.google.com/file/d/10D2uMpq47LBjJXqDMfxqMy8QOm3FQwPV/view?usp=sharing" target="_blank" class="btn interactable" id="link-slot-5">View Project →</a>
         </div>
       </div>
       <div class="project-card reveal interactable" id="card-project-3">
-        <div class="media-container" id="media-project-3">
-          <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1200" alt="Motion Campaign Visuals">
+        <div class="media-container" id="media-slot-6">
+          <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=1200" alt="Motion Campaign Visuals" id="thumb-slot-6">
         </div>
         <div class="project-info">
-          <h3>Motion Campaign Visuals</h3>
-          <p>Motion Graphics & Branded Content</p>
-          <a href="https://drive.google.com/file/d/1B433p5Q0_ulpdqss4cIvEwrPzSAc8uJ_/view?usp=sharing" target="_blank" class="btn interactable">View Project →</a>
+          <h3 id="title-slot-6">Motion Campaign Visuals</h3>
+          <p id="desc-slot-6">Motion Graphics & Branded Content</p>
+          <a href="https://drive.google.com/file/d/1B433p5Q0_ulpdqss4cIvEwrPzSAc8uJ_/view?usp=sharing" target="_blank" class="btn interactable" id="link-slot-6">View Project →</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- REGROUNDED PROFESSIONAL TIMELINE PIPELINE (image_8f891f.jpg / image_8f8928.jpg adjustments) -->
+  <!-- PROFESSIONAL TIMELINE PIPELINE -->
   <section id="experience" class="section">
     <h2 class="section-title gold reveal interactable">Professional Timeline</h2>
     <div class="experience-container">
       <div class="stat-card reveal interactable experience-node">
         <h3 class="gold">March 2026 – May 2026</h3>
         <br>
-        <!-- FIXED TITLES: Cleaned of over-hyping modifications verbatim[cite: 1] -->
         <h2>Video Editor</h2>
-        <p>Market Maker MGMT (Remote)</p>
+        <p>Market Maker MGMT (Remote)[cite: 1]</p>
         <br>
         <p>Edited long-form vlogs, short-form reels, and real estate property walkthroughs using clean transitions, color grading, and motion graphics[cite: 1].</p>
       </div>
@@ -905,25 +911,25 @@ MOBILE & TABLET RESET RULES
         <h3 class="gold">September 2025 – March 2026</h3>
         <br>
         <h2>Freelance Video Editor</h2>
-        <p>Independent Client Projects (Remote)</p>
+        <p>Independent Client Projects (Remote)[cite: 1]</p>
         <br>
-        <p>Edited commercial clips, cinematic reels, and short-form video assets based on platform requirements and client brand styles.</p>
+        <p>Edited commercial clips, cinematic reels, and short-form video assets based on platform requirements and client brand styles[cite: 1].</p>
       </div>
       <div class="stat-card reveal interactable experience-node">
         <h3 class="gold">February 2025 – August 2025</h3>
         <br>
         <h2>3D Animator & Video Editor</h2>
-        <p>EC4YOU Digital Marketing (India)</p>
+        <p>EC4YOU Digital Marketing (India)[cite: 1]</p>
         <br>
-        <p>Created 3D animations and promotional graphics for marketing workflows. Designed banners, brochures, and branded social media visuals.</p>
+        <p>Created 3D animations and promotional graphics for marketing workflows. Designed banners, brochures, and branded social media visuals[cite: 1].</p>
       </div>
       <div class="stat-card reveal interactable experience-node">
         <h3 class="gold">April 2023 – January 2025</h3>
         <br>
         <h2>Freelance Video Editor</h2>
-        <p>Creators & Brands (Remote)</p>
+        <p>Creators & Brands (Remote)[cite: 1]</p>
         <br>
-        <p>Edited cinematic and promotional videos for online campaigns, handled timeline asset assembly, and managed projects from initial editing to final file delivery.</p>
+        <p>Edited cinematic and promotional videos for online campaigns, handled timeline asset assembly, and managed projects from initial editing to final file delivery[cite: 1].</p>
       </div>
     </div>
   </section>
@@ -942,33 +948,33 @@ MOBILE & TABLET RESET RULES
     </div>
   </section>
 
-  <!-- GROUNDED PROFESSIONAL BIO BLOCK (image_8f88c7.jpg adjustments) -->
+  <!-- CLEAN BIO BLOCK MAP MATCHING image_905ebe.jpg -->
   <section id="about" class="section">
     <h2 class="section-title gold reveal interactable">About Me</h2>
     <div class="about-split-row">
       <div class="stat-card reveal interactable" style="display: flex; align-items: center;">
-        <p style="font-size:19px; line-height:1.9; color:#d1d1d6; font-weight: 300;">
-          I am Kishoree Sivakumar, a Video Editor, Motion Graphics Artist, and 3D Animator based in Coimbatore, India. I create clean edits, real estate films, social media content, and 3D product renders for brands and businesses. My work balances story structure, pacing, clear layout composition, and professional post-production choices to build engaging content that hits project deadlines.
+        <p style="font-size:16px; line-height:1.8; color:#aeaeb2; font-weight: 400;">
+          I am Kishoree Sivakumar, a Video Editor, Motion Graphics Artist, and 3D Animator based in Coimbatore, India[cite: 1]. I create clean edits, real estate films, social media content, and 3D product renders for brands and businesses[cite: 1]. My work focuses on story structure, pacing, clear layout composition, and professional post-production choices to build engaging content that hits project deadlines[cite: 1].
         </p>
       </div>
       <div class="about-side-stack">
         <div class="stat-card reveal interactable" style="padding: 24px 35px;">
           <h2>3+ Years</h2>
-          <p style="color: #8e8e93; font-size: 14px;">Active Experience</p>
+          <p style="color: #8e8e93; font-size: 14px;">Active Experience[cite: 1]</p>
         </div>
         <div class="stat-card reveal interactable" style="padding: 24px 35px;">
           <h2>50+ Projects</h2>
-          <p style="color: #8e8e93; font-size: 14px;">Completed Visual Deliveries</p>
+          <p style="color: #8e8e93; font-size: 14px;">Completed Visual Deliveries[cite: 1]</p>
         </div>
         <div class="stat-card reveal interactable" style="padding: 24px 35px;">
           <h2>India</h2>
-          <p style="color: #8e8e93; font-size: 14px;">Based Operations</p>
+          <p style="color: #8e8e93; font-size: 14px;">Based Operations[cite: 1]</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- RESTRUCTURED STABLE CONTACT SECTION WITH CAM REVEAL (image_8f7e23.jpg Layout) -->
+  <!-- CONTACT LAYOUT SECTION WITH CAM REVEAL (image_8f7e23.jpg Layout) -->
   <section id="contact" class="section">
     <h2 class="section-title gold reveal interactable">Global Inquiries</h2>
     <div class="contact-grid">
@@ -1015,11 +1021,11 @@ MOBILE & TABLET RESET RULES
     </div>
     <br><br>
     <div style="text-align: left;">
-      <a href="Kishoree_S_Resume.pdf" target="_blank" class="btn reveal interactable dynamic-cv-link">Acquire Resume CV</a>
+      <a href="Kishoree_S_Resume.pdf" download="Kishoree_S_Resume.pdf" class="btn reveal interactable dynamic-cv-link">Acquire Resume CV</a>
     </div>
   </section>
 
-  <!-- STUDIO FOOTER -->
+  <!-- Footer -->
   <footer style="padding:120px 0 60px 0; border-top:1px solid rgba(255,255,255,0.05); text-align:center; position: relative;">
     <h2 style="font-size:32px; font-weight: 800; margin-bottom:15px;" class="gold reveal interactable">KISHOREE SIVAKUMAR</h2>
     <p style="font-size:15px; color:#8e8e93; margin-bottom:40px;" class="reveal">Video Editor • Motion Graphics Artist • 3D Animator</p>
@@ -1039,6 +1045,8 @@ MOBILE & TABLET RESET RULES
 JAVASCRIPT ENGINE (HIGH PERFORMANCE SYSTEMS)
 ========================= -->
 <script>
+  const FALLBACK_THUMBNAIL = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="360" height="250" viewBox="0 0 360 250"><rect width="360" height="250" fill="%23121212"/><rect width="360" height="250" stroke="%23d4af37" stroke-width="1" stroke-opacity="0.1" fill="none"/><text x="180" y="130" font-family="sans-serif" font-size="11" fill="%23666" text-anchor="middle" letter-spacing="1">CINEMATIC PROJECT LAYER</text></svg>`;
+
   // 1. Scroll-Driven Intersection Cascade
   const observerOptions = {
     root: null,
@@ -1058,14 +1066,35 @@ JAVASCRIPT ENGINE (HIGH PERFORMANCE SYSTEMS)
     document.querySelectorAll('.reveal').forEach((element) => {
       observer.observe(element);
     });
-    // Hydrate resume links locally if available inside client container cache
+    
+    // Check local memory cache and override resume links directly if available
     const storedCV = localStorage.getItem('kishoree_saved_resume_bin');
     if (storedCV) {
-      document.querySelectorAll('.dynamic-cv-link').forEach(link => link.href = storedCV);
+      document.querySelectorAll('.dynamic-cv-link').forEach(link => {
+        link.href = storedCV;
+        link.removeAttribute('download');
+      });
+    }
+
+    // Hydrate project link slots from localStorage metrics
+    for (let i = 1; i <= 6; i++) {
+      const savedLink = localStorage.getItem(`custom_link_slot_${i}`);
+      const savedThumb = localStorage.getItem(`custom_thumb_slot_${i}`);
+      const savedTitle = localStorage.getItem(`custom_title_slot_${i}`);
+      const savedDesc = localStorage.getItem(`custom_desc_slot_${i}`);
+
+      if (savedLink) document.getElementById(`link-slot-${i}`).href = savedLink;
+      if (savedThumb) {
+        document.getElementById(`thumb-slot-${i}`).src = savedThumb;
+      } else if (localStorage.getItem(`custom_link_slot_${i}`)) {
+        document.getElementById(`thumb-slot-${i}`).src = FALLBACK_THUMBNAIL;
+      }
+      if (savedTitle) document.getElementById(`title-slot-${i}`).innerText = savedTitle;
+      if (savedDesc) document.getElementById(`desc-slot-${i}`).innerText = savedDesc;
     }
   });
 
-  // 2. Linear Interpolated Custom Pointer Engine
+  // 2. Custom Cursor Tracking Script
   const cursorDot = document.querySelector('.cursor-dot');
   const cursorRing = document.querySelector('.cursor-ring');
   const compass = document.getElementById('blender-compass');
@@ -1080,7 +1109,6 @@ JAVASCRIPT ENGINE (HIGH PERFORMANCE SYSTEMS)
     cursorDot.style.left = mouseX + 'px';
     cursorDot.style.top = mouseY + 'px';
 
-    // Interactive 3D compass widget orientation tilt
     const rotX = (window.innerWidth / 2 - mouseX) * 0.04;
     const rotY = (window.innerHeight / 2 - mouseY) * 0.04;
     compass.style.transform = `rotateX(${rotY}deg) rotateY(${rotX}deg)`;
@@ -1118,7 +1146,6 @@ JAVASCRIPT ENGINE (HIGH PERFORMANCE SYSTEMS)
   }
   resetPointerTargets();
 
-  // Camera Lens Focus Trigger System Handler
   function focusCardLens(cardElement) {
     if(!cardElement.classList.contains('lens-focused')) {
       cardElement.classList.add('lens-focused');
@@ -1127,7 +1154,7 @@ JAVASCRIPT ENGINE (HIGH PERFORMANCE SYSTEMS)
     }
   }
 
-  // 3. Automated 24fps Media Frame Timecode Calculator
+  // 3. 24fps Timecode Pulse Counter
   const tcDisplay = document.getElementById('tc-display');
   let frames = 0, seconds = 0, minutes = 0, hours = 1;
   
@@ -1141,12 +1168,14 @@ JAVASCRIPT ENGINE (HIGH PERFORMANCE SYSTEMS)
     tcDisplay.innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}:${pad(frames)}`;
   }, 1000 / 24);
 
-  // 4. Interactive Local Ingest Workspace Layout Tools (Secret Access Only)
+  // 4. Hidden Workspace CMS Layer Logic Trigger Routes
   const closeCmsBtn = document.getElementById('close-cms-modal');
   const cmsOverlay = document.getElementById('cms-popup-modal');
+  const logoTrigger = document.getElementById('logo-trigger');
   
   closeCmsBtn.addEventListener('click', () => cmsOverlay.classList.remove('active'));
   
+  // Method A: Shortcut execution
   document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'e') {
       e.preventDefault();
@@ -1154,32 +1183,60 @@ JAVASCRIPT ENGINE (HIGH PERFORMANCE SYSTEMS)
     }
   });
 
-  function handleMediaIngest(file) {
-    if (!file) return;
-    
-    const fileURL = URL.createObjectURL(file);
-    const fileType = file.type;
+  // Method B: Double Click Initial Logo Hook Trigger Execution Route
+  logoTrigger.addEventListener('dblclick', () => {
+    cmsOverlay.classList.add('active');
+  });
 
-    const cardId = prompt("Enter targeted section card ID slot path (e.g. 'work-1', 'work-2', 'project-3'):");
-    if (!cardId) return;
+  function triggerLinkManager() {
+    const slotInput = prompt("Select slot path configuration target index [Enter 1 to 6]:");
+    const idx = parseInt(slotInput);
 
-    const container = document.getElementById(`media-${cardId}`);
-    if (!container) {
-      alert("Specified target card layout path can't be resolved.");
+    if (isNaN(idx) || idx < 1 || idx > 6) {
+      alert("Invalid configuration matrix range.");
       return;
     }
 
-    if (fileType.includes('video') || file.name.endsWith('.mov') || file.name.endsWith('.mp4')) {
-      container.innerHTML = `<video src="${fileURL}" autoplay loop muted playsinline></video>`;
-    } else {
-      container.innerHTML = `<img src="${fileURL}" alt="Uploaded Visual Layer Instance" />`;
-    }
-    
+    const destinationURL = prompt(`[Slot ${idx}] Paste destination work link destination:`);
+    if (!destinationURL) return;
+
+    const thumbnailURL = prompt(`[Slot ${idx}] Paste custom thumbnail asset image link path (Optional):`);
+    const slotTitle = prompt(`[Slot ${idx}] Enter customized card display heading text:`);
+    const slotDesc = prompt(`[Slot ${idx}] Enter customized card content description metrics:`);
+
+    localStorage.setItem(`custom_link_slot_${idx}`, destinationURL);
+    if(thumbnailURL) localStorage.setItem(`custom_thumb_slot_${idx}`, thumbnailURL);
+    if(slotTitle) localStorage.setItem(`custom_title_slot_${idx}`, slotTitle);
+    if(slotDesc) localStorage.setItem(`custom_desc_slot_${idx}`, slotDesc);
+
+    document.getElementById(`link-slot-${idx}`).href = destinationURL;
+    document.getElementById(`thumb-slot-${idx}`).src = thumbnailURL ? thumbnailURL : FALLBACK_THUMBNAIL;
+    if(slotTitle) document.getElementById(`title-slot-${idx}`).innerText = slotTitle;
+    if(slotDesc) document.getElementById(`desc-slot-${idx}`).innerText = slotDesc;
+
+    alert(`Slot ${idx} data structural nodes updated locally.`);
     cmsOverlay.classList.remove('active');
-    resetPointerTargets(); 
   }
 
-  // Dynamic Base64 Resume Converter & local Injection Logic
+  function handleMediaIngest(file) {
+    if (!file) return;
+    const fileURL = URL.createObjectURL(file);
+    const cardId = prompt("Enter card slot position index number string path (e.g., '1' to '6'):");
+    const targetImg = document.getElementById(`thumb-slot-${cardId}`);
+    
+    if (targetImg) {
+      targetImg.src = fileURL;
+      localStorage.setItem(`custom_thumb_slot_${cardId}`, fileURL);
+      alert("Local visual map updated.");
+    } else {
+      alert("Target tracking node path can't be resolved.");
+    }
+    cmsOverlay.classList.remove('active');
+  }
+
+  document.getElementById('universal-file-uploader').addEventListener('change', (e) => handleMediaIngest(e.target.files[0]));
+
+  // Document base64 payload processor sequence logic
   document.getElementById('resume-document-uploader').addEventListener('change', (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -1188,16 +1245,15 @@ JAVASCRIPT ENGINE (HIGH PERFORMANCE SYSTEMS)
     reader.onload = function(event) {
       const base64PDF = event.target.result;
       localStorage.setItem('kishoree_saved_resume_bin', base64PDF);
-      document.querySelectorAll('.dynamic-cv-link').forEach(link => link.href = base64PDF);
-      alert("Resume document updated across all links successfully.");
+      document.querySelectorAll('.dynamic-cv-link').forEach(link => {
+        link.href = base64PDF;
+        link.removeAttribute('download');
+      });
+      alert("Local resume instance payload overwritten.");
       cmsOverlay.classList.remove('active');
     };
     reader.readAsDataURL(file);
   });
-
-  document.getElementById('universal-file-uploader').addEventListener('change', (e) => handleMediaIngest(e.target.files[0]));
-  document.getElementById('image-only-uploader').addEventListener('change', (e) => handleMediaIngest(e.target.files[0]));
-  document.getElementById('video-only-uploader').addEventListener('change', (e) => handleMediaIngest(e.target.files[0]));
 </script>
 
 </body>
