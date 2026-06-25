@@ -482,8 +482,6 @@ CONTAINER & PROPORTIONAL GEOMETRY
   transition: opacity 0.4s ease, transform 0.4s ease;
   z-index: 10;
 }
-
-/* FIXED THE SHUTTER ICON SO IT DOESN'T LOOK LIKE AN ERROR SIGN */
 .focus-lens-card .shutter-icon {
   width: 22px;
   height: 22px;
@@ -751,8 +749,7 @@ RESPONSIVE RECONFIGURATIONS
       <p>Video Editor, Motion Graphics Artist, and 3D Animator creating clean social media edits, real estate walkthroughs, promotional campaigns, and 3D visual experiences.</p>
       
       <div class="hero-buttons">
-        <!-- FIXED RESUME LINK -->
-        <a href="Kishoree S.pdf" download="Kishoree_Sivakumar_Resume.pdf" class="btn interactable">Download CV</a>
+        <a href="Kishoree S.pdf" download="Kishoree_S.pdf" class="btn interactable">Download CV</a>
         <a href="https://www.linkedin.com/in/kishoree-s-948348322" target="_blank" class="btn interactable">LinkedIn Network</a>
       </div>
     </div>
@@ -930,7 +927,6 @@ RESPONSIVE RECONFIGURATIONS
       
       <div class="stat-card reveal interactable focus-lens-card" onclick="focusCardLens(this)">
         <div class="shutter-overlay">
-          <!-- FIXED APERTURE LENS ICON (NO LONGER LOOKS LIKE AN ERROR SYMBOL) -->
           <svg class="shutter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"></circle>
             <path d="M14.31 8l5.74 9.94"></path>
@@ -951,7 +947,6 @@ RESPONSIVE RECONFIGURATIONS
 
       <div class="stat-card reveal interactable focus-lens-card" onclick="focusCardLens(this)">
         <div class="shutter-overlay">
-          <!-- FIXED APERTURE LENS ICON -->
           <svg class="shutter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"></circle>
             <path d="M14.31 8l5.74 9.94"></path>
@@ -972,7 +967,6 @@ RESPONSIVE RECONFIGURATIONS
 
       <div class="stat-card reveal interactable focus-lens-card" onclick="focusCardLens(this)">
         <div class="shutter-overlay">
-          <!-- FIXED APERTURE LENS ICON -->
           <svg class="shutter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"></circle>
             <path d="M14.31 8l5.74 9.94"></path>
@@ -991,11 +985,6 @@ RESPONSIVE RECONFIGURATIONS
         </div>
       </div>
 
-    </div>
-    
-    <div style="margin-top: 50px; text-align: left;">
-      <!-- FIXED RESUME LINK -->
-      <a href="Kishoree S.pdf" download="Kishoree_Sivakumar_Resume.pdf" class="btn interactable reveal">Acquire Resume CV</a>
     </div>
   </section>
 
@@ -1017,7 +1006,6 @@ RESPONSIVE RECONFIGURATIONS
 <script>
   const FALLBACK_THUMBNAIL = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="360" height="250" viewBox="0 0 360 250"><rect width="360" height="250" fill="%23121212"/><rect width="360" height="250" stroke="%23d4af37" stroke-width="1" stroke-opacity="0.1" fill="none"/><text x="180" y="130" font-family="sans-serif" font-size="11" fill="%23666" text-anchor="middle" letter-spacing="1">CINEMATIC PROJECT LAYER</text></svg>`;
 
-  // Scroll Reveal Implementation
   const observerOptions = { root: null, rootMargin: '0px', threshold: 0.08 };
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -1032,7 +1020,6 @@ RESPONSIVE RECONFIGURATIONS
       observer.observe(element);
     });
     
-    // Hydrate project link slots from localStorage metrics
     for (let i = 1; i <= 6; i++) {
       const savedLink = localStorage.getItem(`custom_link_slot_${i}`);
       const savedThumb = localStorage.getItem(`custom_thumb_slot_${i}`);
@@ -1050,7 +1037,6 @@ RESPONSIVE RECONFIGURATIONS
     }
   });
 
-  // Custom Inertia Tracking Cursor Engine
   const cursorDot = document.querySelector('.cursor-dot');
   const cursorRing = document.querySelector('.cursor-ring');
   const compass = document.getElementById('blender-compass');
@@ -1103,7 +1089,6 @@ RESPONSIVE RECONFIGURATIONS
     }
   }
 
-  // 24fps Production Counter Engine
   const tcDisplay = document.getElementById('tc-display');
   let frames = 0, seconds = 0, minutes = 0, hours = 1;
   setInterval(() => {
@@ -1115,7 +1100,6 @@ RESPONSIVE RECONFIGURATIONS
     tcDisplay.innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}:${pad(frames)}`;
   }, 1000 / 24);
 
-  // Hidden Dashboard Logic Trigger
   const closeCmsBtn = document.getElementById('close-cms-modal');
   const cmsOverlay = document.getElementById('cms-popup-modal');
   const logoTrigger = document.getElementById('logo-trigger');
@@ -1124,7 +1108,7 @@ RESPONSIVE RECONFIGURATIONS
   document.addEventListener('keydown', (e) => {
     if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'e') {
       e.preventDefault();
-      cmsOverlay.toggle('active');
+      cmsOverlay.classList.toggle('active');
     }
   });
   logoTrigger.addEventListener('dblclick', () => {
